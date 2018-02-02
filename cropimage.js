@@ -1,5 +1,4 @@
-﻿var parameters = location.search.substring(1).split("&");
-var alias = getParameterByName('alias');
+﻿var alias = getParameterByName('alias');
 var ptr = getParameterByName('ptr');
 var x = getParameterByName('x');
 var y = getParameterByName('y');

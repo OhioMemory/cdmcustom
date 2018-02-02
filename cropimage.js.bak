@@ -1,4 +1,4 @@
-﻿var parameters = location.search.substring(1).split("&");
+﻿
 var alias = getParameterByName('alias');
 var ptr = getParameterByName('ptr');
 var x = getParameterByName('x');
@@ -66,5 +66,5 @@ if (x === null || x == '') {
 
 function performCrop() {
 	var pts = cropper.getCropBoxData(); 
-	location.href = 'http://cdm16007.contentdm.oclc.org/digital/custom/cropimage?alias=' + alias + '&ptr=' + ptr + '&x=' + Math.round(pts.left) + '&y=' + Math.round(pts.top) + '&width=' + Math.round(pts.width) + '&height=' + Math.round(pts.height);
+	location.href = 'http://ohiomemory.org/digital/custom/cropimage?alias=' + alias + '&ptr=' + ptr + '&x=' + Math.round(pts.left) + '&y=' + Math.round(pts.top) + '&width=' + Math.round(pts.width) + '&height=' + Math.round(pts.height);
 }
