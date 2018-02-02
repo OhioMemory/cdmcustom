@@ -18,6 +18,8 @@ var CDM_HOST = "http://www.ohiomemory.org";
 var COLL_ALIAS = "p267401coll32";
 var LETTER_VALUES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
+var browse_field = getParameterByName('field');
+
 var letterList = "";
 for (var i=0; i < LETTER_VALUES.length; i++) {
     if (!isNaN(LETTER_VALUES[i]) && browse_field != "subjec") { continue; }
