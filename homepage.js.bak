@@ -11,7 +11,7 @@ function getParameterByName(name, url) {
 var HOSTDOMAIN = window.location.hostname;
 var CDMHOSTDOMAIN = HOSTDOMAIN == "localhost" ? "cdm16007.contentdm.oclc.org" : "www.ohiomemory.org";
 var THIS_HOST = "http://" + CDMHOSTDOMAIN;
-var THIS_PAGE = "http://" + CDMHOSTDOMAIN + "/digital/custom/browse";
+var THIS_PAGE = "http://" + CDMHOSTDOMAIN + "/cdm/browse/index.html";
 // CDM host domain
 var CDM_HOST = "http://www.ohiomemory.org";
 // Collection alias from which you want to retrieve controlled vocabulary
