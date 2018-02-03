@@ -63,9 +63,9 @@ if (browse_field != 'contri') {
 				var current_letter = browse_upper.substr(0, 1);
 				if (current_letter == browse_letter) {
 					itemList += '<p><a href="' + CDM_HOST + '/digital/search/searchterm/' + 
-					browse_upper.replace(/\//g, "%252F") + 
+					browse_array[i].replace(/\//g, "%252F") + 
 					'/field/' + dc_field + '/mode/exact/conn/and/order/nosort">' + 
-					browse_upper + '</a></p>';
+					browse_array[i] + '</a></p>';
 				}
 			}
 
