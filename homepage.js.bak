@@ -38,7 +38,7 @@ var browse_field = getParameterByName('field');
 // set default browse letter ("1" for subjects; "A" for places or particpant names)
 var browse_letter = (browse_field == "subjec") ? "1" : "A";
 // get the user-selected letter or number
-var browse_field = getParameterByName('letter');
+var browse_letter = getParameterByName('letter');
 // Our display field name is "place", but is actually mapped to "coveraa" for purposes of retrieving place vocabulary
 var dc_field = (browse_field == "place") ? "coveraa" : browse_field;
 var browse_array = [];
@@ -84,10 +84,12 @@ if (browse_field != 'contri') {
 			
 		} else {
 			// returned an error
+			console.log('failure sending');
 		}
 	};
 	request.onerror = function() {
 		// connection error
+		console.log('request error');
 	};
 	request.send();
 

@@ -38,7 +38,7 @@ var browse_field = getParameterByName('field');
 // set default browse letter ("1" for subjects; "A" for places or particpant names)
 var browse_letter = (browse_field == "subjec") ? "1" : "A";
 // get the user-selected letter or number
-var browse_field = getParameterByName('letter');
+var browse_letter = getParameterByName('letter');
 // Our display field name is "place", but is actually mapped to "coveraa" for purposes of retrieving place vocabulary
 var dc_field = (browse_field == "place") ? "coveraa" : browse_field;
 var browse_array = [];
@@ -46,15 +46,13 @@ var browse_array = [];
 if (browse_field != 'contri') {
 	
 	var requestUrl = "http://www.ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/" + COLL_ALIAS + "/" + browse_field + "/0/0/json";
-	console.log(requestUrl);
+	
 	var request = new XMLHttpRequest();
 	request.open('GET', requestUrl, true);
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			// Success!
 			browse_array = JSON.parse(request.responseText);
-			
-			
 			var itemList = "";
 			itemList += '<div id="tabs"' + ((browse_field == "coveraa") ? 'style="width:300px;' : '') + '">';
 			itemList += '<b>' + browse_letter + '</b>:<br>';
@@ -84,12 +82,10 @@ if (browse_field != 'contri') {
 			
 		} else {
 			// returned an error
-			console.log('failure sending');
 		}
 	};
 	request.onerror = function() {
 		// connection error
-		console.log('request error');
 	};
 	request.send();
 
