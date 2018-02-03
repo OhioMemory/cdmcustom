@@ -60,7 +60,7 @@ if (browse_field != 'contri') {
 				if (browse_array[i].match(/^[^0-9A-Za-z].+/)) { continue; }
 				browse_upper = browse_array[i].charAt(0).toUpperCase();
 				
-				var current_letter = substr(browse_upper, 0, 1);
+				var current_letter = browse_upper.substr(0, 1);
 				if (current_letter == browse_letter) {
 					itemList += '<p><a href="' + CDM_HOST + '/digital/search/searchterm/' + 
 					browse_upper.replace(/\//g, "%252F") + 
