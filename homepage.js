@@ -52,7 +52,7 @@ if (browse_field != 'contri') {
 		if (request.status >= 200 && request.status < 400) {
 			// Success!
 			browse_array = JSON.parse(request.responseText);
-			
+			console.log(browse_array);
 			
 			var itemList = "";
 			itemList += '<div id="tabs"' + ((browse_field == "coveraa") ? 'style="width:300px;' : '') + '">';
@@ -60,7 +60,7 @@ if (browse_field != 'contri') {
 			for (i = 0; i < browse_array.length; i++) {
 				if (browse_array[i].match(/^[^0-9A-Za-z].+/)) { continue; }
 				browse_upper = browse_array[i].charAt(0).toUpperCase();
-				console.log(browse_upper);
+				
 				var current_letter = substr(browse_upper, 0, 1);
 				if (current_letter == browse_letter) {
 					itemList += '<p><a href="' + CDM_HOST + '/digital/search/searchterm/' + 
