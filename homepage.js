@@ -46,13 +46,14 @@ var browse_array = [];
 if (browse_field != 'contri') {
 	
 	var requestUrl = "http://www.ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/" + COLL_ALIAS + "/" + browse_field + "/0/0/json";
+	console.log(requestUrl);
 	var request = new XMLHttpRequest();
 	request.open('GET', requestUrl, true);
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			// Success!
 			browse_array = JSON.parse(request.responseText);
-			console.log(request.responseText);
+			
 			
 			var itemList = "";
 			itemList += '<div id="tabs"' + ((browse_field == "coveraa") ? 'style="width:300px;' : '') + '">';
@@ -83,10 +84,12 @@ if (browse_field != 'contri') {
 			
 		} else {
 			// returned an error
+			console.log('failure sending');
 		}
 	};
 	request.onerror = function() {
 		// connection error
+		console.log('request error');
 	};
 	request.send();
 
