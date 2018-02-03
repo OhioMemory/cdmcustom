@@ -35,10 +35,12 @@ var CUSTOM_BROWSE = ["Adams County Historical Society", "Aeronautical Systems Ce
 var browse_field = "subjec";
 // get the user-selected browse value if one exists
 var browse_field = getParameterByName('field');
-// set default browse letter ("1" for subjects; "A" for places or particpant names)
-var browse_letter = (browse_field == "subjec") ? "1" : "A";
 // get the user-selected letter or number
 var browse_letter = getParameterByName('letter');
+if (browse_letter == undefined || browse_letter == "") 
+	// set default browse letter ("1" for subjects; "A" for places or particpant names)
+	var browse_letter = (browse_field == "subjec") ? "1" : "A";
+}
 // Our display field name is "place", but is actually mapped to "coveraa" for purposes of retrieving place vocabulary
 var dc_field = (browse_field == "place") ? "coveraa" : browse_field;
 var browse_array = [];
@@ -91,5 +93,29 @@ if (browse_field != 'contri') {
 
 } else {
 	browse_array = CUSTOM_BROWSE;
+	var itemList = "";
+	itemList += '<div id="tabs"' + ((browse_field == "coveraa") ? 'style="width:300px;' : '') + '">';
+	itemList += '<b>' + browse_letter + '</b>:<br>';
+	for (i = 0; i < browse_array.length; i++) {
+		if (browse_array[i].match(/^[^0-9A-Za-z].+/)) { continue; }
+		browse_upper = browse_array[i].charAt(0).toUpperCase();
+		
+		var current_letter = browse_upper.substr(0, 1);
+		if (current_letter == browse_letter) {
+			itemList += '<p><a href="' + CDM_HOST + '/digital/search/searchterm/' + 
+			browse_array[i].replace(/\//g, "%252F") + 
+			'/field/' + dc_field + '/mode/exact/conn/and/order/nosort">' + 
+			browse_array[i] + '</a></p>';
+		}
+	}
+
+	itemList += '</div>';
+	itemList += '<div id="countyMap">';
+	itemList += (browse_field == "place") ? '<img src="/ui/custom/default/collection/default/resources/custompages/images/mapclick.jpg" alt="Map of Ohio" usemap="#county" border="0">' : ''; 
+	itemList += '</div>';
+
+	document.getElementById('navlist').innerHTML = letterList;
+
+	document.getElementById('browseContainer').innerHTML = itemList;
 }
 
