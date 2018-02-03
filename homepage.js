@@ -52,7 +52,7 @@ if (browse_field != 'contri') {
 		if (request.status >= 200 && request.status < 400) {
 			// Success!
 			browse_array = JSON.parse(request.responseText);
-			console.log(browse_array);
+			console.log(request.responseText);
 			
 			var itemList = "";
 			itemList += '<div id="tabs"' + ((browse_field == "coveraa") ? 'style="width:300px;' : '') + '">';
