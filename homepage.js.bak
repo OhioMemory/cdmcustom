@@ -37,7 +37,7 @@ var browse_field = "subjec";
 var browse_field = getParameterByName('field');
 // get the user-selected letter or number
 var browse_letter = getParameterByName('letter');
-if (browse_letter == undefined || browse_letter == "") 
+if (browse_letter == undefined || browse_letter == "") {
 	// set default browse letter ("1" for subjects; "A" for places or particpant names)
 	var browse_letter = (browse_field == "subjec") ? "1" : "A";
 }
