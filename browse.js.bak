@@ -53,7 +53,7 @@ if (browse_field != 'contri') {
 			browse_array = JSON.parse(request.responseText);
 			var itemList = "";
 			itemList += '<div id="tabs"' + ((browse_field == "coveraa") ? 'style="width:300px;' : '') + '">';
-			itemList += '<b>' + browse_letter + '</b>:<br>';
+			itemList += '<b>' + browse_letter + ':</b>';
 			for (i = 0; i < browse_array.length; i++) {
 				if (browse_array[i].match(/^[^0-9A-Za-z].+/)) { continue; }
 				browse_upper = browse_array[i].charAt(0).toUpperCase();
