@@ -1,0 +1,218 @@
+---
+header: false
+footer: false
+title: ""
+---
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title> | A Collaborative Project of the Ohio History Connection and the State Library of Ohio</title>
+<link rel='stylesheet' id='parent-style-css'  href='/customizations/global/pages/homepage_resources/pinboard-style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='parent-style-css'  href='/customizations/global/pages/homepage_resources/pinboard-child-style.css' type='text/css' media='all' />
+
+<!-- <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script> -->
+<!-- <script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-29104270-1']);
+	_gaq.push(['_gat._forceSSL']);
+	_gaq.push(['_trackPageview']);
+
+	(function () {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+
+</script> -->
+
+<!-- FlexSlider CSS -->
+<link rel="stylesheet" href="/customizations/global/pages/homepage_resources/flexslider.min.css" type="text/css" media="screen">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<!-- <link rel="stylesheet" id="bootstrap-css-css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="all"> -->
+<link rel="stylesheet" href="/customizations/global/pages/homepage_resources/bootstrap-select.min.css">
+
+<!-- jQuery -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
+<!-- <script type="text/javascript" src="/ui/custom/default/collection/default/resources/custompages/pinboard/ios-orientationchange-fix.js"></script> -->
+<!-- FlexSlider -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.0/jquery.flexslider.min.js"></script> -->
+<!-- Modernizr -->
+<!-- <script src="https://cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js"></script> -->
+<!-- JQuery easing plugin (for FlexSlider) -->
+<!-- <script src="https://cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js"></script> -->
+<!-- Bootstrap -->
+<!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+<!-- Bootstrap Select -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/js/bootstrap-select.min.js"></script> -->
+
+</head>
+
+<body class="home page page-id-1911 page-template-default page-template-template-full-width-php">
+	<!-- Google Tag Manager -->
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53BJBX"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	
+	<!-- End Google Tag Manager -->
+	<div id="wrapper">
+		<header id="headerarea">
+			<div id="background-banner" class="sized">
+				<div style="float: left;height: 50%;width: 100%;margin-bottom: -50px;"></div>
+				<div id="site-title" style="clear: both; height: 104px;">
+					<a href="http://ohiomemory.org/" rel="home">
+						<img src="/customizations/global/pages/homepage_resources/OhioMemory-logo.png" alt="" width="124" height="68">
+					</a>
+					<a class="home" href="http://ohiomemory.org/" rel="home"></a>
+				</div>
+				<div id="site-description">
+					<span>A Collaborative Project of the Ohio History Connection and the State Library of Ohio</span>
+				</div>	
+			</div>
+			<!-- <div class="clear"></div> -->
+			
+			<nav id="access">
+				<a class="nav-show" href="#access">Show Navigation</a>
+				<a class="nav-hide" href="#nogo">Hide Navigation</a>
+				<!--<div class="menu-topbar-container" style="margin:0 auto;width:100%">
+					<div id="menu-topbar-wrapper">-->
+					<ul id="menu-topbar" class="menu">	
+						<li id="menu-item-1916" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-1911 menu-item-has-children menu-item-1916"><a href="http://www.ohiohistoryhost.org/ohiomemory/about-ohio-memory">About</a>
+							<ul class="sub-menu">
+								<li id="menu-item-73" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="http://www.ohiohistoryhost.org/ohiomemory/about/faqs">FAQs</a></li>
+								<li id="menu-item-77" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-77"><a href="http://www.ohiohistoryhost.org/ohiomemory/about/staff">Staff</a></li>
+							</ul>
+						</li>
+						<li id="menu-item-68" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-68"><a href="http://www.ohiohistoryhost.org/ohiomemory/collections">Collections</a></li>
+						<li id="menu-item-473" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-473"><a href="http://www.ohiohistoryhost.org/ohiomemory/newspapers">Newspapers</a></li>
+						<li id="menu-item-92" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-92"><a href="http://www.ohiohistoryhost.org/ohiomemory/archives/category/digital-collections">Blog</a></li>
+						<li id="menu-item-2036" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2036"><a href="http://www.ohiohistoryhost.org/ohiomemory/resources/">Educational Resources</a>
+							<ul class="sub-menu">
+								<li id="menu-item-2040" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2040"><a href="http://www.ohiohistoryhost.org/ohiomemory/resources/featured-topics/">Featured Topics</a></li>
+								<li id="menu-item-2039" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2039"><a href="http://www.ohiohistoryhost.org/ohiomemory/resources/for-teachers/">For Teachers</a></li>
+								<li id="menu-item-2037" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2037"><a href="http://www.ohiohistoryhost.org/ohiomemory/resources/interactives/">Interactives</a></li>
+								<li id="menu-item-2038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2038"><a href="http://www.ohiohistoryhost.org/ohiomemory/resources/maps-timelines/">Maps &#038; Timelines</a></li>
+								<li id="menu-item-2041" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2041"><a href="http://www.ohiohistoryhost.org/ohiomemory/resources/search-help">Search Help</a></li>
+							</ul>
+						</li>
+						<li id="menu-item-2049" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2049"><a href="http://www.ohiohistoryhost.org/ohiomemory/for-organizations">For Organizations</a>
+							<ul class="sub-menu">
+								<li id="menu-item-2044" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2044"><a href="http://www.ohiohistory.org/preserve/digital-services/digitization-services" onclick="_gaq.push(['_trackEvent', 'outbound-widget', 'http://www.ohiohistory.org/preserve/digital-services/digitization-services', 'Digitization Services']);" >Digitization Services</a></li>
+								<li id="menu-item-2046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2046"><a href="http://www.ohiohistory.org/preserve/digital-services/microfilm-services" onclick="_gaq.push(['_trackEvent', 'outbound-widget', 'http://www.ohiohistory.org/preserve/digital-services/microfilm-services', 'Newspaper Digitization Services']);" >Newspaper Digitization Services</a></li>
+								<li id="menu-item-2050" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2050"><a href="http://www.ohiohistoryhost.org/ohiomemory/for-organizations/join-ohio-memory">Join Ohio Memory</a></li>
+								<li id="menu-item-2052" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2052"><a href="http://www.ohiohistoryhost.org/ohiomemory/for-organizations/submitting-institutions">Submitting Institutions</a></li>
+							</ul>
+						</li>
+					</ul>
+					<!--</div>
+				</div>-->
+				<div class="clear"></div>
+			</nav><!-- #access -->
+			
+		</header><!-- #header -->														
+		<div id="container">
+			<section id="content" class="column onecol">
+				<article class="post-1911 page type-page status-publish hentry column onecol" id="post-1911">
+					<div class="entry">
+						<header class="entry-header">
+							<h1 class="entry-title"></h1>
+						</header><!-- .entry-header -->
+						<div class="entry-content"><!-- .entry-content -->
+							<div class="search-and-browse"><!-- .search-and-browse -->
+								<div id="advanced"><a href="http://ohiohistoryhost.org/ohiomemory/advanced-search/">Advanced Search</a></div>
+								<div id="clearboth" clear="both"><br/></div>
+								<form class="form-inline" id="searchForm" name="searchForm" style="padding-top:10px">
+									<div class="form-group" id="simple-search">
+										<input id="searchOperator" type="hidden" name="conn" value="and">
+										<input id="searchMode" type="hidden" name="mode" value="all">
+										<input id="searchField" type="hidden" name="field" value="all">
+										<input id="searchTerms" type="text" placeholder="Search Ohio Memory" class="form-control">&nbsp;
+										<button type="submit" class="btn btn-primary">Search</button>
+										<!--<input id="submit_search" type="submit" value="Search" style="text-align:left">-->
+									</div>
+									<div clear="both"></div>
+									<div id="restrict_element" class="form-group checkbox-inline">
+				     					Restrict Search to: &nbsp;&nbsp;<select id="selectFormats" class="form-group selectpicker" title="Select Formats" multiple data-selected-text-format="count">
+				     					<option value="artifacts"> Archaeological Objects</option>
+				     					<option value="picture"> Photographs</option>
+				     					<option value="government"> State Agency Publications</option>
+				     					<option value="objects"> Historical Objects</option>
+				     					<option value="manuscripts"> Manuscripts (letters, diaries, etc.)</option>
+				     					<option value="specimens"> Natural History Specimens</option>
+				     					<option value="newspapers"> Newspapers</option>
+				     					<option value="video"> Video</option></select>
+				     					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+			     					</div>
+			     				
+			     					<div id="text-check">
+			     						
+				     					<input type="checkbox" style="vertical-align:bottom;" name="fulltext" id="ft-yes">
+				     					<a id="restrict-msg" name="fulltext" style="display:inline-block;height:20px;vertical-align:bottom;" href="#"> Exclude full text sources</a>
+				     					
+				     				</div>
+								</form>
+							</div><!-- .search-and-browse -->
+						</div><!-- .entry-content -->
+						<br clear=both>
+
+						<div class="row">
+							<div id="browse-buttons" class="col-lg-2 col-md-4 col-sm-4">
+								<div class="centerBlock">
+								<a class="browse-contributor" href="http://ohiomemory.org/digital/custom/browse?field=contri" target="_blank">
+									<div class="contributors"></div>
+								</a>
+								<br/>&nbsp;<br/>
+								<a class="browse-place" href="http://ohiomemory.org/digital/custom/browse?field=place" class="browse-place">
+									<div class="places"></div>
+								</a>
+								<br/>&nbsp;<br/>
+								<a class="browse-subject" href="http://ohiomemory.org/digital/custom/browse?field=subjec" target="_blank">
+									<div class="subjects"></div>
+								</a>
+								<br/>&nbsp;<br/>
+								<a class="browse-period" href="http://ohiomemory.org/digital/custom/periods" target="_blank">
+									<div class="periods"></div>
+								</a>
+								</div>
+							</div>
+							
+							<div id="main" role="main" class="col-lg-10 col-md-8 col-sm-8" style="padding-top:50px;">
+						  		<section class="slider">
+						    		<div class="flexslider">
+						    			<ul class="slides">
+										
+												    
+										</ul>
+								</section>
+							</div><!-- main -->
+										
+						</div>
+					</div><!-- .entry -->
+					
+					<div class="clear"></div>
+															
+				</article><!-- .post -->
+			</section><!-- #content -->	
+		</div><!-- #container -->
+		<div id="footer">
+			<div id="sponsors">
+				<img class="wp-image-1914" src="/customizations/global/pages/homepage_resources/Ohio_History_Connection_130x130.jpg" alt="Ohio History Connection Logo">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img class="wp-image-1912" src="/customizations/global/pages/homepage_resources/StateLibraryLogo130x130.jpg" alt="StateLibraryLogo">
+			</div>
+			<div id="copyright">
+				<p class="copyright onecol">&copy; 2015 Ohio Memory, 
+					a product of the Ohio History Connection and the State Library of Ohio
+				</p>
+				<div class="clear"></div>
+			</div><!-- #copyright -->
+		</div><!-- #footer -->
+	</div><!-- #wrapper -->
+
+</body>
+</html>

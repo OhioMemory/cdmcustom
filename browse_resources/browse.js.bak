@@ -69,7 +69,7 @@ if (browse_field != 'contri') {
 
 			itemList += '</div>';
 			itemList += '<div id="countyMap">';
-			itemList += (browse_field == "place") ? '<img src="/ui/custom/default/collection/default/resources/custompages/images/mapclick.jpg" alt="Map of Ohio" usemap="#county" border="0">' : ''; 
+			itemList += (browse_field == "place") ? '<img src="/customizations/global/pages/browse_resources/mapclick.jpg" alt="Map of Ohio" usemap="#county" border="0">' : ''; 
 			itemList += '</div>';
 
 			document.getElementById('navlist').innerHTML = letterList;
@@ -113,5 +113,6 @@ if (browse_field != 'contri') {
 	document.getElementById('navlist').innerHTML = letterList;
 
 	document.getElementById('browseContainer').innerHTML = itemList;
+	
 }
 

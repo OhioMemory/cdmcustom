@@ -1,0 +1,49 @@
+﻿---
+header: false
+footer: false
+title: "CONTENTdm Custom file"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Crop Image</title>
+	<link rel="stylesheet" href="/customizations/global/pages/cropimage_resources/cropper.min.css">
+	<style>
+		body {
+			background-color:#eee;
+		}
+	    #container {
+			max-width: 1000px;
+			margin: 50px auto;
+			margin: 1.5em auto 2em auto;
+		    border: 1px #999 solid;
+		    padding: 1em 2em 2em;
+		    background-color:white;
+	    }
+		#imgContainer {
+			margin-top:10px;
+		}
+		button {
+			font-size:120%;
+			font-weight:bold;
+			color:#900;
+		}
+		.CoreLayout-mainWrapperContainer {
+    		margin-top: 0px;
+    	}
+	</style>
+	
+</head>
+<body>
+
+	<div id="container">
+		<div id="imgContainer">
+      
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+.Header-header {
+	background-image: url(/customizations/global/pages/homepage_resources/banner4.png);
+    background-size: cover;
+}
+
+.showTitle {
+	display:block !important;
+}
+
+@media screen and (max-width: 768px) {
+	.Header-logoImage { 
+		max-height:70px;        		
+	}
+	.Header-titleText {
+	    display: block;
+	    white-space: nowrap;
+	    font-size: .70rem !important;
+	}
+	
+}
+@media screen and (min-width: 768px) {
+
+	.Header-logoImage { 
+		max-height:120px;
+		margin-top: 0px !important;        		
+	}
+	.Header-nameHolder {
+		padding-top: 20px;
+		padding-left: 20px;
+	}
+	.Header-controls, .Header-headerMenuLinks {
+		position: static;
+	}
+	.Header-hamburgerHolder {
+		position: absolute;
+	    width: 100%;
+	    background-color: #4c4c4c;
+	    top: 120px;
+	    margin-left: 0px;
+	}
+	.Header-hamburgerHolder .dropdown.btn-group {
+		float: left;
+	}
+	.Header-controls {
+		width: 100%;
+	}
+	.Header-hamburgerHolder .btn-group button {
+		display: none;
+	}
+	.Header-headerMenuLinks {
+		display: flex;
+		flex-wrap: nowrap;
+		border: none;
+		box-shadow: none;
+	}
+	.Header-headerMenuLinks li a:hover {
+		background-color: rgba(0,0,0,0.8) !important;
+	}
+	.Header-headerMenuLinks h3 {
+		margin: 5px;
+		color: white;
+	}
+	.dropdown.btn-group {
+	    padding-right: 10px;
+	}
+	.dropdown-menu {
+		padding: 0;
+		border-radius: 0px;
+	}
+	.dropdown-menu>li>a {
+		background-color: rgba(0,0,0,.7) !important;
+	}
+	
+	.SimpleSearch-searchBox {
+		position: absolute;
+	    top: 10px;
+	    right: 10px;
+	}
+}
