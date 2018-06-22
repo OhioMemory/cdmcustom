@@ -40,10 +40,12 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
+/*
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+*/
 body {
 	line-height: 1;
 }
@@ -66,7 +68,7 @@ table {
 /*
 	Clear Floated Elements
 */
-
+/*
 .clear {
 	clear:both;
 	display:block;
@@ -75,7 +77,7 @@ table {
 	width:0;
 	height:0;
 }
-
+*/
 .clear:after {
 	clear:both;
 	content:' ';
@@ -94,7 +96,7 @@ table {
 /*
 	Style HTML Tags
 */
-
+/*
 body {
 	background:#ccc;
 	color:#333;
@@ -102,7 +104,7 @@ body {
 	font-size:13px;
 	line-height:1.62em;
 }
-
+*/
 a {
 	color:#21759b;
 	text-decoration:none;
@@ -117,13 +119,13 @@ a:hover {
 	color:#d54e21;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/*h1, h2, h3, h4, h5, h6 {
 	margin-bottom:18px;
 	font-family:"Oswald", sans-serif;
 	font-weight:300;
 	line-height:1.62em;
 	letter-spacing:1px;
-}
+}*/
 
 h1 {
 	font-size:36px;
@@ -286,11 +288,11 @@ ul {
 	margin-left:30px;
 	margin-bottom:24px;
 }
-
+/*
 ul li {
 	margin-top:4px;
 }
-
+*/
 ul ul {
 	list-style-type:square;
 	margin-bottom:0;
@@ -700,8 +702,8 @@ audio {
 	height: 16px;
 	padding:8px 16px;
 	margin-right:0;
-	background:#dedede url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/search.png) right center no-repeat;
-	background:rgba(0, 0, 0, .1) url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/search.png) right center no-repeat;
+	background:#dedede url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
+	background:rgba(0, 0, 0, .1) url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
 	border:none;
 	border-radius:24px;
 	box-shadow: none;
@@ -718,7 +720,7 @@ audio {
 
 #header input#s:focus {
 	width:180px;
-	background:#ececec url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/search.png) right center no-repeat;
+	background:#ececec url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
 	box-shadow:inset 1px 1px 5px 1px rgba(0, 0, 0, .1);
 	color:#333;
 	text-indent: 0;
@@ -776,7 +778,7 @@ a.social-media-icon {
 a.social-media-icon:hover {
 	background-position: 0 -32px;
 }
-
+/*
 .facebook {
 	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/facebook.png);
 }
@@ -812,7 +814,7 @@ a.social-media-icon:hover {
 .linkedin {
 	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/linkedin.png);
 }
-
+*/
 #header-image {
 	display:block;
 	max-width:99.1%;
@@ -821,7 +823,7 @@ a.social-media-icon:hover {
 	box-shadow:0 0 3px #999;
 	background:#fff;
 }
-
+/*
 #access {
 	position: relative;
 	z-index: 3;
@@ -891,16 +893,17 @@ a.social-media-icon:hover {
 	border-radius:15px;
 }
 
+
 .drop-down-arrow {
 	display:block;
 	width:0;
 	height:0;
-	margin: 5px 4px 2px 2px; /* 8px 0 0 5px; */
+	margin: 5px 4px 2px 2px; 
 	border-top:5px solid #eee;
 	border-left:transparent 5px solid;
 	border-right:transparent 5px solid;
 }
-
+ *//* 8px 0 0 5px; */
 #access li li {
 	float:none;
 	min-width:190px;
@@ -921,7 +924,7 @@ a.social-media-icon:hover {
 	text-align:left;
 	overflow:hidden;
 }
-
+/*
 #access li li:first-child > a {
 	border-top: none;
 }
@@ -933,7 +936,7 @@ a.social-media-icon:hover {
 #access li li a:hover {
 	background:rgba(255, 255, 255, .2);
 }
-
+*/
 #access li ul {
 	display:none;
 	position:absolute;
@@ -956,12 +959,12 @@ a.social-media-icon:hover {
 #access li li li:hover > ul {
 	display:block;
 }
-
+/*
 #access .nav-show,
 #access .nav-hide {
 	display:none;
 }
-
+*/
 .page-template-template-no-sidebars-php #container {
 	margin:2.4%;
 }
@@ -1600,7 +1603,7 @@ a.social-media-icon:hover {
 .entry-summary .entry-attachment {
 	margin-bottom:18px;
 }
-
+/*
 .entry-author-link {
 	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/user.png) left center no-repeat;
 }
@@ -1626,7 +1629,7 @@ a.social-media-icon:hover {
 	margin:0;
 	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/link.png) left center no-repeat;
 }
-
+*/
 .entry-summary p {
 	margin:0;
 }
@@ -2812,7 +2815,7 @@ a.ajax-load:hover {
 		max-height:90px;
 		margin-top:0;
 	}
-	
+	/*
 	#access {
 		position: absolute;
 		top: 0;
@@ -2827,13 +2830,13 @@ a.ajax-load:hover {
 	#access .nav-show,
 	#access a.nav-show:hover {
 		position: absolute;
-		top: 20px;  /* new 9/7/2016 */
-		right: 5%; /* new 9/7/2016 */
+		top: 20px; 
+		right: 5%; 
 		display:block;
 		width: 40px;
 		height: 32px !important;
 		padding: 0;
-		background: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/nav.png) no-repeat;
+		background: url(/customizations/global/pages/homepage_resources/nav.png) no-repeat;
 		border: none;
 		text-indent: -1000px;
 		overflow: hidden;
@@ -2856,7 +2859,7 @@ a.ajax-load:hover {
 		overflow: hidden;
 		text-indent: -1000px;
 	}
-	
+	*/
 	#access .menu {
 		text-align: center;
 	}
@@ -2955,7 +2958,7 @@ a.ajax-load:hover {
 		display:block;
 		width:168px;
 		margin-left:12px;
-		background:#ececec url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/search.png) right center no-repeat;
+		background:#ececec url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
 		box-shadow:inset 1px 1px 5px 1px rgba(0, 0, 0, .1);
 		text-indent: 0;
 	}
@@ -3226,18 +3229,18 @@ a.ajax-load:hover {
 
 	#access .nav-show,
 	#access a.nav-show:hover {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/nav_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/nav_2x.png);
 		background-size:100%;
 	}
 
 	#header input#s {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/search_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/search_2x.png);
 		background-size:36px;
 		background-position: -3px center;
 	}
-
+	/*
 	.facebook {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/facebook_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/facebook_2x.png);
 		background-size:100%;
 	}
 
@@ -3310,7 +3313,7 @@ a.ajax-load:hover {
 		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/link_2x.png);
 		background-size: 12px;
 	}
-
+	*/
 	#infscr-loading img {
 		width: 32px;
 		height: 32px;

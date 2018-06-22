@@ -98,7 +98,7 @@ table {
 body {
 	background:#ccc;
 	color:#333;
-	font-family:"Open Sans", sans-serif;
+	font-family: "Helvetica Neue",Arial,Helvetica,Verdana,sans-serif;
 	font-size:13px;
 	line-height:1.62em;
 }
@@ -208,7 +208,7 @@ fieldset {
 input[type="text"],
 input[type="password"],
 textarea {
-	padding-left:1.5%;
+	padding:1.5%;
 	box-shadow:inset 1px 1px 5px rgba(0, 0, 0, .05);
 	background:#FCFCFC;
 	border:#EEE 1px solid;
@@ -625,21 +625,8 @@ audio {
 	max-width:760px;
 }
 
-#headerarea {
+#header {
 	border-top:#111 3px solid;
-}
-
-
-#background-banner.sized {
-    background-size: cover;
-    -moz-background-size: cover;
-    background-position: center;
-}
-#background-banner {
-    width: 100%;
-    height: 120px;
-    background-size: auto;
-    background: url(/ui/custom/default/collection/default/resources/custompages/pinboard/image/banner4.png) no-repeat;
 }
 
 #site-title a,
@@ -655,32 +642,20 @@ audio {
 	/*line-height:150px;*/
 }
 
-#site-description span {
-    text-shadow: 1px 1px 1px rgba(150, 150, 150, 1), 1px 1px 6px #fff;
-}
-
-
 #site-title {
-	/*margin: 0 3.4%;*/
+	margin: 0 3.4%;
 	font-family:"Oswald", sans-serif;
 	font-size:32px;
 	letter-spacing:1px;
 }
 
-#site-title a img {
-    width: 180px;
-}
-
 #site-title img {
-	/*margin: 38px 0;
-	vertical-align:middle;*/
-	margin-left: 10px;
-    margin-top: 10px;
-    width: 166px;
-    height: 76px;
+	margin: 38px 0;
+	vertical-align:middle;
 }
 
 #site-description {
+	margin-left:20px;
 	font-size:12px;
 	font-weight:normal;
 }
@@ -726,8 +701,8 @@ audio {
 	height: 16px;
 	padding:8px 16px;
 	margin-right:0;
-	background:#dedede url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
-	background:rgba(0, 0, 0, .1) url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
+	background:#dedede url(images/search.png) right center no-repeat;
+	background:rgba(0, 0, 0, .1) url(images/search.png) right center no-repeat;
 	border:none;
 	border-radius:24px;
 	box-shadow: none;
@@ -744,7 +719,7 @@ audio {
 
 #header input#s:focus {
 	width:180px;
-	background:#ececec url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
+	background:#ececec url(images/search.png) right center no-repeat;
 	box-shadow:inset 1px 1px 5px 1px rgba(0, 0, 0, .1);
 	color:#333;
 	text-indent: 0;
@@ -802,43 +777,43 @@ a.social-media-icon {
 a.social-media-icon:hover {
 	background-position: 0 -32px;
 }
-/*
+
 .facebook {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/facebook.png);
+	background-image: url(images/facebook.png);
 }
 
 .twitter {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/twitter.png);
+	background-image: url(images/twitter.png);
 }
 
 .pinterest {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/pinterest.png);
+	background-image: url(images/pinterest.png);
 }
 
 .flickr {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/flickr.png);
+	background-image: url(images/flickr.png);
 }
 
 .vimeo {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/vimeo.png);
+	background-image: url(images/vimeo.png);
 }
 
 .youtube {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/youtube.png);
+	background-image: url(images/youtube.png);
 }
 
 .google-plus {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/google-plus.png);
+	background-image: url(images/google-plus.png);
 }
 
 .dribble {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/dribble.png);
+	background-image: url(images/dribble.png);
 }
 
 .linkedin {
-	background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/linkedin.png);
+	background-image: url(images/linkedin.png);
 }
-*/
+
 #header-image {
 	display:block;
 	max-width:99.1%;
@@ -849,11 +824,10 @@ a.social-media-icon:hover {
 }
 
 #access {
-	/* position: relative; */
-	margin-top: 0px;
+	/*position: relative;*/
 	z-index: 3;
 	padding:0 20px;
-	background:#111;
+	background-color: rgba(0,0,0,.7) !important;
 	box-shadow:0 0 7px rgba(0, 0, 0, .1);
 }
 
@@ -862,8 +836,8 @@ a.social-media-icon:hover {
 	padding:0;
 	margin:0;
 	list-style:none;
-	font-weight:500;
-	text-transform:uppercase;
+	/*font-weight:600;*/
+	/*text-transform:uppercase;*/
 }
 
 #access li {
@@ -872,6 +846,9 @@ a.social-media-icon:hover {
 	padding:0;
 	margin:0;
 }
+#access li:hover {
+	background-color: black;
+}
 
 #access ul li:first-child {
 	padding-left:0;
@@ -879,7 +856,12 @@ a.social-media-icon:hover {
 
 #access a {
 	display:block;
-	padding:15px 24px;
+	/*padding:15px 24px;*/
+	margin-top: 8px;
+  margin-bottom: 26px;
+
+      margin-left: 20px;
+    margin-right: 20px;
 	color:#f0f0f0;
 	text-decoration:none;
 	-moz-transition: background-color .25s ease, margin .25s ease;
@@ -895,6 +877,7 @@ a.social-media-icon:hover {
 	background:rgba(255, 255, 255, .2);
 	color:#fff;
 	text-decoration:none;
+
 }
 
 #access a span {
@@ -922,7 +905,7 @@ a.social-media-icon:hover {
 	display:block;
 	width:0;
 	height:0;
-	margin: 5px 4px 2px 2px; /* 8px 0 0 5px; */
+	margin:8px 0 0 5px;
 	border-top:5px solid #eee;
 	border-left:transparent 5px solid;
 	border-right:transparent 5px solid;
@@ -992,7 +975,7 @@ a.social-media-icon:hover {
 .page-template-template-no-sidebars-php #container {
 	margin:2.4%;
 }
-/*
+
 #slider {
 	position:relative;
 }
@@ -1192,7 +1175,6 @@ a.social-media-icon:hover {
 #slider .entry-attachment p {
 	margin-bottom:0;
 }
-*/
 
 #current-location,
 #sidebar-wide,
@@ -1627,33 +1609,33 @@ a.social-media-icon:hover {
 .entry-summary .entry-attachment {
 	margin-bottom:18px;
 }
-/*
+
 .entry-author-link {
-	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/user.png) left center no-repeat;
+	background:url(images/user.png) left center no-repeat;
 }
 
 .entry-date {
-	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/time.png) left center no-repeat;
+	background:url(images/time.png) left center no-repeat;
 }
 
 .entry-category {
-	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/ribbon.png) left center no-repeat;
+	background:url(images/ribbon.png) left center no-repeat;
 }
 
 .attachment-size {
-	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/image.png) left center no-repeat;
+	background:url(images/image.png) left center no-repeat;
 }
 
 .edit-link {
-	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/edit.png) left center no-repeat;
+	background:url(images/edit.png) left center no-repeat;
 }
 
 .entry-permalink {
 	float:right;
 	margin:0;
-	background:url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/link.png) left center no-repeat;
+	background:url(images/link.png) left center no-repeat;
 }
-*/
+
 .entry-summary p {
 	margin:0;
 }
@@ -2521,18 +2503,6 @@ a.ajax-load:hover {
 	color:#CCC;
 }
 
-#sponsors {
-	clear:both;				
-	padding:1.4% 3.2%;
-	/*background:#111;*/
-	border-top:#333 1px solid;
-	border-top:rgba(255, 255, 255, .145) 1px solid;
-	color:#CCC; 
-	font-weight:300;
-	text-align:center;
-	background-color:#FFFFFF;
-}
-
 #copyright {
 	clear:both;				
 	padding:1.4% 3.2%;
@@ -2541,7 +2511,6 @@ a.ajax-load:hover {
 	border-top:rgba(255, 255, 255, .145) 1px solid;
 	color:#CCC; 
 	font-weight:300;
-	text-align:center;
 }
 
 .copyright {
@@ -2565,18 +2534,6 @@ a.ajax-load:hover {
 
 #copyright a:hover {
 	color:#d54e21;
-}
-
-#text-check {
-	display:inline-block;
-	clear:both;
-	height:40px;
-	width:300px;
-	vertical-align:bottom;
-}
-
-#browse-buttons {
-	padding-top:70px;
 }
 
 @media screen and (max-width: 1152px) {
@@ -2841,12 +2798,12 @@ a.ajax-load:hover {
 	}
 	
 	#access {
-		position: absolute;
+		/*position: absolute;*/
 		top: 0;
 		left: 0;
 		z-index: 3;
 		width: 100%;
-		padding: 0;;
+		padding: 0;
 		background: none;
 		box-shadow: none;
 	}
@@ -2854,8 +2811,8 @@ a.ajax-load:hover {
 	#access .nav-show,
 	#access a.nav-show:hover {
 		position: absolute;
-		top: 20px;  /* new 9/7/2016 */
-		right: 5%; /* new 9/7/2016 */
+		top: 0px;
+		right: 2%;
 		display:block;
 		width: 40px;
 		height: 32px !important;
@@ -2866,9 +2823,7 @@ a.ajax-load:hover {
 		overflow: hidden;
 	}
 	
-	#access .nav-hide {
-		display: none;
-	}
+
 	
 	#access:target .nav-hide,
 	#access:target a.nav-hide:hover {
@@ -2889,7 +2844,7 @@ a.ajax-load:hover {
 	}
 	
 	#access:target .menu {
-		margin-top: 75px; /* 213px */
+		margin-top: 120px;
 		background: #111;
 	}
 	
@@ -2915,9 +2870,16 @@ a.ajax-load:hover {
 		overflow: hidden;
 	}
 	
-	#access:target .menu a {
+	/*#access:target .menu a {*/
+	#access .menu a {
 		height: 40px !important;
 		border-top: 1px solid #444;
+		margin-top: 0px;
+    margin-bottom: 0px;
+    border-top: rgba(255, 255, 255, .05) 1px solid;
+    border-bottom: rgba(0, 0, 0, .1) 1px solid;
+    margin-left: 0px;
+    margin-right: 0px;
 		line-height: 40px;
 		-moz-transition: height .25s, line-height .25s;
 		-webkit-transition: height .25s, line-height .25s;
@@ -2956,14 +2918,19 @@ a.ajax-load:hover {
 		display:none;
 	}
 	
-	#access:target .drop-down-toggle {
+	/*#access:target .drop-down-toggle {
+		display:block;
+	}*/
+	.drop-down-toggle {
 		display:block;
 	}
 	
 	#access li li .drop-down-toggle {
 		top:5px;
 	}
-	
+	.drop-down-arrow {
+		margin: 5px 4px 2px 2px; /*8px 0 0 5px;*/
+	}
 	#header #searchform {
 		position: relative;
 		z-index: 1;
@@ -2982,7 +2949,7 @@ a.ajax-load:hover {
 		display:block;
 		width:168px;
 		margin-left:12px;
-		background:#ececec url(/customizations/global/pages/homepage_resources/search.png) right center no-repeat;
+		background:#ececec url(images/search.png) right center no-repeat;
 		box-shadow:inset 1px 1px 5px 1px rgba(0, 0, 0, .1);
 		text-indent: 0;
 	}
@@ -3134,6 +3101,7 @@ a.ajax-load:hover {
 		width: 94%;
 	}
 	
+	
 	.entry-author,
 	.comment-body {
 		padding:12px;
@@ -3203,22 +3171,6 @@ a.ajax-load:hover {
 		padding:3.2%;
 	}
 	
-	#restrict_element {
-		display: none;
-	}
-	
-	#text-check {
-		display: none;
-	}
-	
-	#sponsors {
-		display: none;	
-	}
-	
-	#advanced {
-		display: none;
-	}
-	
 	#copyright {
 		padding:1.7% 6.5%;
 		line-height:2em;
@@ -3228,25 +3180,9 @@ a.ajax-load:hover {
 	.credits {
 		float:none;
 		max-width:100%;
-		text-align:center;
-	}
-	
-	.col-lg-2.col-md-4.col-sm-4 {
-		width: 100%;
-	}
-	#main {
-		display: none;
+		text-align:left;
 	}
 
-	#browse-buttons {
-    	padding-top: 0px;
-	}
-	.btn.btn-primary {
-		margin-top: 20px;
-	}
-	#clearboth {
-		display: none;
-	}
 }
 
 @media screen and (-webkit-min-device-pixel-ratio : 1.5), screen and (min-device-pixel-ratio : 1.5) {
@@ -3262,82 +3198,82 @@ a.ajax-load:hover {
 		background-size:36px;
 		background-position: -3px center;
 	}
-	/*
+
 	.facebook {
 		background-image: url(/customizations/global/pages/homepage_resources/facebook_2x.png);
 		background-size:100%;
 	}
 
 	.twitter {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/twitter_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/twitter_2x.png);
 		background-size:100%;
 	}
 
 	.pinterest {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/pinterest_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/pinterest_2x.png);
 		background-size:100%;
 	}
 
 	.google-plus {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/google-plus_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/google-plus_2x.png);
 		background-size:100%;
 	}
 
 	.vimeo {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/vimeo_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/vimeo_2x.png);
 		background-size:100%;
 	}
 
 	.dribble {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/dribble_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/dribble_2x.png);
 		background-size:100%;
 	}
 
 	.flickr {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/flickr_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/flickr_2x.png);
 		background-size:100%;
 	}
 
 	.youtube {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/youtube_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/youtube_2x.png);
 		background-size:100%;
 	}
 
 	.linkedin {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/linkedin_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/linkedin_2x.png);
 		background-size:100%;
 	}
 
 	.entry-author-link {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/user_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/user_2x.png);
 		background-size: 12px;
 	}
 
 	.entry-date {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/time_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/time_2x.png);
 		background-size: 12px;
 	}
 
 	.entry-category {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/ribbon_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/ribbon_2x.png);
 		background-size: 12px;
 	}
 
 	.attachment-size {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/image_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/image_2x.png);
 		background-size: 12px;
 	}
 
 	.edit-link {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/edit_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/edit_2x.png);
 		background-size: 12px;
 	}
 
 	.entry-permalink {
-		background-image: url(http://cdm16007.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/pinboard/image/link_2x.png);
+		background-image: url(/customizations/global/pages/homepage_resources/link_2x.png);
 		background-size: 12px;
 	}
-	*/
+
 	#infscr-loading img {
 		width: 32px;
 		height: 32px;

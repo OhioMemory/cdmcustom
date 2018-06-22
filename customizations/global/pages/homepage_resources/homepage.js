@@ -1,17 +1,28 @@
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-29104270-1']);
-_gaq.push(['_gat._forceSSL']);
-_gaq.push(['_trackPageview']);
 
-(function () {
-	var ga = document.createElement('script');
-	ga.type = 'text/javascript';
-	ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(ga, s);
-})();
 jQuery(document).ready(function($) {
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-29104270-1']);
+	_gaq.push(['_gat._forceSSL']);
+	_gaq.push(['_trackPageview']);
+
+	(function () {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+	
+	(function(w,d,s,l,i){
+		w[l]=w[l]||[];
+		w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+		var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+		j.async=true;
+		j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;
+		f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-WPXQFP');
+	
 	// For Pinboard theme	
 	$('#access .menu > li > a').each(function() {
 		var title = $(this).attr('title');
@@ -78,9 +89,9 @@ jQuery(document).ready(function($) {
 					maxh = parseInt($(this).css('height'));
 				}
 			});
-			$('#access .menu > li > a').css('height', maxh);
+			//$('#access .menu > li > a').css('height', maxh);
 		} else {
-			$('#access .menu > li > a').css('height', 'auto');
+			//$('#access .menu > li > a').css('height', 'auto');
 		}
 	});
 	if( ($(window).width() > 760) || ($(document).width() > 760) ) {
@@ -92,16 +103,16 @@ jQuery(document).ready(function($) {
 				$(this).removeAttr('title');
 			}
 			if(parseInt($(this).css('height'))>maxh) {
-				maxh = parseInt($(this).css('height'));
+				//maxh = parseInt($(this).css('height'));
 			}
 		});
 		$('#access .menu > li > a').css('height', maxh);
-			$('#access li').mouseenter(function() {
-				$(this).children('ul').css('display', 'none').stop(true, true).fadeIn(250).css('display', 'block').children('ul').css('display', 'none');
-			});
-			$('#access li').mouseleave(function() {
-				$(this).children('ul').stop(true, true).fadeOut(250).css('display', 'block');
-			});
+		$('#access li').mouseenter(function() {
+			$(this).children('ul').css('display', 'none').stop(true, true).fadeIn(250).css('display', 'block').children('ul').css('display', 'none');
+		});
+		$('#access li').mouseleave(function() {
+			$(this).children('ul').stop(true, true).fadeOut(250).css('display', 'block');
+		});
 	} else {
 		$('#access li').each(function() {
 			if($(this).children('ul').length)
