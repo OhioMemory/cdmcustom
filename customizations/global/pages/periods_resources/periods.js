@@ -37,6 +37,18 @@ function toggleTimeline() {
         //timelineObj.timelineRef.destroy();
     	var timeline = new vis.Timeline(timelineContainer, historicSettings.hItems, historicSettings.hOptions);
         toggle.innerText = "Switch to Prehistoric Timeline";
+        // attach events to the navigation buttons
+		document.getElementById('moveLeft').onclick  = function () { move( 0.1); };
+		document.getElementById('moveRight').onclick = function () { move(-0.1); };
+		function move (percentage) {
+		    var range = timeline.getWindow();
+		    var interval = range.end - range.start;
+
+		    timeline.setWindow({
+		        start: range.start.valueOf() - interval * percentage,
+		        end:   range.end.valueOf()   - interval * percentage
+		    });
+		}
     }
 }
 
@@ -79,7 +91,7 @@ var historicItems = new vis.DataSet([
 var historicOptions = { 
 	width: '600%',
 	height: 420,
-	zoomable: true,
+	zoomable: false,
 	stack: false,
 	horizontalScroll: true,
 	stackSubgroups: false,
@@ -87,6 +99,8 @@ var historicOptions = {
 		item: 'top',
 		axis: 'both'
 	},
+	min: new Date(1730, 0, 1),
+	max: new Date(2240, 0, 1),
 	margin: {
 		item: {
 			horizontal: 600,
@@ -161,4 +175,17 @@ function getPrehistoricLink(period, coll, ptr) {
 	var searchterm = period.replace(/^(.*?) \(.*/, "$1");
 	var periodlabel = period.replace(/^(.*?)( \(.*)/, "$1<br/>$2");
 	return periodlabel + '<br><a href="http://www.ohiomemory.org/cdm/search/searchterm/' + searchterm + '*/field/coverab/mode/exact/conn/and/order/nosort" target="_blank"><img src="http://cdm16007.contentdm.oclc.org/digital/iiif/' + coll + '/' + ptr + '/full/150,150/0/default.jpg"></a>';
+}
+
+// attach events to the navigation buttons
+document.getElementById('moveLeft').onclick  = function () { move( 0.1); };
+document.getElementById('moveRight').onclick = function () { move(-0.1); };
+function move (percentage) {
+    var range = timeline.getWindow();
+    var interval = range.end - range.start;
+
+    timeline.setWindow({
+        start: range.start.valueOf() - interval * percentage,
+        end:   range.end.valueOf()   - interval * percentage
+    });
 }

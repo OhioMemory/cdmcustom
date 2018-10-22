@@ -1,5 +1,12 @@
 
 jQuery(document).ready(function($) {
+
+	$('.selectpicker').selectpicker({
+		style: 'btn-info',
+		width: '26em',
+		size: 8
+	});
+
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-29104270-1']);
 	_gaq.push(['_gat._forceSSL']);
@@ -13,7 +20,7 @@ jQuery(document).ready(function($) {
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(ga, s);
 	})();
-	
+
 	(function(w,d,s,l,i){
 		w[l]=w[l]||[];
 		w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
@@ -22,8 +29,8 @@ jQuery(document).ready(function($) {
 		j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;
 		f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-WPXQFP');
-	
-	// For Pinboard theme	
+
+	// For Pinboard theme
 	$('#access .menu > li > a').each(function() {
 		var title = $(this).attr('title');
 		if(typeof title !== 'undefined' && title !== false) {
@@ -65,6 +72,7 @@ jQuery(document).ready(function($) {
 				$('.entry-header', container).html(meta.html());
 		}
 	}
+
 	if( ($(window).width() > 960) || ($(document).width() > 960) ) {
 		// Viewport is greater than tablet: portrait
 	} else {
@@ -73,6 +81,7 @@ jQuery(document).ready(function($) {
 		});
 	}
 	$(window).resize(function() {
+
 		if( ($(window).width() > 960) || ($(document).width() > 960) ) {
 			$('.page-template-template-full-width-php #content .hentry, .page-template-template-blog-full-width-php #content .hentry, .page-template-template-blog-four-col-php #content .hentry').each(function() {
 				pinboard_restore_elements($(this));
@@ -82,6 +91,7 @@ jQuery(document).ready(function($) {
 				pinboard_move_elements($(this));
 			});
 		}
+
 		if( ($(window).width() > 760) || ($(document).width() > 760) ) {
 			var maxh = 0;
 			$('#access .menu > li > a').each(function() {
@@ -89,11 +99,12 @@ jQuery(document).ready(function($) {
 					maxh = parseInt($(this).css('height'));
 				}
 			});
-			//$('#access .menu > li > a').css('height', maxh);
+			$('#access .menu > li > a').css('height', maxh);
 		} else {
-			//$('#access .menu > li > a').css('height', 'auto');
+			$('#access .menu > li > a').css('height', 'auto');
 		}
 	});
+
 	if( ($(window).width() > 760) || ($(document).width() > 760) ) {
 		var maxh = 0;
 		$('#access .menu > li > a').each(function() {
@@ -103,7 +114,7 @@ jQuery(document).ready(function($) {
 				$(this).removeAttr('title');
 			}
 			if(parseInt($(this).css('height'))>maxh) {
-				//maxh = parseInt($(this).css('height'));
+				maxh = parseInt($(this).css('height'));
 			}
 		});
 		$('#access .menu > li > a').css('height', maxh);
@@ -114,6 +125,11 @@ jQuery(document).ready(function($) {
 			$(this).children('ul').stop(true, true).fadeOut(250).css('display', 'block');
 		});
 	} else {
+
+		//$('#access').hide();
+		$( ".nav-show" ).click(function(e) {
+			$('#access').toggle();
+		});
 		$('#access li').each(function() {
 			if($(this).children('ul').length)
 				$(this).append('<span class="drop-down-toggle"><span class="drop-down-arrow"></span></span>');
@@ -121,7 +137,9 @@ jQuery(document).ready(function($) {
 		$('.drop-down-toggle').click(function() {
 			$(this).parent().children('ul').slideToggle(250);
 		});
+		
 	}
+
 
 	// Returns width of HTML document
 	var docWidth = $( document ).width();
@@ -130,11 +148,11 @@ jQuery(document).ready(function($) {
 	var pixelsRemaining = frameWidth - logoWidth;
 	var widthRemaining = (pixelsRemaining / frameWidth) * 100;
 	var siteTitleWidth = Math.floor(widthRemaining) - 4;
-	
+
 	//$( document ).width() * .85 // total width
-	//console.log( Math.floor(widthRemaining) ); 
+	//console.log( Math.floor(widthRemaining) );
 	$( "#site-description" ).css( "width", siteTitleWidth+"%" );
-	
+
 	var menuLength = $('ul#menu-topbar.menu').width();
 	var menuBarLength = $('div.menu-topbar-container').width();
 	if (menuLength < menuBarLength) {
@@ -142,11 +160,11 @@ jQuery(document).ready(function($) {
 		var menuWidth = Math.floor(menuRemaining)+2;
 		$('div#menu-topbar-wrapper').css( "width", menuWidth+"%" );
 	}
-	
+
 	// slide feed and search controls
 	var HOSTDOMAIN = window.location.hostname;
 	var CDMHOSTDOMAIN = HOSTDOMAIN == "localhost" ? "cdm16007.contentdm.oclc.org" : "www.ohiomemory.org";
-	
+
 	var feedUrl = "http://www.ohiohistoryhost.org/ohiomemory/feed";
 	var request = new XMLHttpRequest();
 	request.open('GET', feedUrl, true);
@@ -161,7 +179,7 @@ jQuery(document).ready(function($) {
 			var count = items.length
 			var allHTML = '';
 			for (i = 0; i < count ;i++) {
-				
+
 			    var itemTitle = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("title")[0].textContent;
 			    var itemLink = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("link")[0].textContent;
 			    var itemDesc = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("description")[0].textContent;
@@ -173,10 +191,9 @@ jQuery(document).ready(function($) {
 			    			'<p class="caption-title"><br/>' + itemTitle + '</p>' +
 			    			'<p class="flex-caption">' +
 			    			decodeURI(itemDescShort.replace("/(.* ).*/", "$1")) + ' ... <a href="' + itemLink + '" class="more">more</a></p>' +
-			    			//'<img src="' + itemImgSrc + '" />' +
 			    			'</div>' +
 			    			'</li>';
-			   	
+
 			}
 			//console.log(allHTML);
 			document.getElementsByClassName("slides")[0].innerHTML = allHTML;
@@ -205,30 +222,27 @@ jQuery(document).ready(function($) {
 
 	request.send();
 
-	$('.selectpicker').selectpicker({
-		style: 'btn-info',
-		size: 8
-	});
+	
 
 	$( "#searchForm" ).submit(function(event) {
 		event.preventDefault();
-		
+
 		var mode = "all";
 		var searchterms = $('#searchTerms').val();
 		if (searchterms.substring(0,1) == '"') {
 		  mode = "exact";
 		}
-	
+
 		var fullTextVals = "artifact* picture manuscript* object* specimen* video"
 		var noFullText = false;
 
 		if ($('input[name=fulltext]:checked', '#searchForm').val() != undefined) {
 			noFullText = true;
 		}
-	
+
 		var allVals = "";
 		allVals = $("#selectFormats").val();
-		
+
 		var formatsChosen = false;
 		if (allVals != null) {
 		  formatsChosen = true;
@@ -240,39 +254,40 @@ jQuery(document).ready(function($) {
 		} else {
 		  $('#restrict_options').text("All formats");
 		}
-	
+
 		// http://www.ohiomemory.org/cdm/search/searchterm/pottery!picture/field/all!format/mode/all!all/conn/and!and
-		var gotostring =  "http://www.ohiomemory.org/cdm/search"
+		var gotostring =  "http://www.ohiomemory.org/digital/search"
 		                  + '/searchterm/' + escape(searchterms) + (noFullText ? '!' + escape(fullTextVals) : '') + (formatsChosen ? '!' + escape(searchFormatValues) : '')
 		                  + '/field/all' + (noFullText ? '!format' : '') + (formatsChosen ? '!format' : '')
 		                  + '/mode/' + mode + (noFullText ? '!any' : '') + (formatsChosen ? '!any' : '')
 		                  + '/conn/and' + (noFullText ? '!and' : '') + (formatsChosen ? '!and' : '');
-	
+
 		location.href = gotostring;
-		
+
 	});
-	
+
 	$('a#restrict-msg').on('click', function(e){
 		if( $('input#ft-yes').is(':checked') ){
-			$('input#ft-yes').prop('checked', false);	
+			$('input#ft-yes').prop('checked', false);
 		}else{
 			$('input#ft-yes').prop('checked', true);
 		}
 		return false;
 	});
-	
+
 	 //"div, span, p.myClass"  a#input#ft-yes
 	$('a#input#ft-yes').on('change', function(e){
-		
+
 		if( $('input#ft-yes').is(':checked') ){
 			$('input#ft-yes').prop('checked', false);
-			
-			
+
+
 		}else{
 			$('input#ft-yes').prop('checked', true);
-			
+
 		}
-		
+
 	});
-	
+
+
 });

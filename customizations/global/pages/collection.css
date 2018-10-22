@@ -1,0 +1,114 @@
+.Header-header {
+	background-image: url(/customizations/global/pages/homepage_resources/banner4.png);
+    background-size: cover;
+}
+
+.showTitle {
+	display:block !important;
+}
+
+@media screen and (max-width: 1200px) {
+	.Header-titleText {
+	    display: none;
+	    white-space: normal;
+		text-overflow: initial;
+	    overflow: visible;
+	}
+}
+
+@media screen and (max-width: 768px) {
+
+	.Header-nameHolder {
+	    padding-top: 7px;
+	    padding-right: 52px;
+	    padding-left: 0px;
+	}
+	.Header-mobileTitleHide {
+    	display: block;
+	}
+
+	.Header-logoImage { 
+		max-height:70px;
+		margin-right: 4px;       		
+	}
+	.Header-titleText {
+	    display: none;
+	    white-space: normal;
+		text-overflow: initial;
+	    overflow: visible;
+	    font-size: .70rem !important;
+	}
+	
+}
+@media screen and (min-width: 768px) {
+
+	.Header-logoImage { 
+		max-height:120px;
+		margin-top: 0px !important;        		
+	}
+	.Header-nameHolder {
+		padding-top: 40px;
+		/*padding-left: 20px;*/
+		padding-left: 22%;
+    	padding-right: 22%;
+    	text-shadow: 1px 1px 1px rgba(150, 150, 150, 1), 1px 1px 6px #fff;
+	}
+	.Header-controls, .Header-headerMenuLinks {
+		position: static;
+	}
+	.Header-nameHolder a h2 {
+		font-weight: normal;
+		font-size: 1.25rem;
+	}
+	.Header-hamburgerHolder {
+		position: absolute;
+	    width: 100%;
+	    background-color: #000000;
+	    top: 120px;
+	    margin-left: 0px;
+	}
+	.Header-hamburgerHolder .dropdown.btn-group {
+		float: left;
+	}
+	.Header-controls {
+		width: 100%;
+	}
+	.Header-hamburgerHolder .btn-group button {
+		display: none;
+	}
+	.Header-headerMenuLinks {
+		display: flex;
+		flex-wrap: nowrap;
+		border: none;
+		box-shadow: none;
+	}
+	.Header-headerMenuLinks li a:hover {
+		background-color: rgba(0,0,0,0.8) !important;
+	}
+	.Header-headerMenuLinks h3 {
+		margin: 5px;
+		color: white;
+	}
+	.dropdown.btn-group {
+	    padding-right: 10px;
+	}
+	.dropdown-menu {
+		padding: 0;
+		border-radius: 0px;
+	}
+	.dropdown-menu>li>a {
+		background-color: #000000 !important;
+	}
+	
+	.SimpleSearch-searchBox {
+		position: absolute;
+	    top: 10px;
+	    right: 10px;
+	}
+}
+
+@media screen and (max-width : 860px) {
+	.SimpleSearch-searchInput {
+	    width: 220px;
+	}
+}

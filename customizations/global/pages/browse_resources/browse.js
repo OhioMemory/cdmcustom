@@ -43,7 +43,7 @@ var browse_array = [];
 
 if (browse_field != 'contri') {
 	
-	var requestUrl = "http://www.ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/" + COLL_ALIAS + "/" + browse_field + "/0/0/json";
+	var requestUrl = "http://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/" + COLL_ALIAS + "/" + browse_field + "/0/0/json";
 	
 	var request = new XMLHttpRequest();
 	request.open('GET', requestUrl, true);

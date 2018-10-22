@@ -8,9 +8,6 @@ title: "Ohio Memory Browse by Period"
       font-family: arial, sans-serif;
       font-size: 11pt;
     }
-    span {
-      color: red;
-    }
     span.large {
       font-size: 200%;
     }
@@ -32,50 +29,100 @@ title: "Ohio Memory Browse by Period"
     } 
 	*/
 	
-	button {
+	button#toggle {
 	    display: inline-block;
 	    text-align: center;
 	    vertical-align: middle;
 	    padding: 6px 14px;
 	    border: 1px solid #6f6f6f;
 	    border-radius: 8px;
-	    background: #b6b6b6;
+	    /*background: #b6b6b6;
 	    background: -webkit-gradient(linear, left top, left bottom, from(#b6b6b6), to(#6f6f6f));
 	    background: -moz-linear-gradient(top, #b6b6b6, #6f6f6f);
-	    background: linear-gradient(to bottom, #b6b6b6, #6f6f6f);
+	    background: linear-gradient(to bottom, #b6b6b6, #6f6f6f);*/
 	    font: normal normal bold 18px arial;
 	    color: #171717;
 	    text-decoration: none;
+	    background-color: #dee6ff;
+	    margin-bottom: 18px;
 	}
-	button:hover,
-	button:focus {
+	button#toggle:hover {
 	    border: 1px solid #9e9e9e;
 	    background: #dadada;
-	    background: -webkit-gradient(linear, left top, left bottom, from(#dadada), to(#858585));
+	    /*background: -webkit-gradient(linear, left top, left bottom, from(#dadada), to(#858585));
 	    background: -moz-linear-gradient(top, #dadada, #858585);
-	    background: linear-gradient(to bottom, #dadada, #858585);
+	    background: linear-gradient(to bottom, #dadada, #858585);*/
 	    color: #171717;
 	    text-decoration: none;
+	    background-color: #ffffff;
+	    outline:0;
 	}
-	button:active {
-	    background: #6f6f6f;
-	    background: -webkit-gradient(linear, left top, left bottom, from(#6f6f6f), to(#6f6f6f));
+	button#toggle:focus {
+		outline:0;
+	}
+	button#toggle:active {
+	    background: #dee6ff;
+	    /*background: -webkit-gradient(linear, left top, left bottom, from(#6f6f6f), to(#6f6f6f));
 	    background: -moz-linear-gradient(top, #6f6f6f, #6f6f6f);
-	    background: linear-gradient(to bottom, #6f6f6f, #6f6f6f);
+	    background: linear-gradient(to bottom, #6f6f6f, #6f6f6f);*/
 	}
-
+	.fa-arrow-circle-right {
+		margin-right:20px;
+		margin-left:20px;
+		padding: 10px;
+	}
+	.fa-arrow-circle-right:hover {
+		color:#336699;
+	}
+	.fa-arrow-circle-left {
+		margin-left:20px;
+		margin-right:20px;
+		padding: 10px;
+	}
+	.fa-arrow-circle-left:hover {
+		color:#336699;
+	}
 	
+	.timeline-container {
+		border-radius: 5px;
+	    background-color: #fff;
+	    border-bottom: rgba(0, 0, 0, .13) 1px solid;
+	    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+	    padding: 10px;
+	}
+	#timeline {
+	    overflow: hidden;
+	    border-right: 1px #ccc solid;
+	}
+	.Header-valerieBar {
+	    background-color: #000;
+	    height: 3px;
+	}
+	.flex-container {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+  		justify-content: center;
+	}
   </style>
 
   <link href="/customizations/global/pages/periods_resources/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
   
 </head>
 <body>
+
+
+<div class="timeline-container">
 <div style="text-align:center">
-<button id="toggle" onclick="toggleTimeline()">Switch to Prehistoric Timeline</button>
+<i class="fas fa-arrow-circle-left fa-3x" id="moveLeft"></i><button id="toggle" onclick="toggleTimeline()">Switch to Prehistoric Timeline</button><i class="fas fa-arrow-circle-right fa-3x" id="moveRight"></i>
 <br/>&nbsp;<br/>
 </div>
 
 <div id="timeline"></div>
+</div>
+
+
 
 
