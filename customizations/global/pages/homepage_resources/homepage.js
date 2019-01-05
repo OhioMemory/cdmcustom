@@ -1,9 +1,12 @@
 
 jQuery(document).ready(function($) {
 
+
+	$('#main-menu').smartmenus();
+
+
 	$('.selectpicker').selectpicker({
 		style: 'btn-info',
-		width: '26em',
 		size: 8
 	});
 
@@ -105,8 +108,8 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	if( ($(window).width() > 760) || ($(document).width() > 760) ) {
-		var maxh = 0;
+	if( ($(window).width() > 768) || ($(document).width() > 768) ) {
+		/*var maxh = 0;
 		$('#access .menu > li > a').each(function() {
 			var title = $(this).attr('title');
 			if(typeof title !== 'undefined' && title !== false) {
@@ -123,20 +126,20 @@ jQuery(document).ready(function($) {
 		});
 		$('#access li').mouseleave(function() {
 			$(this).children('ul').stop(true, true).fadeOut(250).css('display', 'block');
-		});
+		});*/
 	} else {
 
 		//$('#access').hide();
 		$( ".nav-show" ).click(function(e) {
 			$('#access').toggle();
 		});
-		$('#access li').each(function() {
+		/*$('#access li').each(function() {
 			if($(this).children('ul').length)
 				$(this).append('<span class="drop-down-toggle"><span class="drop-down-arrow"></span></span>');
 		});
 		$('.drop-down-toggle').click(function() {
 			$(this).parent().children('ul').slideToggle(250);
-		});
+		});*/
 		
 	}
 
@@ -165,7 +168,7 @@ jQuery(document).ready(function($) {
 	var HOSTDOMAIN = window.location.hostname;
 	var CDMHOSTDOMAIN = HOSTDOMAIN == "localhost" ? "cdm16007.contentdm.oclc.org" : "www.ohiomemory.org";
 
-	var feedUrl = "http://www.ohiohistoryhost.org/ohiomemory/feed";
+	var feedUrl = "https://ohiohistoryhost.org/ohiomemory/feed";
 	var request = new XMLHttpRequest();
 	request.open('GET', feedUrl, true);
 
@@ -178,30 +181,31 @@ jQuery(document).ready(function($) {
 			var items = xmlDoc.getElementsByTagName("item");
 			var count = items.length
 			var allHTML = '';
-			for (i = 0; i < count ;i++) {
+			for (i = 0; i < 5 ;i++) {
 
 			    var itemTitle = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("title")[0].textContent;
 			    var itemLink = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("link")[0].textContent;
 			    var itemDesc = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("description")[0].textContent;
-			    itemDescShort = itemDesc.substr(0, 290);
+			    var itemDescShort = itemDesc.substr(0, 290);
 			    var itemImgSrc = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("enclosure")[0].getAttribute('url');
 
-				allHTML += '<li style="height:400px;background: url(' + itemImgSrc + '">' +
-							'<div style="background: rgba(0,0,0,.7);">' +
-			    			'<p class="caption-title"><br/>' + itemTitle + '</p>' +
-			    			'<p class="flex-caption">' +
-			    			decodeURI(itemDescShort.replace("/(.* ).*/", "$1")) + ' ... <a href="' + itemLink + '" class="more">more</a></p>' +
+				allHTML += '<li>' +
+							'<div class="caption-title">' + itemTitle + '</div>' +
+			    			'<div class="flex-caption">' +
+			    			decodeURI(itemDescShort.replace("/(.*\w).*/", "$1")) + ' ... <a href="' + itemLink + '" class="more">more</a></p>' +
 			    			'</div>' +
+			    			'<img class="images" src="' + itemImgSrc + '" />' +
 			    			'</li>';
 
 			}
 			//console.log(allHTML);
 			document.getElementsByClassName("slides")[0].innerHTML = allHTML;
-			console.log('images loaded');
+			//console.log('images loaded');
 			request.abort();
-			console.log('flexloader firing');
+			//console.log('flexloader firing');
 			$('.flexslider').flexslider({
 				animation: "slide",
+				itemWidth: "70%", 
 				animationLoop: false,
 				smoothHeight: false,
 				slideshow: false,
@@ -211,6 +215,7 @@ jQuery(document).ready(function($) {
 					$('body').removeClass('loading');
 				}
 			});
+			fixFlexsliderHeight();
 		} else {
 			// We reached our target server, but it returned an error
 		}
@@ -222,7 +227,62 @@ jQuery(document).ready(function($) {
 
 	request.send();
 
-	
+	function fixFlexsliderHeight() {
+		var checker = 0;
+		var imageSlides = $('.slides li img.images');
+		var imageTotal = $('.slides li img.images').length;
+		var last = imageTotal - 1;
+		var sliderHeight = 600;
+	    function clientHeightLoaded() {
+			clearInterval(checker);
+		} 	
+		function checkClientHeight() {
+			if ( $('.slides li img.images')[last].clientHeight > 0 ) {
+	        	clientHeightLoaded();
+	        	for (var i = 0; i < imageTotal; i++) {
+					var item = imageSlides[i];
+					var slideHeight = item.clientHeight;
+					/*console.log('sliderHeight: ' + sliderHeight + ", slideHeight: " + slideHeight);
+					console.log(sliderHeight > slideHeight);*/
+					if (sliderHeight > slideHeight) {
+		                sliderHeight = slideHeight;
+		            }
+				}
+	        	var sliderHeightCss = sliderHeight + "px";
+	        	//console.log( ($(window).width() < 760) || ($(document).width() < 760) );
+	        	//console.log(sliderHeightCss);
+	        	$('.flex-viewport').css("height", sliderHeightCss);
+			} 
+	    	if(checker == 0) {
+	    		checker = window.setInterval(checkClientHeight, 100);
+	    	}
+		}
+		checkClientHeight();
+	}
+
+	/*$(window).resize(function() {
+	    fixFlexsliderHeight();
+	});*/
+
+	var rtime;
+	var timeout = false;
+	var delta = 200;
+	$(window).resize(function() {
+	    rtime = new Date();
+	    if (timeout === false) {
+	        timeout = true;
+	        setTimeout(resizeend, delta);
+	    }
+	});
+	function resizeend() {
+	    if (new Date() - rtime < delta) {
+	        setTimeout(resizeend, delta);
+	    } else {
+	        timeout = false;
+	        //alert('Done resizing');
+	        fixFlexsliderHeight();
+	    }               
+	}
 
 	$( "#searchForm" ).submit(function(event) {
 		event.preventDefault();

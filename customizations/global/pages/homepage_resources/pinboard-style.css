@@ -25,7 +25,7 @@
     margin: 6px 10px;
 }
 
-#access a:hover,
+/*#access a:hover,
 #access li.current_page_item > a,
 #access li.current-menu-item > a {
 	background:none;
@@ -59,7 +59,7 @@
 	line-height:33px;
 	text-align:left;
 	overflow:hidden;
-}
+}*/
 
 .page #content .hentry {
 	box-shadow:none;

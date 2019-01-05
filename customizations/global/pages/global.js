@@ -43,15 +43,33 @@ document.addEventListener('cdm-item-page:ready', function(e){
 	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
 	// menu link changes for test only - end
 
-	console.log(event);
-	document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].addEventListener("click", function(event){
-		localStorage.setItem('searchterms', document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value);
-		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = localStorage.getItem('searchterms');
-		console.log(event);
-		
-		console.log(event.view.sessionStorage);
+	//console.log(e);
 
+
+
+	/*if (document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value.match(/ OR /g)) {
+		var newSearchString = document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value.replace(/ OR /, ' ');
+		
+		//var evt = new KeyboardEvent('keydown', {'keyCode':65, 'which':65} );
+		//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].dispatchEvent (evt);
+		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].removeAttribute("value");
+		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].setAttribute("value", "passed away");
+		var stringArray = newSearchString.split("");
+		for (i = 0; i < stringArray.length; i++) {
+			document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].dispatchEvent( new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : stringArray[i], char : stringArray[i], shiftKey : true}) );
+		}
+		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].focus();
+		//document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+
+	}*/
+
+	/*document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].addEventListener("keyup", function(event){
+		console.log('ready: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value)
 	});
+	document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].addEventListener("click", function(event){
+		console.log('ready: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value);
+	});*/
+	
 	console.log('cdm-item-page:ready');
 	// e is instance of CustomEvent
 	//console.log('ready: ' + e.detail); // {collectionId: '...', itemId: '...'}
@@ -60,57 +78,7 @@ document.addEventListener('cdm-item-page:ready', function(e){
 	//console.log('cdm-item-page:ready');
 	//console.log(e);
 
-	/*
-	ScriptLoader('https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js', function() {
-		store.remove('searchTerms');
-
-		document.getElementsByClassName("fa-times-circle")[1].parentNode.style.display = 'none';
-		const pageViewElem = elFactory('div', { id: 'pageView' }, 'View all pages');
-		
-		var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
-
-		viewNode.addEventListener("click", function(){
-			if (document.getElementById("pageView").innerText == "View all pages") {
-				var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
-				store.set('searchTerms', { terms: termValues });
-				document.getElementsByClassName("fa-times-circle")[1].click();
-				document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
-				//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = " ";
-				document.getElementById("pageView").innerText = "View relevant pages";
-			} else {
-				if (store.get('searchTerms') !== undefined && store.get('searchTerms').terms != "") {
-					//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
-					//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].setAttribute('value', store.get('searchTerms').terms);
-					document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].addEventListener("click"), function(event){
-						console.log(event);
-						
-					}
-					document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
-					document.getElementById("pageView").innerText = "View all pages";
-				}
-			}
-		});
-	});
-	*/
-
-	/*
-	document.getElementsByClassName("fa-times-circle")[1].parentNode.style.display = 'none';
-	const pageViewElem = elFactory('div', { id: 'pageView' }, 'View all pages');
-	var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
-	viewNode.addEventListener("click", function(){
-		if (document.getElementById("pageView").innerText == "View all pages") {
-			var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
-			document.getElementsByClassName("fa-times-circle")[1].click();
-			document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = termValues;
-			//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = " ";
-			document.getElementById("pageView").innerText = "View relevant pages";
-		} else {
-			document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
-			document.getElementById("pageView").innerText = "View all pages";
-		}
-	});
-	*/
-
+	
 	// hide full text initially
 	if (document.getElementById("compoundItemTranscript") != null) {
 
@@ -120,7 +88,7 @@ document.addEventListener('cdm-item-page:ready', function(e){
 		
 	}
 
-	var item_img =  document.querySelector('.ItemImage-itemImage img');
+	/*var item_img =  document.querySelector('.ItemImage-itemImage img');
 	if (item_img != undefined){
 		var img_src_str = item_img.getAttribute('src');
 		var img_id = img_src_str.split("/")[6];
@@ -149,7 +117,7 @@ document.addEventListener('cdm-item-page:ready', function(e){
 			document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers";
 			document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
 		}
-	}
+	}*/
 
 });
 
@@ -165,40 +133,14 @@ document.addEventListener('cdm-item-page:update', function(e){
 	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
 	// menu link changes for test only - end
 
-	console.log("cdm-item-page:update");
-
-	//console.log('update: ' + e.detail); // {collectionId: '...', itemId: '...'}
-	//console.log('cdm-item-page:update');
-
-	/*
-	ScriptLoader('https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js', function() {
-		const pageViewElem = elFactory('div', { id: 'pageView' }, 'View relevant pages');
-		document.getElementsByClassName("fa-times-circle")[1].parentNode.style.display = 'none';
-		if (document.getElementById("pageView").innerText == "View all pages") { 
-			const pageViewElem = elFactory('div', { id: 'pageView' }, 'View all pages');
-		} else {
-			const pageViewElem = elFactory('div', { id: 'pageView' }, 'View relevant pages');
-		}
-
-		var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
-
-		viewNode.addEventListener("click", function(){
-			if (document.getElementById("pageView").innerText == "View all pages") {
-				var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
-				store.set('searchTerms', { terms: termValues });
-				document.getElementsByClassName("fa-times-circle")[1].click();
-				document.getElementById("pageView").innerText = "View relevant pages";
-			} else {
-				if (store.get('searchTerms') !== undefined && store.get('searchTerms').terms != "") {
-					document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
-					document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
-					document.getElementById("pageView").innerText = "View all pages";
-				}
-			}
-		});
+	/*document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].addEventListener("keyup", function(event){
+		console.log('update: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value)
 	});
-	*/
+	document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].addEventListener("click", function(event){
+		console.log('update: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value);
+	});*/
 
+	console.log("cdm-item-page:update");
 
 	// hide full text initially
 	if (document.getElementById("compoundItemTranscript") != null) {
@@ -209,8 +151,7 @@ document.addEventListener('cdm-item-page:update', function(e){
 		
 	}
 	
-	var cropButton = document.querySelector('#crop');
-	//var displayId = e.detail.itemId;
+	/*var cropButton = document.querySelector('#crop');
 	var item_img =  document.querySelector('.ItemImage-itemImage img');
 	if (item_img != undefined){
 		var img_src_str = item_img.getAttribute('src');
@@ -234,7 +175,7 @@ document.addEventListener('cdm-item-page:update', function(e){
 			}
 			targetElem.insertBefore(newButton, targetElem.firstElementChild);
 		}
-	}
+	}*/
 
 	// document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href");
 	if (document.getElementsByClassName('BackToResults-backLink')[0] != undefined) {
@@ -267,12 +208,12 @@ document.addEventListener('cdm-search-page:ready', function(e){
 
 	//console.log(e);
 	// for newspaper portal
-	/*
-	if (e.target.URL.match(/!newspapers/).length > 0) {
-		document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers"
-		document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
-	}
-	*/
+	
+	//if (e.target.URL.match(/!newspapers/).length > 0) {
+	//	document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers"
+	//	document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
+	//}
+	
 
 	var facetNodes = document.getElementsByClassName("panel-title");
 	for (i=1; i<facetNodes.length; i++) {
@@ -434,7 +375,12 @@ document.addEventListener('cdm-advanced-search-page:leave', function(e){
 });
 // app ready
 document.addEventListener('cdm-app:ready', function(e){
-	//console.log(e);
+	//console.log('cdm-app:ready' + e);
+	//var pageHead = e.srcElement.head;
+
+});
+document.addEventListener('cdm-app:enter', function(e){
+	console.log('cdm-app:enter' + e);
 	//var pageHead = e.srcElement.head;
 
 });
@@ -539,10 +485,14 @@ document.addEventListener('cdm-custom-page:ready', function(e){
 				body.appendChild(script);
 				var script = document.createElement("script")
 			    script.type = "application/javascript";
+				script.src = '/customizations/global/pages/homepage_resources/jquery.smartmenus.min.js';
+				body.appendChild(script);
+				var script = document.createElement("script")
+			    script.type = "application/javascript";
 				script.src = '/customizations/global/pages/homepage_resources/homepage.js';
 				body.appendChild(script);
 			}
-		 
+		 	
 			function checkJquery() {
 				if (window.jQuery) {
 		        	jqueryLoaded();
@@ -706,7 +656,7 @@ function ScriptLoader(url, callback){
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
 }
-
+/*
 // advanced search window
 (function () {
 
@@ -719,9 +669,9 @@ function ScriptLoader(url, callback){
 			var advSearchContent = new tingle.modal( {cssClass: ['advanced-modal'] });
 		    var advLink = document.querySelector('.SimpleSearch-headerAdvancedSearchButtonLink');
 		    advLink.addEventListener('click', function(){
-		        advSearchContent.open();
-		        advSearchContent.setContent('<iframe id="advSearchFrame" src="/customizations/global/pages/advancedsearch_resources/advanced_search.html?' + coll + '&' + urlpath + '" width="100%" height="540px" scrolling="no" frameBorder="0" style="border:none;"></iframe>'); 
+		        advSearchContent.open(); 
 		    });
+		    advSearchContent.setContent('<iframe id="advSearchFrame" src="/customizations/global/pages/advancedsearch_resources/advanced_search.html?' + coll + '&' + urlpath + '" width="100%" height="540px" scrolling="yes" frameBorder="0" style="border:none;"></iframe>'); 
 			document.getElementsByClassName("SimpleSearch-headerAdvancedSearchButtonLink")[0].addEventListener("click", function(e){
 				e.stopPropagation();
 				e.preventDefault();
@@ -729,40 +679,104 @@ function ScriptLoader(url, callback){
 		});
 	}
 
-	// set up custom advanced search modal for following events
-	document.addEventListener('cdm-custom-page:ready', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-custom-page:update', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-collection-landing-page:ready', function(e){
-    	setupAdvancedModal(e.detail.collectionId, e.target.URL);
-    });
-    document.addEventListener('cdm-collection-landing-page:update', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-collection-search-page:ready', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-collection-search-page:update', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-search-page:ready', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-search-page:update', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-item-page:ready', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
-	document.addEventListener('cdm-item-page:update', function(e){
-		setupAdvancedModal(e.detail.collectionId, e.target.URL);
-	});
+	function startEventListener(cdmEvent) {
+		document.addEventListener(cdmEvent, function(e){
+			setupAdvancedModal(e.detail.collectionId, e.target.URL);
+		});
+	}
+
+	var cdmEvents = ['cdm-custom-page:ready', 'cdm-custom-page:update', 'cdm-collection-landing-page:ready', 'cdm-collection-landing-page:update', 'cdm-collection-search-page:ready', 'cdm-collection-search-page:update', 'cdm-search-page:ready', 'cdm-search-page:update', 'cdm-item-page:ready', 'cdm-item-page:update'];
+
+	cdmEvents.forEach(startEventListener);
 
 })();
+*/
+/*
+// openseadragon viewer
+(function () {
 
+	function CustomImageView(container, imgsrc) {
+		
+		if (!container) {
+            return false;
+        }
+        if (!imgsrc) {
+            return false;
+        }
+
+        
+        if (document.getElementsByClassName("CompoundItemPagination-container").length > 0) {
+
+        	var pageContainers = document.getElementsByClassName("CompoundItemView-container");
+        	for (i = 2; i < pageContainers.length; i++) {
+        		pageContainers[i].style.borderLeft  = "5px solid crimson";
+        	}
+        	document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].click();
+
+        	if (imgsrc.match(/highlightTerms/)) {
+	        	container.firstChild.className += ' hide';
+	            var openseadragonContainer = elFactory('div', { id: 'zoomDiv', style: 'height:100vh;width:100%' });
+	            container.parentNode.insertBefore(openseadragonContainer, container);
+
+	            // OpenSeadragon
+	            var viewer = OpenSeadragon({
+			        id: "zoomDiv",
+			        prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.0/images/",
+			        tileSources: {
+				        type: 'image',
+				        url:  'https://www.ohiomemory.org/digital/iiif/p15005coll5/1304/full/2000,/0/default.jpg?highlightTerms=high%20street'
+				    },
+			        showNavigator: false
+			    });
+			    openseadragonContainer.firstChild.firstChild.setAttribute("style", odcStyle + "outline:0");
+	        }
+        	
+	        
+			for (let i = 0; i < sessionStorage.length; i++){
+			  let key = sessionStorage.key(i);
+			  let value = sessionStorage.getItem(key);
+			  console.log(key, value);
+			}	
+	        
+
+        }
+
+        var unmount = function () {
+            openseadragonContainer.parentNode && openseadragonContainer.parentNode.removeChild(openseadragonContainer);
+        };
+
+        return {
+            unmount: unmount
+        };
+	}
+
+    document.addEventListener('cdm-item-page:ready', function (e) {
+    	
+    	// unmount or remove current video player from DOM if it is exists
+    	currentInstance && currentInstance.unmount();
+   		// creates a new instance if it is url item and it is from vimeo.com
+    	//currentInstance = CustomVideoView(document.querySelector('div[class*=itemUrl]'));
+    	currentInstance = CustomImageView(document.getElementsByClassName("preview")[0], document.getElementsByClassName("ItemImage-expandButton")[0].parentElement.firstChild.src);
+        
+    });
+
+    document.addEventListener('cdm-item-page:update', function (e) {
+        
+    	// unmount or remove current video player from DOM if it is exists
+    	currentInstance && currentInstance.unmount();
+   		// creates a new instance if it is url item and it is from vimeo.com
+    	//currentInstance = CustomVideoView(document.querySelector('div[class*=itemUrl]'));
+    	currentInstance = CustomImageView(document.getElementsByClassName("preview")[0], document.getElementsByClassName("ItemImage-expandButton")[0].parentElement.firstChild.src);
+        
+    });
+
+    document.addEventListener('cdm-item-page:leave', function () {
+        // unmount or remove current video player from DOM if it is exists
+        currentInstance && currentInstance.unmount();
+    });
+
+})();
+*/
 // video handler
 (function () {
 
@@ -872,7 +886,7 @@ function ScriptLoader(url, callback){
                 links = links.concat(row.lastChild.textContent.split(','));
             }
         });
-        console.log(links);
+
         // create container for iFrames
         var frameContainer = document.createElement('div');
 

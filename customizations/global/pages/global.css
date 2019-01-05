@@ -110,9 +110,9 @@ body {
 	    top: 120px;
 	    margin-left: 0px;
 	}
-	.Header-hamburgerHolder .dropdown.btn-group {
+	/*.Header-hamburgerHolder .dropdown.btn-group {
 		float: left;
-	}
+	}*/
 	.Header-controls {
 		width: 100%;
 	}
@@ -132,7 +132,7 @@ body {
 		margin: 5px;
 		color: white;
 	}
-	.dropdown.btn-group {
+	/*.dropdown.btn-group {
 	    padding-right: 10px;
 	}
 	.dropdown-menu {
@@ -141,7 +141,7 @@ body {
 	}
 	.dropdown-menu>li>a {
 		background-color: #000000 !important;
-	}
+	}*/
 	
 	.SimpleSearch-searchBox {
 		position: absolute;

@@ -31,32 +31,312 @@ title: ""
 </script> -->
 
 <!-- Javascripts localhost -->
-<script src="/customizations/global/pages/homepage_resources/jquery.min.js"></script>
-<script src="/customizations/global/pages/homepage_resources/bootstrap.min.js"></script>
-<script src="/customizations/global/pages/homepage_resources/ios-orientationchange-fix.js"></script>
-<script src="/customizations/global/pages/homepage_resources/jquery.flexslider-min.js"></script>
-<script src="/customizations/global/pages/homepage_resources/modernizr.min.js"></script>
-<script src="/customizations/global/pages/homepage_resources/jquery.easing.1.3.min.js"></script>
-<script src="/customizations/global/pages/homepage_resources/bootstrap-select.min.js"></script>
-<script src="/customizations/global/pages/homepage_resources/homepage.js"></script>
-<script type='text/javascript' src='http://apps.ohiohistory.org/ohiomemory/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/jquery.min.js"></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/bootstrap.min.js"></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/ios-orientationchange-fix.js"></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/jquery.flexslider-min.js"></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/modernizr.min.js"></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/jquery.easing.1.3.min.js"></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/bootstrap-select.min.js"></script>
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/homepage.js"></script>
+<!-- <script type='text/javascript' src='http://apps.ohiohistory.org/ohiomemory/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
 <script type='text/javascript' src='http://apps.ohiohistory.org/ohiomemory/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
 <script type='text/javascript' src='http://apps.ohiohistory.org/ohiomemory/wp-includes/js/jquery/ui/tabs.min.js?ver=1.11.4'></script>
 <script type='text/javascript' src='http://apps.ohiohistory.org/ohiomemory/wp-includes/js/jquery/ui/accordion.min.js?ver=1.11.4'></script>
-<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=1316526300'></script>
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=1316526300'></script> -->
 
 <!-- bootstrap css localhost -->
 <link rel="stylesheet" id="bootstrap-css-css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="all">
-
-<link rel='stylesheet' id='parent-style-css'  href='/customizations/global/pages/homepage_resources/style.css' type='text/css' media='all' />
-<link rel='stylesheet' id='parent-style-css'  href='/customizations/global/pages/homepage_resources/pinboard-style.css' type='text/css' media='all' />
-<link rel='stylesheet' id='parent-style-css'  href='/customizations/global/pages/homepage_resources/pinboard-child-style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='parent-style-css'  href='https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='parent-style-css'  href='https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/pinboard-style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='parent-style-css'  href='https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/pinboard-child-style.css' type='text/css' media='all' />
 
 <!-- FlexSlider CSS -->
-<link rel="stylesheet" href="/customizations/global/pages/homepage_resources/flexslider.min.css" type="text/css" media="screen">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/customizations/global/pages/homepage_resources/bootstrap-select.min.css">
+<!-- <link rel="stylesheet" href="/customizations/global/pages/homepage_resources/flexslider.css" type="text/css" media="screen"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.1/flexslider.min.css" />
+<link rel="stylesheet" href="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/bootstrap-select.min.css">
 
+<link rel="stylesheet" href="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/sm-core-css.css">
+<script src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/jquery.smartmenus.min.js"></script>
+<style>
+  
+  ul.dropdown-menu li a span {
+    white-space:normal;
+    width:175px;
+  }
+  div.dropdown-menu {
+    width:15em;
+  }
+  
+  .bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+    left: 190px;
+  }
+
+  .sm-simple {
+    /*border: 1px solid #bbbbbb;*/
+    background: #fff;
+    /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);*/
+  }
+  .sm-simple a, .sm-simple a:focus, .sm-simple a:active {
+    padding: 13px 20px;
+    /* make room for the toggle button (sub indicator) */
+    padding-right: 58px;
+    color: #fff;
+    font-family: "Helvetica Neue",Arial,Helvetica,Verdana,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 17px;
+    text-decoration: none;
+    background-color:#000;
+  }
+  .sm-simple a:hover {
+  	color: #fff;
+  }
+  .sm-simple a.current {
+    background: #555555;
+    color: #fff;
+  }
+  .sm-simple a.disabled {
+    color: #cccccc;
+  }
+  .sm-simple a .sub-arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+    left: auto;
+    right: 4px;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    font: bold 14px/34px monospace !important;
+    text-align: center;
+    text-shadow: none;
+    background: rgba(0, 0, 0, 0.08);
+  }
+  .sm-simple a .sub-arrow::before {
+    content: '+';
+  }
+  .sm-simple a.highlighted .sub-arrow::before {
+    content: '-';
+  }
+  .sm-simple li {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .sm-simple > li:first-child {
+    border-top: 0;
+  }
+  .sm-simple ul {
+    background: rgba(179, 179, 179, 0.1);
+  }
+  .sm-simple ul a, .sm-simple ul a:hover, .sm-simple ul a:focus, .sm-simple ul a:active {
+    font-size: 14px;
+    border-left: 8px solid transparent;
+  }
+  .sm-simple ul ul a,
+  .sm-simple ul ul a:hover,
+  .sm-simple ul ul a:focus,
+  .sm-simple ul ul a:active {
+    border-left: 16px solid transparent;
+  }
+  .sm-simple ul ul ul a,
+  .sm-simple ul ul ul a:hover,
+  .sm-simple ul ul ul a:focus,
+  .sm-simple ul ul ul a:active {
+    border-left: 24px solid transparent;
+  }
+  .sm-simple ul ul ul ul a,
+  .sm-simple ul ul ul ul a:hover,
+  .sm-simple ul ul ul ul a:focus,
+  .sm-simple ul ul ul ul a:active {
+    border-left: 32px solid transparent;
+  }
+  .sm-simple ul ul ul ul ul a,
+  .sm-simple ul ul ul ul ul a:hover,
+  .sm-simple ul ul ul ul ul a:focus,
+  .sm-simple ul ul ul ul ul a:active {
+    border-left: 40px solid transparent;
+  }
+
+  .sm-simple ul a:hover {
+  	color: #fff;
+  }
+  .flex-direction-nav a {
+    overflow:visible;
+  }
+
+@media (min-width: 768px) {
+  /* Switch to desktop layout
+  -----------------------------------------------
+     These transform the menu tree from
+     collapsible to desktop (navbar + dropdowns)
+  -----------------------------------------------*/
+  /* start... (it's not recommended editing these rules) */
+  .sm-simple ul {
+    position: absolute;
+    width: 12em;
+  }
+
+  .sm-simple li {
+    float: left;
+  }
+
+  .sm-simple.sm-rtl li {
+    float: right;
+  }
+
+  .sm-simple ul li, .sm-simple.sm-rtl ul li, .sm-simple.sm-vertical li {
+    float: none;
+  }
+
+  .sm-simple a {
+    white-space: nowrap;
+  }
+
+  .sm-simple ul a, .sm-simple.sm-vertical a {
+    white-space: normal;
+  }
+
+  .sm-simple .sm-nowrap > li > a, .sm-simple .sm-nowrap > li > :not(ul) a {
+    white-space: nowrap;
+  }
+
+  /* ...end */
+  .sm-simple {
+    background: #000;
+  }
+  .sm-simple a, .sm-simple a:focus, .sm-simple a:active, .sm-simple a.highlighted {
+    padding: 9px 20px;
+    color: #fff;
+  }
+  .sm-simple a:hover {
+	color: #333;
+	}
+  .sm-simple a:hover, .sm-simple a:focus, .sm-simple a:active, .sm-simple a.highlighted {
+    background: #333;
+    color: #fff;
+  }
+  .sm-simple a.current {
+    background: #555555;
+    color: #fff;
+  }
+  .sm-simple a.disabled {
+    background: #fff;
+    color: #cccccc;
+  }
+  .sm-simple a.has-submenu {
+    padding-right: 32px;
+  }
+  .sm-simple a .sub-arrow {
+    top: 50%;
+    margin-top: -8px;
+    right: 20px;
+    width: 8px;
+    height: 0px; /* 0px */
+    font: 14px/16px monospace !important;
+    background: transparent;
+  }
+  .sm-simple a.highlighted .sub-arrow::before {
+    content: '+';
+  }
+  .sm-simple > li {
+    border-top: 0;
+    /*border-left: 1px solid #eeeeee;*/
+  }
+  .sm-simple > li:first-child {
+    border-left: 0;
+  }
+  .sm-simple ul {
+    /*border: 1px solid #bbbbbb;*/
+    background: #000;
+    /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);*/
+  }
+  .sm-simple ul a {
+    border: 0 !important;
+  }
+  .sm-simple ul a.has-submenu {
+    padding-right: 20px;
+  }
+  .sm-simple ul a .sub-arrow {
+    left: 8px;
+    right: auto;
+  }
+  .sm-simple ul > li {
+    border-left: 0;
+    /*border-top: 1px solid #eeeeee;*/
+  }
+  .sm-simple ul > li:first-child {
+    border-top: 0;
+  }
+  .sm-simple .scroll-up,
+  .sm-simple .scroll-down {
+    position: absolute;
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+    background: #fff;
+    height: 20px;
+  }
+  .sm-simple .scroll-up-arrow,
+  .sm-simple .scroll-down-arrow {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    margin-left: -8px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border-width: 8px;
+    border-style: dashed dashed solid dashed;
+    border-color: transparent transparent #555555 transparent;
+  }
+  .sm-simple .scroll-down-arrow {
+    top: 6px;
+    border-style: solid dashed dashed dashed;
+    border-color: #555555 transparent transparent transparent;
+  }
+  .sm-simple.sm-rtl a.has-submenu {
+    padding-right: 20px;
+    padding-left: 32px;
+  }
+  .sm-simple.sm-rtl a .sub-arrow {
+    left: 20px;
+    right: auto;
+  }
+  .sm-simple.sm-rtl.sm-vertical a.has-submenu {
+    padding: 11px 20px;
+  }
+  .sm-simple.sm-rtl.sm-vertical a .sub-arrow {
+    left: auto;
+    right: 8px;
+  }
+  .sm-simple.sm-rtl > li:first-child {
+    border-left: 1px solid #eeeeee;
+  }
+  .sm-simple.sm-rtl > li:last-child {
+    border-left: 0;
+  }
+  .sm-simple.sm-rtl ul a.has-submenu {
+    padding: 11px 20px;
+  }
+  .sm-simple.sm-rtl ul a .sub-arrow {
+    left: auto;
+    right: 8px;
+  }
+  .sm-simple.sm-vertical a .sub-arrow {
+    left: 8px;
+    right: auto;
+  }
+  .sm-simple.sm-vertical li {
+    border-left: 0;
+    border-top: 1px solid #eeeeee;
+  }
+  .sm-simple.sm-vertical > li:first-child {
+    border-top: 0;
+  }
+}
+
+/*# sourceMappingURL=sm-simple.css.map */
+  </style>
 </head>
 
 <body class="home page page-id-1911 page-template-default page-template-template-full-width-php">
@@ -70,10 +350,10 @@ title: ""
 			<div id="background-banner" class="sized">
 				<div id="site-top"></div>
 				<div id="site-title">
-					<a href="http://ohiomemory.org/" rel="home">
-						<img src="/customizations/global/pages/homepage_resources/OhioMemory-logo.png" alt="" width="124" height="68">
+					<a href="https://ohiomemory.org/" rel="home">
+						<img src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/OhioMemory-logo.png" alt="" width="124" height="68">
 					</a>
-					<a class="home" href="http://ohiomemory.org/" rel="home"></a>
+					<a class="home" href="https://ohiomemory.org/" rel="home"></a>
 				</div>
 				<div id="site-description">
 					<span>A Collaborative Program of the Ohio History Connection and the State Library of Ohio</span>
@@ -84,36 +364,37 @@ title: ""
 			<!-- <a class="headerIcon"><span class="fa fa-bars fa-2x"></span></a> -->
 			<!--<div class="nav-hide">Hide Navigation</div>-->
 			<!--<a class="nav-hide" href="#nogo">Hide Navigation</a>-->
+
 			<nav id="access">
-				
-					<ul id="menu-topbar" class="menu">	
-						<li id="menu-item-1916" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-1911 menu-item-has-children menu-item-1916"><a href="http://apps.ohiohistory.org/ohiomemory/about-ohio-memory">About</a>
-							<ul class="sub-menu">
-								<li id="menu-item-73" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="http://apps.ohiohistory.org/ohiomemory/about/faqs">FAQs</a></li>
-								<li id="menu-item-77" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-77"><a href="http://apps.ohiohistory.org/ohiomemory/about/staff">Staff</a></li>
-							</ul>
-						</li>
-						<li id="menu-item-68" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-68"><a href="http://apps.ohiohistory.org/ohiomemory/collections">Collections</a></li>
-						<li id="menu-item-473" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-473"><a href="http://apps.ohiohistory.org/ohiomemory/newspapers">Newspapers</a></li>
-						<li id="menu-item-92" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-92"><a href="http://apps.ohiohistory.org/ohiomemory/archives/category/digital-collections">Blog</a></li>
-						<li id="menu-item-2036" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2036"><a href="http://apps.ohiohistory.org/ohiomemory/resources/">Educational Resources</a>
-							<ul class="sub-menu">
-								<li id="menu-item-2040" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2040"><a href="http://apps.ohiohistory.org/ohiomemory/resources/featured-topics/">Featured Topics</a></li>
-								<li id="menu-item-2039" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2039"><a href="http://apps.ohiohistory.org/ohiomemory/resources/for-teachers/">For Teachers</a></li>
-								<li id="menu-item-2037" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2037"><a href="http://apps.ohiohistory.org/ohiomemory/resources/interactives/">Interactives</a></li>
-								<li id="menu-item-2038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2038"><a href="http://apps.ohiohistory.org/ohiomemory/resources/maps-timelines/">Maps &#038; Timelines</a></li>
-								<li id="menu-item-2041" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2041"><a href="http://apps.ohiohistory.org/ohiomemory/resources/search-help">Search Help</a></li>
-							</ul>
-						</li>
-						<li id="menu-item-2049" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2049"><a href="http://apps.ohiohistory.org/ohiomemory/for-organizations">For Organizations</a>
-							<ul class="sub-menu">
-								<li id="menu-item-2044" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2044"><a href="http://www.ohiohistory.org/preserve/digital-services/digitization-services" onclick="_gaq.push(['_trackEvent', 'outbound-widget', 'http://www.ohiohistory.org/preserve/digital-services/digitization-services', 'Digitization Services']);" >Digitization Services</a></li>
-								<li id="menu-item-2046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2046"><a href="http://www.ohiohistory.org/preserve/digital-services/microfilm-services" onclick="_gaq.push(['_trackEvent', 'outbound-widget', 'http://www.ohiohistory.org/preserve/digital-services/microfilm-services', 'Newspaper Digitization Services']);" >Newspaper Digitization Services</a></li>
-								<li id="menu-item-2050" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2050"><a href="http://apps.ohiohistory.org/ohiomemory/for-organizations/join-ohio-memory">Join Ohio Memory</a></li>
-								<li id="menu-item-2052" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2052"><a href="http://apps.ohiohistory.org/ohiomemory/for-organizations/submitting-institutions">Submitting Institutions</a></li>
-							</ul>
-						</li>
-					</ul>
+
+					<ul id="main-menu" class="sm sm-simple">
+					  <li><a href="https://ohiohistoryhost.org/ohiomemory/about-ohio-memory">About</a>
+					    <ul>
+					      <li><a href="https://ohiohistoryhost.org/ohiomemory/about/faqs">FAQs</a></li>
+					      <li><a href="https://ohiohistoryhost.org/ohiomemory/about/staff">Staff</a></li>
+					    </ul>
+					  </li>
+					  <li><a href="https://ohiohistoryhost.org/ohiomemory/collections">Collections</a></li>
+					  <li><a href="https://ohiohistoryhost.org/ohiomemory/newspapers">Newspapers</a></li>
+					  <li><a href="https://ohiohistoryhost.org/ohiomemory/archives/category/digital-collections">Blog</a></li>
+					  <li><a href="https://ohiohistoryhost.org/ohiomemory/resources/">Educational Resources</a>
+					      <ul>
+					        <li><a href="https://ohiohistoryhost.org/ohiomemory/resources/featured-topics/">Featured Topics</a></li>
+					        <li><a href="https://ohiohistoryhost.org/ohiomemory/resources/for-teachers/">For Teachers</a></li>
+					        <li><a href="https://ohiohistoryhost.org/ohiomemory/resources/interactives/">Interactives</a></li>
+					        <li><a href="https://ohiohistoryhost.org/ohiomemory/resources/maps-timelines/">Maps &#038; Timelines</a></li>
+					        <li><a href="https://ohiohistoryhost.org/ohiomemory/resources/search-help">Search Help</a></li>
+					      </ul>
+					    </li>
+					    <li><a href="https://ohiohistoryhost.org/ohiomemory/for-organizations">For Organizations</a>
+					      <ul>
+					        <li><a href="https://www.ohiohistory.org/preserve/digital-services/digitization-services">Digitization Services</a></li>
+					        <li><a href="https://www.ohiohistory.org/preserve/digital-services/microfilm-services">Newspaper Digitization Services</a></li>
+					        <li><a href="https://ohiohistoryhost.org/ohiomemory/for-organizations/join-ohio-memory">Join Ohio Memory</a></li>
+					        <li><a href="https://ohiohistoryhost.org/ohiomemory/for-organizations/submitting-institutions">Submitting Institutions</a></li>
+					      </ul>
+					    </li>
+					</ul> 
 
 				<div class="clear"></div>
 			</nav><!-- #access -->
@@ -125,7 +406,7 @@ title: ""
 					<div class="entry">
 						<div class="entry-content"><!-- .entry-content -->
 							<div class="search-and-browse"><!-- .search-and-browse -->
-								<div id="advanced" class="SimpleSearch-headerAdvancedSearchButtonLink"><a href="http://ohiohistoryhost.org/ohiomemory/advanced-search/">Advanced Search</a></div>
+								<div id="advanced"><a href class="SimpleSearch-headerAdvancedSearchButtonLink">Advanced Search</a></div>
 								
 								<div id="clearboth" clear="both"><br/></div>
 								<form class="form-inline" id="searchForm" name="searchForm" style="padding-top:10px">
@@ -148,13 +429,13 @@ title: ""
 	                                    <option value="government"> State agency publications</option>
 	                                    <option value="sound"> Sound</option>
 	                                    <option value="video"> Video</option>
-				     					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+	                                	</select>
 			     					</div>
 			     				
 			     					<div id="text-check">
 			     						
-				     					<input type="checkbox" style="vertical-align:bottom;margin-top:.7em;" name="fulltext" id="ft-yes">
-				     					<a id="restrict-msg" name="fulltext" style="display:inline-block;vertical-align:middle;" href="#"> Exclude full text sources</a>
+				     					<input type="checkbox" style="display:inline-block;vertical-align:middle;margin-bottom: 4;" name="fulltext" id="ft-yes">
+				     					<a id="restrict-msg" name="fulltext" style="display:inline-block;vertical-align:middle;margin-bottom: 0;" href="#"> Exclude full text sources</a>
 				     					
 				     				</div>
 								</form>
@@ -166,22 +447,22 @@ title: ""
 							<div id="browse-buttons">
 								<div class="centerBlock">
 									<div class="browseItem col-xs-6 col-sm-3">
-										<a class="browse-contributor" href="http://ohiomemory.org/digital/custom/browse?field=contri" target="_blank">
+										<a class="browse-contributor" href="https://ohiomemory.org/digital/custom/browse?field=contri" target="_blank">
 											<div class="contributors"></div>
 										</a>
 									</div>
 									<div class="browseItem col-xs-6 col-sm-3">
-										<a class="browse-place" href="http://ohiomemory.org/digital/custom/browse?field=place" class="browse-place">
+										<a class="browse-place" href="https://ohiomemory.org/digital/custom/browse?field=place" class="browse-place">
 											<div class="places"></div>
 										</a>
 									</div>
 									<div class="browseItem col-xs-6 col-sm-3">
-										<a class="browse-subject" href="http://ohiomemory.org/digital/custom/browse?field=subjec" target="_blank">
+										<a class="browse-subject" href="https://ohiomemory.org/digital/custom/browse?field=subjec" target="_blank">
 											<div class="subjects"></div>
 										</a>
 									</div>
 									<div class="browseItem col-xs-6 col-sm-3">
-										<a class="browse-period" href="http://ohiomemory.org/digital/custom/periods">
+										<a class="browse-period" href="https://ohiomemory.org/digital/custom/periods">
 											<div class="periods"></div>
 										</a>
 									</div>
@@ -212,9 +493,9 @@ title: ""
 		</div><!-- #container -->
 		<div id="footer">
 			<div id="sponsors">
-				<img class="wp-image-1914" src="/customizations/global/pages/homepage_resources/Ohio_History_Connection_130x130.jpg" alt="Ohio History Connection Logo">
+				<img class="wp-image-1914" src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/Ohio_History_Connection_130x130.jpg" alt="Ohio History Connection Logo">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<img class="wp-image-1912" src="/customizations/global/pages/homepage_resources/StateLibraryLogo130x130.jpg" alt="StateLibraryLogo">
+				<img class="wp-image-1912" src="https://cdm16007.contentdm.oclc.org/customizations/global/pages/homepage_resources/StateLibraryLogo130x130.jpg" alt="StateLibraryLogo">
 			</div>
 			<div id="copyright">
 				<p class="copyright onecol">&copy; 2015 Ohio Memory, 
@@ -224,7 +505,11 @@ title: ""
 			</div><!-- #copyright -->
 		</div><!-- #footer -->
 	</div><!-- #wrapper -->
-
+<script>
+	$(function() {
+		$('#main-menu').smartmenus();
+	});
+</script>
 
 </body>
 </html>

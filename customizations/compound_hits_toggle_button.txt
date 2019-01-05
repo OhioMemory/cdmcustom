@@ -1,0 +1,102 @@
+
+/*
+ScriptLoader('https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js', function() {
+	store.remove('searchTerms');
+
+	document.getElementsByClassName("fa-times-circle")[1].parentNode.style.display = 'none';
+	const pageViewElem = elFactory('div', { id: 'pageView' }, 'View all pages');
+	
+	var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
+
+	viewNode.addEventListener("click", function(){
+		if (document.getElementById("pageView").innerText == "View all pages") {
+			var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
+			store.set('searchTerms', { terms: termValues });
+			document.getElementsByClassName("fa-times-circle")[1].click();
+			document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
+			//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = " ";
+			document.getElementById("pageView").innerText = "View relevant pages";
+		} else {
+			if (store.get('searchTerms') !== undefined && store.get('searchTerms').terms != "") {
+				//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
+				//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].setAttribute('value', store.get('searchTerms').terms);
+				document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].addEventListener("click"), function(event){
+					console.log(event);
+					
+				}
+				document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+				document.getElementById("pageView").innerText = "View all pages";
+			}
+		}
+	});
+});
+*/
+
+/*
+document.getElementsByClassName("fa-times-circle")[1].parentNode.style.display = 'none';
+const pageViewElem = elFactory('div', { id: 'pageView' }, 'View all pages');
+var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
+viewNode.addEventListener("click", function(){
+	if (document.getElementById("pageView").innerText == "View all pages") {
+		var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
+		document.getElementsByClassName("fa-times-circle")[1].click();
+		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = termValues;
+		//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = " ";
+		document.getElementById("pageView").innerText = "View relevant pages";
+	} else {
+		document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+		document.getElementById("pageView").innerText = "View all pages";
+	}
+});
+*/
+
+
+
+
+/*
+ScriptLoader('https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js', function() {
+	const pageViewElem = elFactory('div', { id: 'pageView' }, 'View relevant pages');
+	document.getElementsByClassName("fa-times-circle")[1].parentNode.style.display = 'none';
+	if (document.getElementById("pageView").innerText == "View all pages") { 
+		const pageViewElem = elFactory('div', { id: 'pageView' }, 'View all pages');
+	} else {
+		const pageViewElem = elFactory('div', { id: 'pageView' }, 'View relevant pages');
+	}
+
+	var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
+
+	viewNode.addEventListener("click", function(){
+		if (document.getElementById("pageView").innerText == "View all pages") {
+			var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
+			store.set('searchTerms', { terms: termValues });
+			document.getElementsByClassName("fa-times-circle")[1].click();
+			document.getElementById("pageView").innerText = "View relevant pages";
+		} else {
+			if (store.get('searchTerms') !== undefined && store.get('searchTerms').terms != "") {
+				document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
+				document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+				document.getElementById("pageView").innerText = "View all pages";
+			}
+		}
+	});
+});
+*/
+
+
+/*document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].addEventListener("click", function(event){
+	localStorage.setItem('searchterms', document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value);
+	document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = localStorage.getItem('searchterms');
+	console.log(event);
+	
+	console.log(event.view.sessionStorage);
+
+});*/
+/*document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].removeAttribute("value");
+document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].setAttribute("value", "passed away");
+document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value.replace(/ OR /, ' ');
+document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+
+var event = document.createEvent('HTMLEvents');
+event.initEvent('change', true, false);
+el.dispatchEvent(event);*/
