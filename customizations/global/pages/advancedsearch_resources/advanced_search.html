@@ -7,8 +7,13 @@
     Advanced Search
 </title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/customizations/global/pages/homepage_resources/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.13.2/tingle.js"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css?ver=4.9.8" id="bootstrap-css-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css?ver=4.9.8" id="bootstrap-select-css-css" media="all" rel="stylesheet" type="text/css"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js?ver=4.9.8" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.min.js?ver=4.9.8" type="text/javascript"></script>
 
 <script type="text/javascript">
     
@@ -29,7 +34,7 @@ jQuery(document).ready(function($){
 
         e.preventDefault();
 
-        var searchurl = 'http://www.ohiomemory.org/digital/search/';
+        var searchurl = 'https://www.ohiomemory.org/digital/search';
         var modevalues = [];
         var modeClasses = [];
         var searchCriteria = "0";
@@ -66,14 +71,17 @@ jQuery(document).ready(function($){
 
         // collections
         var collCriteria = ""; 
-        var searchCollectionValues = $("#selectCollections").val();
-        if (searchCollectionValues.length > 0 && searchCollectionValues.length < 147) {
-            $('#restrict_options').text(searchCollectionValues.length + " collections chosen");
-            collCriteria = 'collection/' + searchCollectionValues.join("!");
-        } else {
+        if ($("#selectCollections").val() !== null) {
+            var searchCollectionValues = $("#selectCollections").val();
+            if (searchCollectionValues.length > 0 && searchCollectionValues.length < 147) {
+                $('#restrict_options').text(searchCollectionValues.length + " collections chosen");
+                collCriteria = '/collection/' + searchCollectionValues.join("!");
+            }
+        }
+        /*else {
             $('#restrict_options').text("All formats");
             collCriteria = 'collection/all';
-        }
+        }*/ 
         
         // connectors
         var conns = $( "select[name='conn']" ).serializeArray();
@@ -92,16 +100,17 @@ jQuery(document).ready(function($){
         // dates (from input)
         if ( isValidDate($("#firstDateField").val()) && isValidDate($("#secondDateField").val()) ) {
             searchtermvalues.push($("#firstDateField").val().replace(/-/g, '') + "-" + $("#secondDateField").val().replace(/-/g, ''));
-            fieldvalues.push("date");
-            modevalues.push("all");
+            //if (searchCollectionValues.length > 1) { fieldvalues.push("date"); } else { fieldvalues.push("search"); }
+            if ($("#selectCollections").val() === null) { fieldvalues.push("date"); } else { fieldvalues.push("search"); }
+            modevalues.push("exact");
             connvalues.push("and");
         } 
 
         if (searchtermvalues.length > 0) {
             searchCriteria = 'searchterm/' + searchtermvalues.join("!");
         }
-
-        // e.g http://www.ohiomemory.org/cdm/search/collection/p267401coll32!p16007coll51/searchterm/war!battle!19050101-19191231/field/subjec!all!date/mode/all!all!exact/conn/and!and!and/order/nosort 1905-01-01 1919-12-31
+        // https://ohiomemory.org/customizations/global/pages/advancedsearch_resources/advanced_search.html?undefined&search/searchterm/buckeye%20steamboat/field/all/mode/all/conn/and
+        // e.g https://ohiomemory.org/digital/search/collection/p267401coll32!p16007coll51/searchterm/war!battle!19050101-19191231/field/subjec!all!date/mode/all!all!exact/conn/and!and!and/order/nosort 1905-01-01 1919-12-31
         searchurl += collCriteria + '/' + searchCriteria + '/field/' + fieldvalues.join("!") + '/mode/' + modevalues.join("!") + '/conn/' + connvalues.join("!");
 
         window.parent.location.href = searchurl;
@@ -128,37 +137,65 @@ jQuery(document).ready(function($){
 
     // autofill search form using values from from URL
     // e.g. /customizations/global/pages/advancedsearch_resources/advanced_search.html?p267401coll34!p267401coll32&search/collection/p267401coll34!p267401coll32/searchterm/war!1860-1863/field/subjec!date/mode/all!all/conn/and!and
+    
+    //console.log(window.location.search);
+    //console.log(window.location.search.substring(1).split('&search'));
+    //if (window.location.search.substring(1) !== 'undefined&' && window.location.search.substring(1) != "") {
 
-    if (window.location.search.substring(1) !== 'undefined&' && window.location.search.substring(1) != "") {
-        var lastCriteriaSelected = window.location.search.substring(1).split('&');
-        var lastCollectionSelected = lastCriteriaSelected[0].split("!");
-        $('.selectpicker').selectpicker('val', lastCollectionSelected);
-        if ( lastCriteriaSelected[1].includes('searchterm') ) {
+    if (sessionStorage.getItem('lastSearchUrl') !== null) {
+        var ssUrl = sessionStorage.getItem('lastSearchUrl');
+
+        // if coveraa, change to place
+        //ssUrl = ssUrl.replace(/coveraa/, 'Place');
+        //console.log('ssUrl: ' + ssUrl);
+        if (ssUrl.match(/\/collection\//) != null) {
+            var collectionString = ssUrl.replace(/^.*?\/collection\/(.*?)\/.*/, '$1');
+            //var lastCollectionSelected = lastCriteriaSelected[0].split("!");
+            var lastCollectionSelected = collectionString.split("!");
+            //$('.selectpicker').selectpicker('val', lastCollectionSelected);
+            $('.collectionselectpicker').selectpicker('val', lastCollectionSelected);
+        }
+        //console.log(sessionStorage);
+        //console.log(lastCriteriaSelected[1]);
+        // replaced lastCriteriaSelected[1] with ssURL
+        //if ( ssURL.includes('searchterm') ) {
 
             // search terms
-            var termString = lastCriteriaSelected[1].replace(/^.*?searchterm\/(.*?)(\/.*|$)/, '$1');
+            //var termString = ssURL.replace(/^.*?searchterm\/(.*?)(\/.*|$)/, '$1');
+            var termString = ssUrl.replace(/^.*?searchterm\/(.*?)(\/.*|$)/, '$1');
             var terms = termString.split("!");
             var formatValues = ["picture", "objects", "books", "manuscripts", "newspapers", "government", "sound", "video"];
 
             // fields
-            var fieldString = lastCriteriaSelected[1].replace(/^.*?\/field\/(.*?)\/.*/, '$1');
+            var fieldString = ssUrl.replace(/^.*?\/field\/(.*?)\/.*/, '$1');
             var fields = fieldString.split("!");
 
             // mode
-            var modeString = lastCriteriaSelected[1].replace(/^.*?\/mode\/(.*?)\/.*/, '$1');
+            var modeString = ssUrl.replace(/^.*?\/mode\/(.*?)\/.*/, '$1');
             var modes = modeString.split("!");
 
             // connector
-            var connString = lastCriteriaSelected[1].replace(/^.*?\/conn\/(.*?)/, '$1');
+            var connString = ssUrl.replace(/^.*?\/conn\/(.*?)(\/|$)/, '$1');
             var conns = connString.split("!");
 
             // dates
             var dates = [];
-            if (fields[0] == "date") {
+            if (fields[0] == "date" || fields[0] == "search") {
                 dates = terms[0].split("-");
                 $('#firstDateField').val(makeIsoDate(dates[0]));
                 $('#secondDateField').val(makeIsoDate(dates[1]));
-            } 
+            }
+            
+            if (fields[0] == "Place" || fields[0] == "coveraa") {
+                fields[0] = "coveraa";
+                //$('#mode option[class="coveraa"]').attr('selected', 'selected');
+            }
+            //$('.fieldselectpicker').selectpicker('val', fields[0]);
+
+
+            if (modes[0].length < 3 || modes[0].length > 5) { modes[0] = "all"; }
+            if (fields[0].length < 4 || fields[0].length > 7) { fields[0] = "all"; }
+            if (conns[0].length < 2 || conns[0].length > 3) { conns[0] = "and"; }
             if (fields[0] == "format" && formatValues.indexOf(decodeURI(terms[0]).split(" ")[0]) > -1) {
                 var lastFormatsSelected = decodeURI(terms[0]).split(" ");
                 $('.formatselectpicker').selectpicker('val', lastFormatsSelected);
@@ -169,33 +206,51 @@ jQuery(document).ready(function($){
                 var unencodedTermsString = decodeURI(terms[0]).replace(/' '/g, '');
                 var termsArray = unencodedTermsString.split('near5');
                 terms[0] = termsArray.join(" ");
-                console.log($('#mode option[class="near"]'));
+                //console.log($('#mode option[class="near"]'));
                 $('#mode option[class="near"]').attr('selected', 'selected');
             } else {
                 $("select[name='mode']").val(modes[0]);
             }
-            $("input[name='searchterm']").val(terms[0]);
+            $("input[name='searchterm']").val(decodeURI(terms[0]));
             
             $("select[name='conn']").val(conns[0]);
 
             // need to addline() for each term after first
             if (terms.length > 1) {
                 for (i = 1; i < terms.length; i++) {
-                    if (fields[i] == "date") {
+                    if (modes[i].length < 3 || modes[i].length > 5) { modes[i] = "all"; }
+                    if (fields[i].length < 4 || fields[i].length > 7) { fields[i] = "all"; }
+                    if (conns[i].length < 2 || conns[i].length > 3) { conns[i] = "and"; }
+                    if (fields[i] == "date" || fields[i] == "search") {
                         dates = terms[i].split("-");
                         $('#firstDateField').val(makeIsoDate(dates[0]));
                         $('#secondDateField').val(makeIsoDate(dates[1]));
                         continue;
                     }
+                    if (fields[i] == "Place" || fields[i] == "coveraa") {
+                        fields[i] = "coveraa";
+                    }
+                    //$('.fieldselectpicker').selectpicker('val', fields[0]);
                     if (fields[i] == "format" && formatValues.indexOf(decodeURI(terms[i]).split(" ")[0]) > -1) {
                         var lastFormatsSelected = decodeURI(terms[i]).split(" ");
                         $('.formatselectpicker').selectpicker('val', lastFormatsSelected);
                         continue;
-                    }
+                    } 
+                    //$("select[name='field']").val(fields[i]);
+                    //$("select[name='field']")[i].value = fields[i];
+                    /*console.log(i);
+                    console.log(document.querySelectorAll('#field')[i]);
+                    console.log(fields[i]);
+                    document.querySelectorAll('#field')[i] = fields[i];
+*/
+                    /*else {
+                        $("select[name='field']").val(fields[i]);
+                        continue;   
+                    }*/
                     addLine(terms[i], modes[i], fields[i], conns[i]); 
                 }
             }
-        }
+        //}
     }
 
     function addLine(term = "", mode = "all", field = "all", conn = "and") {
@@ -321,7 +376,7 @@ div.add-or-submit {
                                 <li class="adv_search_row">
                                     <ul class="adv_search_ul_row">
                                         <li class="criteria">
-                                            <select class="form-control" id="mode" name="mode">
+                                            <select id="mode" class="form-control" name="mode">
                                                 <option class="all" selected="selected" value="all">
                                                     All of the words
                                                 </option>
@@ -342,45 +397,43 @@ div.add-or-submit {
                                         <li class="criteria spaceMar5L spacePad5">
                                             <input class="form-control" name="searchterm" type="text"/>
                                         </li>
+                                        <span>&nbsp;in&nbsp;</span>
                                         <li class="criteria spaceMar5L">
-                                            <label>
-                                                <span>in&nbsp;</span>
-                                            </label>
-                                                <select class="form-control" name="field">
-                                                    <option selected="selected" value="all">
+                                                <select id="field" class="form-control" name="field">
+                                                    <option class="all" selected="selected" value="all">
                                                         All fields
                                                     </option>
-                                                    <option value="title">
+                                                    <option class="title" value="title">
                                                         Title
                                                     </option>
-                                                    <option value="creato">
+                                                    <option class="creato" value="creato">
                                                         Creator
                                                     </option>
-                                                    <option value="subjec">
+                                                    <option class="subjec" value="subjec">
                                                         Subject
                                                     </option>
-                                                    <option value="place">
+                                                    <option class="coveraa" value="coveraa">
                                                         Place
                                                     </option>
-                                                    <option value="descri">
+                                                    <option class="descri" value="descri">
                                                         Description
                                                     </option>
-                                                    <option value="contri">
+                                                    <option class="contri" value="contri">
                                                         Contributor
                                                     </option>
-                                                    <option value="date">
+                                                    <option class="date" value="date">
                                                         Date of Original
                                                     </option>
-                                                    <option value="format">
+                                                    <option class="format" value="format">
                                                         Format
                                                     </option>
-                                                    <option value="identi">
+                                                    <option class="identi" value="identi">
                                                         Identifier
                                                     </option>
-                                                    <option value="source">
+                                                    <option class="source" value="source">
                                                         Source
                                                     </option>
-                                                    <option value="extent">
+                                                    <option class="extent" value="extent">
                                                         Extent
                                                     </option>
                                                 </select>
@@ -463,7 +516,7 @@ div.add-or-submit {
                     <div class="col-md-8 col-md-offset-2 AdvancedSearch-content">
                         <div class="well well-sm">
                             <div id="restrict_element" class="form-group checkbox-inline">
-                                <select id="selectCollections" class="form-group selectpicker" title="Select Collections" multiple data-selected-text-format="count"></select>
+                                <select id="selectCollections" class="form-group collectionselectpicker" title="Select Collections" multiple data-selected-text-format="count"></select>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
                                 <!--<span id="sourcesHelp" class="linkClass" title="Clicking the checkbox will exclude resources containing full text, such as newspapers or books.">Exclude full text sources</span>? 
                                 <input type="checkbox" name="fulltext" id="ft-yes">-->
@@ -483,11 +536,6 @@ div.add-or-submit {
     </form>
 </body>
 </html>
-
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css?ver=4.9.8" id="bootstrap-css-css" media="all" rel="stylesheet" type="text/css"/>
-<link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css?ver=4.9.8" id="bootstrap-select-css-css" media="all" rel="stylesheet" type="text/css"/>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js?ver=4.9.8" type="text/javascript"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.min.js?ver=4.9.8" type="text/javascript"></script>
 
 <script>
 
@@ -1364,18 +1412,6 @@ div.add-or-submit {
       "name":"Zoar Collection",
       "path":"\/cdm\/sites\/16007\/data\/p16007coll10",
       "secondary_alias":"p16007coll10"
-   },
-   {
-      "alias":"\/p15005coll5",
-      "name":"Test Collection",
-      "path":"\/cdm\/sites\/16007\/data\/p15005coll5",
-      "secondary_alias":"p15005coll5"
-   },
-   {
-      "alias":"\/p133201ccp2",
-      "name":"OHS CCP Collection",
-      "path":"\/cdm\/sites\/16007\/data\/p133201ccp2",
-      "secondary_alias":"p133201ccp2"
    }
 ];
 
@@ -1388,7 +1424,7 @@ $.each( data, function( i, prop ) {
 $("#selectCollections").html(items.join(""));
 
 // initialize collections drop-down
-$('.selectpicker').selectpicker({
+$('.collectionselectpicker').selectpicker({
     actionsBox: true,
     style: 'btn-info',
     virtualScroll: true
@@ -1400,5 +1436,7 @@ $('.formatselectpicker').selectpicker({
     width: '18em',
     size: 8
 });
+
+//$('.fieldselectpicker').selectpicker();
 
 </script>

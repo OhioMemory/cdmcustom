@@ -1,6 +1,6 @@
 
 // create element function
-const elFactory = (type, attributes, ...children) => {
+/*const elFactory = (type, attributes, ...children) => {
 	const el = document.createElement(type)
 	for (key in attributes) {
 		el.setAttribute(key, attributes[key])
@@ -13,207 +13,54 @@ const elFactory = (type, attributes, ...children) => {
 		}
 	})
 	return el
-}
+}*/
 
 // subscribe to the homepage ready event
 document.addEventListener('cdm-home-page:ready', function(e){
 	// console.log('ready: ' + e.detail);
-	console.log(e);
+	//console.log(e);
 });
 
 document.addEventListener('cdm-home-page:update', function(e){
 	// console.log('ready: ' + e.detail);
-	console.log(e);
+	//console.log(e);
 });
 
 document.addEventListener('cdm-item-page:enter', function(e){
 	// e is instance of CustomEvent
-	// console.log(e);
+	//console.log('cdm-item-page:enter');
+	//console.log(e);
 });
 
-document.addEventListener('cdm-item-page:ready', function(e){
 
+(function () {
 
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
+	document.addEventListener('cdm-item-page:update', function(e){
 
-	//console.log(e);
+		// hide full text initially
+		if (document.getElementById("compoundItemTranscript") != null) {
 
-
-
-	/*if (document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value.match(/ OR /g)) {
-		var newSearchString = document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value.replace(/ OR /, ' ');
-		
-		//var evt = new KeyboardEvent('keydown', {'keyCode':65, 'which':65} );
-		//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].dispatchEvent (evt);
-		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].removeAttribute("value");
-		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].setAttribute("value", "passed away");
-		var stringArray = newSearchString.split("");
-		for (i = 0; i < stringArray.length; i++) {
-			document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].dispatchEvent( new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : stringArray[i], char : stringArray[i], shiftKey : true}) );
-		}
-		document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].focus();
-		//document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
-
-	}*/
-
-	/*document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].addEventListener("keyup", function(event){
-		console.log('ready: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value)
-	});
-	document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].addEventListener("click", function(event){
-		console.log('ready: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value);
-	});*/
-	
-	console.log('cdm-item-page:ready');
-	// e is instance of CustomEvent
-	//console.log('ready: ' + e.detail); // {collectionId: '...', itemId: '...'}
-	//apply the item id in <img> to be the display id;
-	//var displayId = e.detail.itemId;
-	//console.log('cdm-item-page:ready');
-	//console.log(e);
-
-	
-	// hide full text initially
-	if (document.getElementById("compoundItemTranscript") != null) {
-
-		if ( document.getElementById('compoundItemTranscript').getAttribute("aria-hidden") == "false" ) {
-			document.getElementsByClassName('panel-title')[0].firstChild.click();
-		}
-		
-	}
-
-	/*var item_img =  document.querySelector('.ItemImage-itemImage img');
-	if (item_img != undefined){
-		var img_src_str = item_img.getAttribute('src');
-		var img_id = img_src_str.split("/")[6];
-		var page_url = 'http://ohiomemory.org/digital/custom/cropimage?alias=' + e.detail.collectionId + '&ptr=' + img_id;
-		var page_win = "clipWindow";
-		var page_size = "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000";
-
-		var newButton = document.createElement("div");
-		newButton.setAttribute('class', 'btn-group');
-		var span_str = '<span class="fa fa-crop fa-2x"></span>';
-		var button_str = '<button onclick="window.open(\''+page_url+'\',\''+page_win+'\',\''+page_size+'\');return false;" id="crop" class="cdm-btn btn btn-primary" type="button" role="button" title="Crop" aria-label="Crop" aria-haspopup="true" aria-expanded="false">'+ span_str+'</button>';
-
-		newButton.innerHTML =  button_str;
-
-		var offsetheight = document.getElementsByClassName('btn-toolbar pull-right')[1].offsetHeight;
-		if (offsetheight > 0) {
-			var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[1];
-		} else {
-			var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[0];
-		}
-		targetElem.insertBefore(newButton, targetElem.firstElementChild);
-	}	
-
-	if (document.getElementsByClassName('BackToResults-backLink')[0] != undefined) {
-		if (document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/) != null && document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/).length > 0) {
-			document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers";
-			document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
-		}
-	}*/
-
-});
-
-document.addEventListener('cdm-item-page:update', function(e){
-
-
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
-
-	/*document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].addEventListener("keyup", function(event){
-		console.log('update: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value)
-	});
-	document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].addEventListener("click", function(event){
-		console.log('update: ' + document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value);
-	});*/
-
-	console.log("cdm-item-page:update");
-
-	// hide full text initially
-	if (document.getElementById("compoundItemTranscript") != null) {
-
-		if ( document.getElementById('compoundItemTranscript').getAttribute("aria-hidden") == "false" ) {
-			document.getElementsByClassName('panel-title')[0].firstChild.click();
-		}
-		
-	}
-	
-	/*var cropButton = document.querySelector('#crop');
-	var item_img =  document.querySelector('.ItemImage-itemImage img');
-	if (item_img != undefined){
-		var img_src_str = item_img.getAttribute('src');
-		var img_id = img_src_str.split("/")[6];
-		var page_url = 'http://ohiomemory.org/digital/custom/cropimage?alias=' + e.detail.collectionId + '&ptr=' + img_id;
-		var page_win = "clipWindow";
-		var page_size = "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000";
-
-		if (cropButton != undefined){ //update existing Crop button
-			cropButton.setAttribute('onclick', 'window.open(\''+page_url+'\',\''+page_win+'\',\''+page_size+'\')');
-		}else{ //insert new Crop button
-			var newButton = document.createElement("div");
-			newButton.setAttribute('class', 'btn-group');
-			var span_str = '<span class="fa fa-crop fa-2x"></span>';
-			var button_str = '<button onclick="window.open(\''+page_url+'\',\''+page_win+'\',\''+page_size+'\');return false;" id="crop" class="cdm-btn btn btn-primary" type="button" role="button" title="Crop" aria-label="Crop" aria-haspopup="true" aria-expanded="false">'+ span_str+'</button>';
-			newButton.innerHTML =  button_str;
-			if (document.getElementsByClassName('btn-toolbar pull-right')[1].offsetHeight > 0) {
-				var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[1];
-			} else {
-				var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[0];
+			if ( document.getElementById('compoundItemTranscript').getAttribute("aria-hidden") == "false" ) {
+				document.getElementsByClassName('panel-title')[0].firstChild.click();
 			}
-			targetElem.insertBefore(newButton, targetElem.firstElementChild);
+			
 		}
-	}*/
 
-	// document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href");
+	});
+
+});
+
+/**
+ * This could be the way a supercollection search work, where branding and search criteria are maintained across pages
+ */
+/*document.addEventListener('cdm-search-page:ready', function(e){
+	
 	if (document.getElementsByClassName('BackToResults-backLink')[0] != undefined) {
 		if (document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/) != null && document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/).length > 0) {
 			document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers";
 			document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
 		}
 	}
-});
-
-function openCropWindow(coll, ptr) {
-	var page_url = 'http://ohiomemory.org/digital/custom/cropimage?alias=' + coll + '&ptr=' + ptr;
-	window.open(page_url, "clipWindow", "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000");
-}
-
-document.addEventListener('cdm-search-page:ready', function(e){
-
-	console.log("cdm-search-page:ready");
-	console.log(e);
-
-
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
-
-	//console.log(e);
-	// for newspaper portal
-	
-	//if (e.target.URL.match(/!newspapers/).length > 0) {
-	//	document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers"
-	//	document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
-	//}
-	
 
 	var facetNodes = document.getElementsByClassName("panel-title");
 	for (i=1; i<facetNodes.length; i++) {
@@ -221,32 +68,14 @@ document.addEventListener('cdm-search-page:ready', function(e){
 			facetNodes[i].firstChild.click();
 		}
 	}
-});
+});*/
 
 
 document.addEventListener('cdm-search-page:update', function(e){
 
-	console.log("cdm-search-page:update");
-	console.log(e);
-
-
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
-
+	//console.log("cdm-search-page:update");
 	//console.log(e);
-	// for newspaper portal
-	/*
-	if (e.target.URL.match(/!newspapers/).length > 0) {
-		document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers";
-		document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
-	}
-	*/
+
 });
 
 document.addEventListener('cdm-collection-landing-page:enter', function(e){
@@ -256,8 +85,8 @@ document.addEventListener('cdm-collection-landing-page:enter', function(e){
 
 document.addEventListener('cdm-collection-landing-page:ready', function(e){
 
-	console.log("cdm-collection-landing-page:ready");
-	console.log(e);
+	//console.log("cdm-collection-landing-page:ready");
+	//console.log(e);
 
 
 	/*document.getElementsByClassName("SimpleSearch-headerAdvancedSearchButtonLink")[0].addEventListener("click", function(){
@@ -267,36 +96,18 @@ document.addEventListener('cdm-collection-landing-page:ready', function(e){
 	/*const pageViewElem = elFactory('style', { id: 'headerTitleDisplay' }, 'View all pages');
 	document.querySelector('style').textContent += ".Header-titleText { display: none; }";*/
 
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
-
 });
 
 document.addEventListener('cdm-collection-landing-page:update', function(e){
-	console.log("cdm-collection-landing-page:ready");
-	console.log(e);
+	//console.log("cdm-collection-landing-page:ready");
+	//console.log(e);
 
 });
 
+/**
+ * Close all facet nodes initially
+ */
 document.addEventListener('cdm-collection-search-page:ready', function(e){
-
-	console.log("cdm-collection-search-page:ready");
-	console.log(e);
-
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
 
 	var facetNodes = document.getElementsByClassName("panel-title");
 	for (i=1; i<facetNodes.length; i++) {
@@ -309,106 +120,16 @@ document.addEventListener('cdm-collection-search-page:ready', function(e){
 
 document.addEventListener('cdm-collection-search-page:update', function(e){
 
-	console.log("cdm-collection-search-page:update");
-	console.log(e);
-
-
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
-});
-
-document.addEventListener('cdm-advanced-search-page:ready', function(e){
-
-	console.log("cdm-advanced-search-page:ready");
-	console.log(e);
-
-	// e is instance of CustomEvent
-	// ...
-	var newOption = document.createElement("option");
-	newOption.setAttribute('id', 'nearOp');
-	newOption.value = "near5";
-	newOption.innerText = "Within 5 words";
-	document.getElementsByClassName('form-control')[2].appendChild(newOption);
-	
-	/*
-	var terms = document.getElementsByClassName('form-control')[1].value.split(" ").join(' near5 ');
-	
-	window.location.href = 'http://www.ohiomemory.org/digital/collection/' + e.detail.collectionId + '/search/searchterm/' + document.getElementsByClassName('form-control')[1].value.split(" ").join(' near5 ') + '/field/all/mode/exact/conn/and';
-	*/
-
-	document.getElementsByClassName("cdm-btn btn btn-primary btn-block")[1].addEventListener("click", function(){
-
-		if ( document.getElementsByClassName('form-control')[2].value.match(/near5/) ) {
-			
-			//window.location.href = e.srcElement.location.href;
-			window.location.href = 'http://www.ohiomemory.org/digital/search/searchterm/' + document.getElementsByClassName('form-control')[1].value.split(" ").join(' near5 ') + '/field/all/mode/exact/conn/and';
-			e.stopPropagation();
-		}
-	});
-	
-});
-document.addEventListener('cdm-advanced-search-page:update', function(e){
-	// e is instance of CustomEvent
-	// a page was updated
+	//console.log("cdm-collection-search-page:update");
 	//console.log(e);
-	console.log("cdm-advanced-search-page:update");
-	console.log(e);
-	document.getElementsByClassName("SimpleSearch-headerAdvancedSearchButtonLink")[0].addEventListener("click", function(e){
-		console.log("cdm-advanced-search-page:update");
-		//if( !!document.getElementById("advancedSearchDiv") ) { history.back(1); e.stopPropagation(); }
-	});
 
-});
-document.addEventListener('cdm-advanced-search-page:leave', function(e){
-	// e is instance of CustomEvent
-	// ...
-	// http://www.ohiomemory.org/digital/collection/addresses/search/searchterm/water%20near5%20pollution/field/all/mode/exact/conn/and
-	
-	
-	//console.log(e);
-});
-// app ready
-document.addEventListener('cdm-app:ready', function(e){
-	//console.log('cdm-app:ready' + e);
-	//var pageHead = e.srcElement.head;
-
-});
-document.addEventListener('cdm-app:enter', function(e){
-	console.log('cdm-app:enter' + e);
-	//var pageHead = e.srcElement.head;
-
-});
-
-document.addEventListener('cdm-custom-page:enter', function(e){
-	// e is instance of CustomEvent
-	// console.log(e.srcElement.head);
-	
 });
 
 document.addEventListener('cdm-custom-page:ready', function(e){
 	// e is instance of CustomEvent
 	// ...
-	console.log(e);
 
-	// menu link changes for test only - begin
-	if (document.querySelectorAll('.Header-headerMenuLinks li a').length > 0) {
-		var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-		var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-		document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-		var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-		var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-		document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	}
-	// menu link changes for test only - end
-
-
-	// console.log(typeof e.detail.filename === "undefined"); // e.srcElement.URL == http://www.ohiomemory.org/digital/ if(isEmpty(e.detail)) {
+	// load resources based on what custom page is requested
 	switch (e.detail.filename) {
 		case 'cropimage':
 			var pageHead = (e.srcElement||e.target).head;
@@ -423,11 +144,13 @@ document.addEventListener('cdm-custom-page:ready', function(e){
 			});
 			break;
 		case 'browse':
-			var body = document.getElementsByTagName('body')[0];
-			var script = document.createElement("script")
-		    script.type = "application/javascript";
-			script.src = '/customizations/global/pages/browse_resources/browse.js';
-			body.appendChild(script);
+
+			ScriptLoader('/customizations/global/pages/browse_resources/imageMapResizer.min.js', function() {
+				ScriptLoader('/customizations/global/pages/browse_resources/browse.js', function() {
+					
+				});
+			});
+
 			break;
 		case 'periods':
 			var pageHead = (e.srcElement||e.target).head;
@@ -441,69 +164,40 @@ document.addEventListener('cdm-custom-page:ready', function(e){
 			  pageHead.appendChild(script);
 			});
 			break;
+		case 'periods_test':
+			var pageHead = (e.srcElement||e.target).head;
+			[
+			  '/customizations/global/pages/periods_resources/vis.min.js',
+			  '/customizations/global/pages/periods_resources/periods_test.js'
+			].forEach(function(src) {
+			  var script = document.createElement('script');
+			  script.src = src;
+			  script.async = false;
+			  pageHead.appendChild(script);
+			});
+			break;
 		default:
-			// console.log('default');
-			var body = document.getElementsByTagName('body')[0];
-			var script = document.createElement("script")
-		    script.type = "application/javascript";
-			script.src = '/customizations/global/pages/homepage_resources/jquery.min.js';
-			body.appendChild(script);
-			
-			var checker = 0;
-		 
-		 	function jqueryLoaded() {
-				clearInterval(checker);
-				//alert('jQuery is loaded, sire!');
-			
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = 'http://www.google-analytics.com/ga.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/bootstrap.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/ios-orientationchange-fix.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/jquery.flexslider-min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/modernizr.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/jquery.easing.1.3.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/bootstrap-select.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/jquery.smartmenus.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/homepage.js';
-				body.appendChild(script);
-			}
-		 	
-			function checkJquery() {
-				if (window.jQuery) {
-		        	jqueryLoaded();
-				} 
-		    	if(checker == 0) {
-					//alert('Setting up interval');
-	        		checker = window.setInterval(checkJquery, 100);
-		    	}
-			}	
-		 
-			checkJquery();
+			ScriptLoader('/customizations/global/pages/homepage_resources/jquery.min.js', function() {
+				ScriptLoader('/customizations/global/pages/homepage_resources/jquery.smartmenus.js', function() {
+					ScriptLoader('/customizations/global/pages/homepage_resources/bootstrap.min.js', function() {
+						ScriptLoader('/customizations/global/pages/homepage_resources/bootstrap-select.min.js', function() {
+							ScriptLoader('/customizations/global/pages/homepage_resources/jquery.flexslider-min.js', function() {
+								ScriptLoader('/customizations/global/pages/homepage_resources/jquery.easing.1.3.min.js', function() {
+									ScriptLoader('/customizations/global/pages/homepage_resources/homepage.js', function() {
+										ScriptLoader('https://www.google-analytics.com/ga.js', function() {
+											$('#main-menu').smartmenus();
+											$('.selectpicker').selectpicker({
+												style: 'btn-info',
+												size: 8
+											});
+										});
+									});
+								});
+							});
+						});
+					});
+				});
+			});
 				
 	}
 });
@@ -511,18 +205,8 @@ document.addEventListener('cdm-custom-page:ready', function(e){
 document.addEventListener('cdm-custom-page:update', function(e){
 	// e is instance of CustomEvent
 	// ...
-	console.log(e);
+	//console.log(e);
 
-
-	// menu link changes for test only - begin
-	var collectionListPageProd = document.querySelectorAll('.Header-headerMenuLinks li a')[1].getAttribute('href');
-	var collectionListPageTest = collectionListPageProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[1].setAttribute('href', collectionListPageTest);
-	var collectionListNppProd = document.querySelectorAll('.Header-headerMenuLinks li a')[2].getAttribute('href');
-	var collectionListNppTest = collectionListNppProd.replace(/www\.ohiohistoryhost/, 'apps.ohiohistory');
-	document.querySelectorAll('.Header-headerMenuLinks li a')[2].setAttribute('href', collectionListNppTest);
-	// menu link changes for test only - end
-	
 	// console.log(typeof e.detail.filename === "undefined"); // e.srcElement.URL == http://www.ohiomemory.org/digital/ if(isEmpty(e.detail)) {
 	switch (e.detail.filename) {
 		case 'cropimage':
@@ -557,65 +241,27 @@ document.addEventListener('cdm-custom-page:update', function(e){
 			});
 			break;
 		default:
-			// console.log('default');
-			var body = document.getElementsByTagName('body')[0];
-			var script = document.createElement("script")
-		    script.type = "application/javascript";
-			script.src = '/customizations/global/pages/homepage_resources/jquery.min.js';
-			body.appendChild(script);
-			
-			var checker = 0;
-		 
-		 	function jqueryLoaded() {
-				clearInterval(checker);
-				//alert('jQuery is loaded, sire!');
-			
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = 'http://www.google-analytics.com/ga.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/bootstrap.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/ios-orientationchange-fix.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/jquery.flexslider-min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/modernizr.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/jquery.easing.1.3.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/bootstrap-select.min.js';
-				body.appendChild(script);
-				var script = document.createElement("script")
-			    script.type = "application/javascript";
-				script.src = '/customizations/global/pages/homepage_resources/homepage.js';
-				body.appendChild(script);
-			}
-		 
-			function checkJquery() {
-				if (window.jQuery) {
-		        	jqueryLoaded();
-				} 
-		    	if(checker == 0) {
-					//alert('Setting up interval');
-	        		checker = window.setInterval(checkJquery, 100);
-		    	}
-			}	
-		 
-			checkJquery();
-			
+			ScriptLoader('/customizations/global/pages/homepage_resources/jquery.min.js', function() {
+				ScriptLoader('/customizations/global/pages/homepage_resources/jquery.smartmenus.js', function() {
+					ScriptLoader('/customizations/global/pages/homepage_resources/bootstrap.min.js', function() {
+						ScriptLoader('/customizations/global/pages/homepage_resources/bootstrap-select.min.js', function() {
+							ScriptLoader('/customizations/global/pages/homepage_resources/jquery.flexslider-min.js', function() {
+								ScriptLoader('/customizations/global/pages/homepage_resources/jquery.easing.1.3.min.js', function() {
+									ScriptLoader('/customizations/global/pages/homepage_resources/homepage.js', function() {
+										ScriptLoader('https://www.google-analytics.com/ga.js', function() {
+											$('#main-menu').smartmenus();
+											$('.selectpicker').selectpicker({
+												style: 'btn-info',
+												size: 8
+											});
+										});
+									});
+								});
+							});
+						});
+					});
+				});
+			});
 	}
 });
 
@@ -656,11 +302,252 @@ function ScriptLoader(url, callback){
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
 }
-/*
+
+// some kind of sub / super collection search
+/*(function () {
+	if (document.getElementsByClassName('BackToResults-backLink')[0] != undefined) {
+		if (document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/) != null && document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/).length > 0) {
+			document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers";
+			document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
+		}
+	}
+})();*/
+
+
+// compound object item view
+(function () {
+
+	function startEventListener(cdmEvent) {
+
+		document.addEventListener(cdmEvent, function (e) {
+
+			if (e.detail.collectionId == 'p15005coll5') {
+				
+				var pageViewContainers = document.querySelectorAll('#pageView');
+				for (var i = 0; i < pageViewContainers.length; ++i) {
+				  pageViewContainers[i].remove();
+				} 
+				if (document.querySelectorAll('#pageView').length < 1) { 
+					var pageViewElem = document.createElement('div');
+					var att = document.createAttribute("id");
+					att.value = "pageView";
+					pageViewElem.setAttributeNode(att); 
+					var linkText = document.createTextNode("View all pages");
+					pageViewElem.appendChild(linkText);
+					var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
+				}
+
+				viewNode.addEventListener("click", function(event){
+					if (document.getElementById("pageView").innerText == "View all pages") {
+						//var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
+						//sessionStorage.setItem('searchTerms', { terms: termValues });
+						document.getElementsByClassName("fa-times-circle")[1].click();
+						//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
+						//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = " ";
+						document.getElementById("pageView").innerText = "View relevant pages";
+						console.log(event);
+						console.log('Ready: View relevant pages');
+						document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = 'infantry';
+						document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].addEventListener("click", function(event){
+							console.log(event);
+							console.log('Ready: View all pages');
+							document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+							document.getElementById("pageView").innerText = "View all pages";
+						});
+						
+					} else {
+						//if (store.get('searchTerms') !== undefined && store.get('searchTerms').terms != "") {
+							document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = 'infantry';
+							//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
+							//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].setAttribute('value', store.get('searchTerms').terms);
+							document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].addEventListener("click", function(event){
+								console.log(event);
+								console.log('Ready: View all pages');
+								document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
+								document.getElementById("pageView").innerText = "View all pages";
+							});
+							
+						//}
+					}
+				});
+
+	    	}
+	    });
+	}
+	
+	var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+
+	cdmEvents.forEach(startEventListener);
+
+})();
+
+
+/**
+ * Crop function for item view page
+ */
+(function () {
+	
+	function openCropWindow(coll, ptr) {
+		var page_url = 'https://ohiomemory.org/digital/custom/cropimage?alias=' + coll + '&ptr=' + ptr;
+		window.open(page_url, "clipWindow", "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000");
+	}
+
+	function setupCropTool(currentImageElement, collAlias) {
+
+		if (currentImageElement === null) {
+			return false;
+		}
+		if (document.getElementById("crop") !== null) {
+			document.getElementById("crop").remove();
+		}
+		var img_src_str = currentImageElement.getAttribute('src');
+		var img_id = img_src_str.split("/")[6];
+		var page_url = 'https://ohiomemory.org/digital/custom/cropimage?alias=' + collAlias + '&ptr=' + img_id;
+		var page_win = "clipWindow";
+		var page_size = "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000";
+
+		var newButton = document.createElement("div");
+		newButton.setAttribute('class', 'btn-group');
+		var span_str = '<span class="fa fa-crop fa-2x"></span>';
+		var button_str = '<button onclick="window.open(\''+page_url+'\',\''+page_win+'\',\''+page_size+'\');return false;" id="crop" class="cdm-btn btn btn-primary" type="button" role="button" title="Crop" aria-label="Crop" aria-haspopup="true" aria-expanded="false">'+ span_str+'</button>';
+
+		newButton.innerHTML =  button_str;
+
+		var offsetheight = document.getElementsByClassName('btn-toolbar pull-right')[1].offsetHeight;
+		if (offsetheight > 0) {
+			var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[1];
+		} else {
+			var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[0];
+		}
+		targetElem.insertBefore(newButton, targetElem.firstElementChild);
+
+	}
+
+	function startEventListener(cdmEvent) {
+		document.addEventListener(cdmEvent, function (e) {
+	        setupCropTool(document.querySelector('.ItemImage-itemImage img'), e.detail.collectionId);
+	    });
+	}
+	
+    var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+	cdmEvents.forEach(startEventListener);
+
+})();
+
+/**
+ * Create a control to display Reference URLs for an item record
+ */
+(function () {
+
+	function startEventListener(cdmEvent) {
+		document.addEventListener(cdmEvent, function(e){
+			
+
+				// remove CONTENTdm default of page-level the filename
+            	if (document.getElementsByClassName("ItemTitle-secondaryTitle")[0] !== undefined) {
+            		document.getElementsByClassName("ItemTitle-secondaryTitle")[0].remove();
+            	}
+            	// remove all previous instances of the container block for reference URLs
+            	var refContainers = document.querySelectorAll('.refContainer');
+				for (var i = 0; i < refContainers.length; ++i) {
+				  refContainers[i].remove();
+				}
+	            
+				// get the record-level and item-level IDs for reference URLs using CDM API
+				var request = new XMLHttpRequest();
+				request.open('GET', location.protocol + '//' + location.hostname + '/digital/bl/dmwebservices/index.php?q=GetParent/' + e.detail.collectionId + '/' + e.detail.itemId + '/json', true);
+				request.onload = function() {
+					if (request.status >= 200 && request.status < 400) {
+						
+						// create the container div
+						var itemTitleContainer = document.getElementsByClassName("ItemView-itemTitle")[0];
+			            var refContainer = document.createElement("div");
+			            refContainer.setAttribute("class", "refContainer");
+			            itemTitleContainer.append(refContainer);
+			            var refUrl = document.createElement("div");
+			            refUrl.setAttribute("id", "refUrl");
+			            refUrl.setAttribute("class", "refStyle");
+			            refUrl.innerHTML = 'Show Reference URL';
+			            refContainer.append(refUrl);
+						
+						// defaults data for URLs
+						var urlStem = 'https://ohiomemory.org/digital/collection/' + e.detail.collectionId;
+						var objectUrl = urlStem+ '/id/' + e.detail.itemId;
+						var pageUrl = urlStem + '/id/' + e.detail.itemId;
+
+						// change the object-level URL if different
+						var ret = JSON.parse(request.responseText);
+						if (ret.parent > -1) {
+							objectUrl = urlStem + '/id/' + ret.parent;
+						}
+
+						// create elements with object- and page-level URLs
+						var refDiv = document.createElement("div");
+			            refDiv.setAttribute("id", "refDiv");
+			            refDiv.setAttribute("class", "refDivStyle");
+			            refDiv.innerHTML = '<p class="formfield">' + 
+												'<label for="input">&nbsp;&nbsp;&nbsp;Entire object: </label>' + 
+												'<input name="message" class="ref-input-css" onclick="this.select()" value="' + objectUrl + '"></input>' + 
+											'</p>' + 
+											'<p class="formfield">' + 
+												'<label for="input">&nbsp;&nbsp;Specific page: </label>' + 
+												'<input name="message" class="ref-input-css" onclick="this.select()" value="' + pageUrl + '"></input>' + 
+											'</p>';
+						refContainer.append(refDiv);
+						refDiv.style.display = "none";
+
+						// event listener for Hide/Show Reference URL link
+						refUrl.addEventListener('click', function() {
+							var x = document.getElementById("refDiv");
+							  if (x.style.display === "none") {
+							    x.style.display = "block";
+							    document.getElementById("refUrl").innerHTML = 'Hide Reference URL';
+							  } else {
+							    x.style.display = "none";
+							    document.getElementById("refUrl").innerHTML = 'Show Reference URL';
+							  }
+						});
+
+
+					} else { } // else: reached target but returned an error
+			    };
+			    request.onerror = function() { }; // connection error
+			    request.send();	
+
+		});
+	}
+
+	var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+
+	cdmEvents.forEach(startEventListener);
+	
+})();
+
+/**
+ * Google Analytics needs to be set for every event
+ */
+(function () {
+
+	function startEventListener(cdmEvent) {
+		document.addEventListener(cdmEvent, function(e){
+			ScriptLoader('https://ohiomemory.org/customizations/global/pages/ga_resources/ga.js', function() {
+			});
+		});
+	}
+
+	var cdmEvents = ['cdm-custom-page:ready', 'cdm-custom-page:update', 'cdm-collection-landing-page:ready', 'cdm-collection-landing-page:update', 'cdm-collection-search-page:ready', 'cdm-collection-search-page:update', 'cdm-search-page:ready', 'cdm-search-page:update', 'cdm-item-page:ready', 'cdm-item-page:update'];
+
+	cdmEvents.forEach(startEventListener);
+
+})();
+
 // advanced search window
 (function () {
 
 	function setupAdvancedModal(coll, urlstring) {
+		if ( urlstring.indexOf("searchterm") > -1 ) {
+			sessionStorage.setItem('lastSearchUrl', urlstring);
+		}
 		ScriptLoader('https://cdnjs.cloudflare.com/ajax/libs/tingle/0.13.2/tingle.js', function(){
 			var urlpath = urlstring.replace(/^.*?digital\//, '');
 			if (document.getElementsByClassName("advanced-modal").length > 0) { 
@@ -690,93 +577,109 @@ function ScriptLoader(url, callback){
 	cdmEvents.forEach(startEventListener);
 
 })();
-*/
-/*
-// openseadragon viewer
+
+
+/**
+ * Replace default viewer with alternative viewer (OpenSeadragon)
+ */
 (function () {
 
-	function CustomImageView(container, imgsrc) {
+	function CustomImageView(container, imgsrc, collectionId, imageId, objArray) {
 		
-		if (!container) {
-            return false;
-        }
-        if (!imgsrc) {
-            return false;
-        }
+		// get the terms to highlight, if any
+    	if (imgsrc.replace(/^.*highlightTerms=(.*)$/, "$1").length > 0) {
+    		var highlightedTerms = imgsrc.replace(/^.*highlightTerms=(.*)$/, "$1");
+    	}
+		var levelsArray = [];
+		Object.keys(objArray.sizes).forEach(function(key,index) {
+    		var levelsObject = { 
+    			url: 'https://ohiomemory.org/digital/iiif/' + collectionId + '/' + imageId + '/full/' + objArray.sizes[index].width + ',/0/default.jpg?highlightTerms=' + highlightedTerms,
+    			height: objArray.sizes[index].height,
+    			width: objArray.sizes[index].width
+    		}
+    		levelsArray.push(levelsObject);
+    	});
+    	//console.log(levelsArray);
+		ScriptLoader('https://ohiomemory.org/customizations/global/pages/openseadragon_resources/openseadragon.min.js', function(){
+        	container.firstChild.className += ' hide';
+        	var zoomContainers = document.getElementsByClassName("zoomView");
+	    	if (document.getElementsByClassName("zoomView").length > 0) {	
+	    		Array.prototype.forEach.call(zoomContainers, function(el) { el.parentNode.removeChild(el); });
+	    	}
+            //var openseadragonContainer = elFactory('div', { id: 'zoomDiv', class: 'zoomView', style: 'height:100vh;width:100%' });
+            var openseadragonContainer = document.createElement("div");
+            openseadragonContainer.setAttribute("id", "zoomDiv");
+            openseadragonContainer.setAttribute("class", "zoomView");
+            openseadragonContainer.setAttribute("style", "height:100vh;width:100%");
 
-        
-        if (document.getElementsByClassName("CompoundItemPagination-container").length > 0) {
+            container.parentNode.insertBefore(openseadragonContainer, container);
+            var viewer = OpenSeadragon({
+		        id: "zoomDiv",
+		        prefixUrl: "https://ohiomemory.org/customizations/global/pages/openseadragon_resources/images/",
+		        tileSources: [{
+		        	type: 'legacy-image-pyramid',
+		         	levels: levelsArray,
+		        }],
+		        showNavigator: false
+		    });
+		    var odcStyle = openseadragonContainer.firstChild.firstChild.getAttribute("style");
+		    openseadragonContainer.firstChild.firstChild.setAttribute("style", odcStyle + "outline:0");
+		});
 
-        	var pageContainers = document.getElementsByClassName("CompoundItemView-container");
-        	for (i = 2; i < pageContainers.length; i++) {
-        		pageContainers[i].style.borderLeft  = "5px solid crimson";
-        	}
-        	document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[3].click();
-
-        	if (imgsrc.match(/highlightTerms/)) {
-	        	container.firstChild.className += ' hide';
-	            var openseadragonContainer = elFactory('div', { id: 'zoomDiv', style: 'height:100vh;width:100%' });
-	            container.parentNode.insertBefore(openseadragonContainer, container);
-
-	            // OpenSeadragon
-	            var viewer = OpenSeadragon({
-			        id: "zoomDiv",
-			        prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.0/images/",
-			        tileSources: {
-				        type: 'image',
-				        url:  'https://www.ohiomemory.org/digital/iiif/p15005coll5/1304/full/2000,/0/default.jpg?highlightTerms=high%20street'
-				    },
-			        showNavigator: false
-			    });
-			    openseadragonContainer.firstChild.firstChild.setAttribute("style", odcStyle + "outline:0");
-	        }
-        	
-	        
-			for (let i = 0; i < sessionStorage.length; i++){
-			  let key = sessionStorage.key(i);
-			  let value = sessionStorage.getItem(key);
-			  console.log(key, value);
-			}	
-	        
-
-        }
-
-        var unmount = function () {
-            openseadragonContainer.parentNode && openseadragonContainer.parentNode.removeChild(openseadragonContainer);
-        };
-
-        return {
-            unmount: unmount
-        };
 	}
 
-    document.addEventListener('cdm-item-page:ready', function (e) {
-    	
-    	// unmount or remove current video player from DOM if it is exists
-    	currentInstance && currentInstance.unmount();
-   		// creates a new instance if it is url item and it is from vimeo.com
-    	//currentInstance = CustomVideoView(document.querySelector('div[class*=itemUrl]'));
-    	currentInstance = CustomImageView(document.getElementsByClassName("preview")[0], document.getElementsByClassName("ItemImage-expandButton")[0].parentElement.firstChild.src);
-        
-    });
+    function startEventListener(cdmEvent) {
+    	document.addEventListener(cdmEvent, function(e){
 
-    document.addEventListener('cdm-item-page:update', function (e) {
-        
-    	// unmount or remove current video player from DOM if it is exists
-    	currentInstance && currentInstance.unmount();
-   		// creates a new instance if it is url item and it is from vimeo.com
-    	//currentInstance = CustomVideoView(document.querySelector('div[class*=itemUrl]'));
-    	currentInstance = CustomImageView(document.getElementsByClassName("preview")[0], document.getElementsByClassName("ItemImage-expandButton")[0].parentElement.firstChild.src);
-        
-    });
+    		// don't use openseadragon for videos
+    		if (document.getElementsByClassName("field-type")[0] !== undefined && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == 'MovingImage') {
+    			return;
+    		}
+    		// don't use openseadragon for PDFs
+    		if (document.getElementsByClassName("ItemPDF-itemImage").length > 0) {
+    			return;
+    		}
 
-    document.addEventListener('cdm-item-page:leave', function () {
-        // unmount or remove current video player from DOM if it is exists
-        currentInstance && currentInstance.unmount();
-    });
+    		var zoomContainers = document.getElementsByClassName("zoomView");
+	    	if (document.getElementsByClassName("zoomView").length > 0) {
+				Array.prototype.forEach.call(zoomContainers, function(el) { el.parentNode.removeChild(el); });
+	    	}
+			var request = new XMLHttpRequest();
+			request.open('GET', location.protocol + '//' + location.hostname + '/digital/bl/dmwebservices/index.php?q=GetParent/' + e.detail.collectionId + '/' + e.detail.itemId + '/json', true);
+			request.onload = function() {
+				if (request.status >= 200 && request.status < 400) {
+					var imageId = e.detail.itemId;
+					var ret = JSON.parse(request.responseText);
+					if (ret.parent < 0 && document.getElementsByClassName("CompoundItemPagination-pageInput").length != 0) {
+						imageId = e.detail.itemId - document.getElementsByClassName("CompoundItemPagination-pageInput")[0].getAttribute('max');
+					}
+					var request2 = new XMLHttpRequest();
+				    request2.open('GET', 'https://cdm16007.contentdm.oclc.org/digital/iiif/' + e.detail.collectionId + '/' + imageId + '/info.json', true);
+				    request2.onload = function() {
+					    if (request2.status >= 200 && request2.status < 400) {
+							var objArray = JSON.parse(request2.responseText);
+							CustomImageView(document.getElementsByClassName("preview")[0], document.getElementsByClassName("ItemImage-expandButton")[0].parentElement.firstChild.src, e.detail.collectionId, imageId, objArray);
+						} else { } // else: reached target but returned an error
+					};
+					request2.onerror = function() { }; // connection error
+				    request2.send();
+				} else { } // else: reached target but returned an error
+		    };
+		    request.onerror = function() { }; // connection error
+		    request.send();
+			
+    	});
+    }
+
+    // use the alternative viewer only for larger sizes
+    if ( window.innerWidth > 760 || document.body.clientWidth > 760 ) {
+	    var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+	    cdmEvents.forEach(startEventListener);
+	}
 
 })();
-*/
+
+
 // video handler
 (function () {
 
@@ -833,7 +736,22 @@ function ScriptLoader(url, callback){
                 return resolve(false);
             }
             // create iframe for Norweld
+            url = url.replace(/http:\/\/media\.norweld\.org/, 'https://a55865c8573dbc244995-bcf9371fc589cc3fb98d8cac2b9b4a59.ssl.cf5.rackcdn.com');
+            //console.log(url);
             var html = '<iframe type="text/html" width="640" height="320" src="' + url + '" frameborder="0" allowfullscreen=""></iframe>';
+            resolve(html);
+        });
+    }
+
+    function ToledoAPI(url) {
+        return new Promise(function (resolve) {
+            if (!url) {
+                return resolve(false);
+            }
+            // create iframe for Toledo
+            url = url.replace(/http:/, '');
+            //console.log(url);
+            var html = '<iframe type="text/html" width="640" height="320" src="' + decodeURI(url) + '" frameborder="0" allowfullscreen=""></iframe>';
             resolve(html);
         });
     }
@@ -843,7 +761,8 @@ function ScriptLoader(url, callback){
         'youtu.be': YoutuAPI,
         'www.youtube.com': YoutubeAPI,
         'cdnapisec.kaltura.com': KalturaAPI,
-        'media.norweld.org' : NorweldAPI
+        'media.norweld.org' : NorweldAPI,
+        'media.toledolibrary.org' : ToledoAPI
     };
 
     function loadFrame(link) {
@@ -877,16 +796,28 @@ function ScriptLoader(url, callback){
 
         // parse metadata
         var rows = document.querySelectorAll('tr[class*=metadatarow]');
-        Array.from(rows).forEach(row => {
-            // find a description field
+        /*Array.from(rows).forEach(row => {
             if (row.firstChild.textContent === 'Source') {
                 links = links.concat(row.lastChild.textContent.split(','));
             }
             if (row.firstChild.textContent === ' 	') {
                 links = links.concat(row.lastChild.textContent.split(','));
             }
-        });
+        });*/
 
+        for (var i = 0; i < rows.length; i++) { 
+			if (rows[i].firstChild.textContent === 'Source') {
+		        links = links.concat(rows[i].lastChild.textContent.split(','));
+		    }
+		    if (rows[i].firstChild.textContent === ' 	') {
+		        links = links.concat(rows[i].lastChild.textContent.split(','));
+		    } 
+		}
+
+		if (window.location.href.indexOf("p16007coll33") > 0) {
+			links[0] = document.querySelector('.ItemUrl-itemUrlLink a').href;
+		}
+		//console.log(links);
         // create container for iFrames
         var frameContainer = document.createElement('div');
 
@@ -906,7 +837,6 @@ function ScriptLoader(url, callback){
                     // insert it
                     container.parentNode.insertBefore(frameContainer, container);
                 });
-
         };
 
         var unmount = function () {
@@ -922,7 +852,7 @@ function ScriptLoader(url, callback){
     }
     
     document.addEventListener('cdm-item-page:ready', function (e) {
-    	if ("p16007coll30 p16007coll72 p15005coll27 p15005coll22".match(e.detail.collectionId) !== null) {
+    	if (document.getElementsByClassName("field-type")[0] !== undefined && "p16007coll30 p16007coll72 p15005coll27 p15005coll22 p16007coll33".match(e.detail.collectionId) !== null && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == "MovingImage") {
         	// unmount or remove current video player from DOM if it is exists
         	currentInstance && currentInstance.unmount();
        		// creates a new instance if it is url item and it is from vimeo.com
@@ -932,7 +862,7 @@ function ScriptLoader(url, callback){
     });
 
     document.addEventListener('cdm-item-page:update', function (e) {
-        if ("p16007coll30 p16007coll72 p15005coll27 p15005coll22".match(e.detail.collectionId) !== null) {
+        if (document.getElementsByClassName("field-type")[0] !== undefined && "p16007coll30 p16007coll72 p15005coll27 p15005coll22 p16007coll33".match(e.detail.collectionId) !== null && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == "MovingImage") {
         	// unmount or remove current video player from DOM if it is exists
         	currentInstance && currentInstance.unmount();
        		// creates a new instance if it is url item and it is from vimeo.com
@@ -1026,7 +956,7 @@ document.addEventListener('cdm-custom-page:ready', function(event) {
 	        * Main execution
 	        */
 	        ScriptLoader('https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js', function() {
-	            ScriptLoader('https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js', function(){
+	            ScriptLoader('https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js', function() {
 	                let cssFileRef = document.createElement("link");
 	                cssFileRef.rel = "stylesheet";
 	                cssFileRef.type = "text/css";
@@ -1034,7 +964,7 @@ document.addEventListener('cdm-custom-page:ready', function(event) {
 	                document.getElementsByTagName("head")[0].appendChild(cssFileRef)
 	                
 	                //axios.get('https://cdm16007.contentdm.oclc.org/digital/bl/dmwebservices/index.php?q=dmQuery/p16007coll51/0/title!demo!rights/demo/100/1/0/0/0/0/json')
-	                axios.get('http://www.ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmQuery/p16007coll51/0/title!demo!rights/demo/100/1/0/0/0/0/json')
+	                axios.get('https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmQuery/p16007coll51/0/title!demo!rights/demo/100/1/0/0/0/0/json')
 	                .then(function(response) {
 	                    let collectionManifest = createCollectionManifest();
 	                    response.data.records.forEach(function(record) {
@@ -1059,13 +989,12 @@ document.addEventListener('cdm-custom-page:ready', function(event) {
 	                        window.timeline = new TL.Timeline('timeline-embed', timelineJson);
 	                    });
 	                }).catch(function(error) {
-	                    console.log(error);
+	                    //console.log(error);
 	                });
 	            });
 	        });
 	    }
     }
 });
-
 
 

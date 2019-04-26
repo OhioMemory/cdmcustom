@@ -1,14 +1,9 @@
 
-jQuery(document).ready(function($) {
+//jQuery(document).ready(function($) {
+//$( document ).ready(function() {
 
 
-	$('#main-menu').smartmenus();
-
-
-	$('.selectpicker').selectpicker({
-		style: 'btn-info',
-		size: 8
-	});
+	/*$('#main-menu').smartmenus();*/
 
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-29104270-1']);
@@ -83,32 +78,56 @@ jQuery(document).ready(function($) {
 			pinboard_move_elements($(this));
 		});
 	}
+
+	var after_resize = (function(){
+		var timer = 0;
+		return function(callback, ms){
+			clearTimeout (timer);
+			timer = setTimeout(callback, ms);
+		};
+	})();
+
 	$(window).resize(function() {
+		after_resize(function(){
 
-		if( ($(window).width() > 960) || ($(document).width() > 960) ) {
-			$('.page-template-template-full-width-php #content .hentry, .page-template-template-blog-full-width-php #content .hentry, .page-template-template-blog-four-col-php #content .hentry').each(function() {
-				pinboard_restore_elements($(this));
-			});
-		} else {
-			$('#content .hentry').each(function() {
-				pinboard_move_elements($(this));
-			});
-		}
+			if( ($(window).width() > 960) || ($(document).width() > 960) ) {
+				$('.page-template-template-full-width-php #content .hentry, .page-template-template-blog-full-width-php #content .hentry, .page-template-template-blog-four-col-php #content .hentry').each(function() {
+					pinboard_restore_elements($(this));
+				});
+			} else {
+				$('#content .hentry').each(function() {
+					pinboard_move_elements($(this));
+				});
+			}
 
-		if( ($(window).width() > 760) || ($(document).width() > 760) ) {
-			var maxh = 0;
-			$('#access .menu > li > a').each(function() {
-				if(parseInt($(this).css('height'))>maxh) {
-					maxh = parseInt($(this).css('height'));
-				}
-			});
-			$('#access .menu > li > a').css('height', maxh);
-		} else {
-			$('#access .menu > li > a').css('height', 'auto');
-		}
+			if( ($(window).width() > 760) || ($(document).width() > 760) ) {
+				var maxh = 0;
+				$('#access .menu > li > a').each(function() {
+					if(parseInt($(this).css('height'))>maxh) {
+						maxh = parseInt($(this).css('height'));
+					}
+				});
+				$('#access .menu > li > a').css('height', maxh);
+				$('#access').css("display", "block");
+			} else {
+				$('#access .menu > li > a').css('height', 'auto');
+			}
+
+			if( ($(window).width() < 760) || ($(document).width() < 760) ) {
+				$('#access').css("display", "none");
+				$( ".nav-show" ).click(function(e) {
+					if($('#access').is(':visible')) {
+						$('#access').css("display", "none");
+					} else {
+						$('#access').css("display", "block");
+					}
+				});
+			}
+		}, 300);
+		
 	});
 
-	if( ($(window).width() > 768) || ($(document).width() > 768) ) {
+	if( ($(window).width() > 760) || ($(document).width() > 760) ) {
 		/*var maxh = 0;
 		$('#access .menu > li > a').each(function() {
 			var title = $(this).attr('title');
@@ -129,10 +148,17 @@ jQuery(document).ready(function($) {
 		});*/
 	} else {
 
-		//$('#access').hide();
-		$( ".nav-show" ).click(function(e) {
-			$('#access').toggle();
+		$( ".nav-show" ).click(function() {
+			if($('#access').is(':visible')) {
+				$('#access').css("display", "none");
+			} else {
+				$('#access').css("display", "block");
+			}
 		});
+		/*$( ".nav-show" ).click(function() {
+			console.log('clicked');
+			$('#access').toggle();
+		});*/
 		/*$('#access li').each(function() {
 			if($(this).children('ul').length)
 				$(this).append('<span class="drop-down-toggle"><span class="drop-down-arrow"></span></span>');
@@ -164,11 +190,7 @@ jQuery(document).ready(function($) {
 		$('div#menu-topbar-wrapper').css( "width", menuWidth+"%" );
 	}
 
-	// slide feed and search controls
-	var HOSTDOMAIN = window.location.hostname;
-	var CDMHOSTDOMAIN = HOSTDOMAIN == "localhost" ? "cdm16007.contentdm.oclc.org" : "www.ohiomemory.org";
-
-	var feedUrl = "https://ohiohistoryhost.org/ohiomemory/feed";
+	var feedUrl = "https://ohiomemory.ohiohistory.org/feed";
 	var request = new XMLHttpRequest();
 	request.open('GET', feedUrl, true);
 
@@ -177,18 +199,37 @@ jQuery(document).ready(function($) {
 
 			parser = new DOMParser();
 			xmlDoc = parser.parseFromString(request.responseText,"text/xml");
+			var sliderImagesPath = 'https://' + window.location.hostname + '/customizations/global/pages/homepage_resources/sliderimages';
+			var imagesExistOnThisServer = false; 
 
+			var firstItemImgSrc = xmlDoc.getElementsByTagName("item")[0].getElementsByTagName("enclosure")[0].getAttribute('url');
+			var firstItemImgSrcFilename = firstItemImgSrc.replace(/^.*\/(.*)$/, '$1');
+			/*$.get(sliderImagesPath + '/' + firstItemImgSrcFilename)
+				.done(function() { 
+				    imagesExistOnThisServer = true; 
+				}).fail(function() { 
+				    // console.log('image does not exists');
+				})*/
+
+			//console.log(sliderImagesPath + '/' + firstItemImgSrcFilename);
+			//console.log(imagesExistOnThisServer);
 			var items = xmlDoc.getElementsByTagName("item");
 			var count = items.length
 			var allHTML = '';
-			for (i = 0; i < 5 ;i++) {
-
+			for (i = 0; i < 3; i++) {
 			    var itemTitle = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("title")[0].textContent;
 			    var itemLink = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("link")[0].textContent;
 			    var itemDesc = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("description")[0].textContent;
 			    var itemDescShort = itemDesc.substr(0, 290);
 			    var itemImgSrc = xmlDoc.getElementsByTagName("item")[i].getElementsByTagName("enclosure")[0].getAttribute('url');
 
+			    /*if (imagesExistOnThisServer) {
+			    	currentItemImgSrc = itemImgSrc.replace(/^.*\/(.*)$/, '$1');
+			    	itemLink = sliderImagesPath + "/" + currentItemImgSrc;
+			    }*/
+			    /*var currentItemImgSrc = itemImgSrc.replace(/^.*\/(.*)$/, '$1');
+			    itemImgSrc = sliderImagesPath + "/" + currentItemImgSrc;*/
+			    //console.log(itemImgSrc);
 				allHTML += '<li>' +
 							'<div class="caption-title">' + itemTitle + '</div>' +
 			    			'<div class="flex-caption">' +
@@ -196,11 +237,9 @@ jQuery(document).ready(function($) {
 			    			'</div>' +
 			    			'<img class="images" src="' + itemImgSrc + '" />' +
 			    			'</li>';
-
 			}
-			//console.log(allHTML);
 			document.getElementsByClassName("slides")[0].innerHTML = allHTML;
-			//console.log('images loaded');
+			
 			request.abort();
 			//console.log('flexloader firing');
 			$('.flexslider').flexslider({
@@ -284,6 +323,15 @@ jQuery(document).ready(function($) {
 	    }               
 	}
 
+
+	/*$('.selectpicker').selectpicker({
+		style: 'btn-info',
+		size: 8
+	});*/
+	
+
+	
+
 	$( "#searchForm" ).submit(function(event) {
 		event.preventDefault();
 
@@ -293,7 +341,7 @@ jQuery(document).ready(function($) {
 		  mode = "exact";
 		}
 
-		var fullTextVals = "artifact* picture manuscript* object* specimen* video"
+		var fullTextVals = "picture manuscript* object* sound video"
 		var noFullText = false;
 
 		if ($('input[name=fulltext]:checked', '#searchForm').val() != undefined) {
@@ -316,7 +364,7 @@ jQuery(document).ready(function($) {
 		}
 
 		// http://www.ohiomemory.org/cdm/search/searchterm/pottery!picture/field/all!format/mode/all!all/conn/and!and
-		var gotostring =  "http://www.ohiomemory.org/digital/search"
+		var gotostring =  "https://ohiomemory.org/digital/search"
 		                  + '/searchterm/' + escape(searchterms) + (noFullText ? '!' + escape(fullTextVals) : '') + (formatsChosen ? '!' + escape(searchFormatValues) : '')
 		                  + '/field/all' + (noFullText ? '!format' : '') + (formatsChosen ? '!format' : '')
 		                  + '/mode/' + mode + (noFullText ? '!any' : '') + (formatsChosen ? '!any' : '')
@@ -350,4 +398,4 @@ jQuery(document).ready(function($) {
 	});
 
 
-});
+//});

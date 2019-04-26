@@ -10,11 +10,11 @@ function getParameterByName(name, url) {
 }
 
 var HOSTDOMAIN = window.location.hostname;
-var CDMHOSTDOMAIN = HOSTDOMAIN == "localhost" ? "cdm16007.contentdm.oclc.org" : "www.ohiomemory.org";
-var THIS_HOST = "http://" + CDMHOSTDOMAIN;
-var THIS_PAGE = "http://" + CDMHOSTDOMAIN + "/digital/custom/browse";
+var CDMHOSTDOMAIN = HOSTDOMAIN == "localhost" ? "cdm16007.contentdm.oclc.org" : "ohiomemory.org";
+var THIS_HOST = "https://" + CDMHOSTDOMAIN;
+var THIS_PAGE = "https://" + CDMHOSTDOMAIN + "/digital/custom/browse";
 // CDM host domain
-var CDM_HOST = "http://www.ohiomemory.org";
+var CDM_HOST = "https://ohiomemory.org";
 // Collection alias from which you want to retrieve controlled vocabulary
 var COLL_ALIAS = "p267401coll32";
 var LETTER_VALUES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -41,9 +41,12 @@ if (browse_letter == "" || browse_letter == null) {
 var dc_field = (browse_field == "place") ? "coveraa" : browse_field;
 var browse_array = [];
 
-if (browse_field != 'contri') {
-	
-	var requestUrl = "http://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/" + COLL_ALIAS + "/" + browse_field + "/0/0/json";
+// if contributor need to use controlled vocab from Ohio Memory Collection: p267401coll36
+if (browse_field == 'contri') { COLL_ALIAS = "p267401coll36"; }
+
+//if (browse_field != 'contri') {
+	// https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/p267401coll36/contri/0/0/json
+	var requestUrl = "https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionFieldVocabulary/" + COLL_ALIAS + "/" + browse_field + "/0/0/json";
 	
 	var request = new XMLHttpRequest();
 	request.open('GET', requestUrl, true);
@@ -69,14 +72,14 @@ if (browse_field != 'contri') {
 
 			itemList += '</div>';
 			itemList += '<div id="countyMap">';
-			itemList += (browse_field == "place") ? '<img src="/customizations/global/pages/browse_resources/mapclick.jpg" alt="Map of Ohio" usemap="#county" border="0">' : ''; 
+			itemList += (browse_field == "place") ? '<img src="/customizations/global/pages/browse_resources/OM_LocationBrowseMap_FINAL.png" alt="Map of Ohio" usemap="#county" border="0" class="responsive">' : ''; 
 			itemList += '</div>';
 
 			document.getElementById('navlist').innerHTML = letterList;
 
 			document.getElementById('browseContainer').innerHTML = itemList;
 			
-			
+			if (browse_field == 'place') { imageMapResize(); }
 			
 		} else {
 			// returned an error
@@ -86,7 +89,7 @@ if (browse_field != 'contri') {
 		// connection error
 	};
 	request.send();
-
+/*
 } else {
 	browse_array = CUSTOM_BROWSE;
 	var itemList = "";
@@ -107,7 +110,7 @@ if (browse_field != 'contri') {
 
 	itemList += '</div>';
 	itemList += '<div id="countyMap">';
-	itemList += (browse_field == "place") ? '<img src="/ui/custom/default/collection/default/resources/custompages/images/mapclick.jpg" alt="Map of Ohio" usemap="#county" border="0">' : ''; 
+	itemList += (browse_field == "place") ? '<img src="/customizations/global/pages/browse_resources/OM_LocationBrowseMap_FINAL.png" alt="Map of Ohio" usemap="#county" border="0" class="responsive">' : ''; 
 	itemList += '</div>';
 
 	document.getElementById('navlist').innerHTML = letterList;
@@ -116,3 +119,4 @@ if (browse_field != 'contri') {
 
 }
 
+*/

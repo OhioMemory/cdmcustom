@@ -4,8 +4,13 @@ ScriptLoader('https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.j
 	store.remove('searchTerms');
 
 	document.getElementsByClassName("fa-times-circle")[1].parentNode.style.display = 'none';
-	const pageViewElem = elFactory('div', { id: 'pageView' }, 'View all pages');
-	
+	//const pageViewElem = '<div id="pageView">View all pages</div>';
+	var pageViewElem = document.createElement('div');
+	var att = document.createAttribute("id");
+	att.value = "pageView";
+	pageViewElem.setAttributeNode(att); 
+	var linkText = document.createTextNode("View all pages");
+	pageViewElem.appendChild(linkText);
 	var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
 
 	viewNode.addEventListener("click", function(){
@@ -100,3 +105,13 @@ document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click()
 var event = document.createEvent('HTMLEvents');
 event.initEvent('change', true, false);
 el.dispatchEvent(event);*/
+
+
+var urlstring = 'thisUrlString';
+var withinstring = 'thisLastWithin';
+var datetime = new Date().getTime();
+var searchSessionData = '{ "lastSearchURL":  "' + urlstring + '", "lastSearchTime":  "' + datetime + '" }';
+var withinSessionData = '{ "lastWithinTerms":  "' + withinstring + '", "lastWithinTime":  "' + datetime + '" }';
+var searchSessionObj = JSON.parse(searchSessionData);
+var withinSessionObj = JSON.parse(withinSessionData);
+withinSessionObj.lastWithinTime;

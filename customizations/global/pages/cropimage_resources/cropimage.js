@@ -5,7 +5,7 @@ var y = getParameterByName('y');
 var tw = getParameterByName('width');
 var th = getParameterByName('height');
 
-var itemdataUrl = "http://ohiomemory.org/digital/iiif/" + alias + "/" + ptr + "/info.json";
+var itemdataUrl = "https://ohiomemory.org/digital/iiif/" + alias + "/" + ptr + "/info.json";
 //console.log('itemdataUrl: ' + itemdataUrl);
 var request = new XMLHttpRequest();
 request.open('GET', itemdataUrl, true);
@@ -31,7 +31,7 @@ request.onload = function() {
 
 			var imgElem = document.createElement('img');
 			imgElem.setAttribute('id', 'image');
-			imgElem.setAttribute('src', 'http://ohiomemory.org/digital/iiif/' + alias + '/' + ptr + '/full/' + max_w + ',/0/default.jpg');
+			imgElem.setAttribute('src', 'https://ohiomemory.org/digital/iiif/' + alias + '/' + ptr + '/full/' + max_w + ',/0/default.jpg');
 
 			document.getElementById("imgContainer").appendChild(imgElem);
 
@@ -50,7 +50,7 @@ request.onload = function() {
 
 			document.getElementById("cropbutton").onclick = function() {
 				var pts = cropper.getData(true);
-				location.href = 'http://ohiomemory.org/digital/custom/cropimage?alias=' + alias + '&ptr=' + ptr + '&x=' + pts.x + '&y=' + pts.y + '&width=' + pts.width + '&height=' + pts.height;
+				location.href = 'https://ohiomemory.org/digital/custom/cropimage?alias=' + alias + '&ptr=' + ptr + '&x=' + pts.x + '&y=' + pts.y + '&width=' + pts.width + '&height=' + pts.height;
 			};
 
 		} else {
@@ -62,7 +62,7 @@ request.onload = function() {
 			var posy = y * scale;
 			//console.log('scale: ' + scale + ", tw: " + tw + ", th: " + th + ", x: " + x + ", y: " + y);
 			var imgElem = document.createElement('img');
-			imgElem.setAttribute('src', 'http://ohiomemory.org/digital/iiif/' + alias + '/' + ptr + '/' + Math.round(posx) + ',' + Math.round(posy) + ',' + Math.round(targw) + ',' + Math.round(targh) + '/full/0/default.jpg');
+			imgElem.setAttribute('src', 'https://ohiomemory.org/digital/iiif/' + alias + '/' + ptr + '/' + Math.round(posx) + ',' + Math.round(posy) + ',' + Math.round(targw) + ',' + Math.round(targh) + '/full/0/default.jpg');
 			document.getElementById("imgContainer").appendChild(imgElem);
 		}
 	} else{

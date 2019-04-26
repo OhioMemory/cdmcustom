@@ -1,4 +1,4 @@
-.Header-header {
+/*.Header-header {
 	background-image: url(/customizations/global/pages/homepage_resources/banner4.png);
     background-size: cover;
 }
@@ -48,7 +48,6 @@
 	}
 	.Header-nameHolder {
 		padding-top: 40px;
-		/*padding-left: 20px;*/
 		padding-left: 22%;
     	padding-right: 22%;
     	text-shadow: 1px 1px 1px rgba(150, 150, 150, 1), 1px 1px 6px #fff;
@@ -112,3 +111,4 @@
 	    width: 220px;
 	}
 }
+*/

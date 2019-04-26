@@ -1,0 +1,85 @@
+// Logo action
+/*(function () {
+	function startEventListenerCollections(cdmEvent) {
+		document.addEventListener(cdmEvent, function(e){
+
+			if (document.querySelectorAll('.Header-logoHolder div a').length > 0) {
+				document.querySelectorAll('.Header-logoHolder div a')[0].addEventListener("click", function(){
+
+					var keysHomeLinks = ["p16007coll88", "p16007coll31", "p16007coll33", "p16007coll77", "p267401coll14", "p267401coll15", "p267401coll16", "p267401coll17", "p267401coll18", "p267401coll19", "p267401coll20", "p267401coll21", "p267401coll22", "p267401coll13", "p267401coll23", "p267401coll24", "p267401coll25", "p267401coll26", "p267401coll27", "p267401coll28", "p267401coll29"];
+
+					if ( keysHomeLinks.join().indexOf(e.detail.collectionId) > -1 ) {
+						console.log(keysHomeLinks.join().indexOf(e.detail.collectionId) > -1);
+						if (e.detail.collectionId.indexOf('267401') > -1 ) {
+							console.log(e.detail.collectionId.indexOf('267401') > -1);
+							location.href = "https://www.harriselmorelibrary.org/local-history-genealogy";
+						}
+						if (e.detail.collectionId.indexOf('16007') > -1 ) {
+							location.href = "http://www.toledolibrary.org/digitalcollections";
+						}
+					} 
+
+				});
+			}
+		});
+	}
+
+	function startEventListenerDefault(cdmEvent) {
+		document.addEventListener(cdmEvent, function(e){
+			if (document.querySelectorAll('.Header-logoHolder div a').length > 0) {
+				document.querySelectorAll('.Header-logoHolder div a')[0].addEventListener("click", function(){
+					location.href = 'https://ohiomemory.org/digital';
+				});
+			}
+		});
+	}
+
+	var cdmCollectionEvents = ['cdm-collection-landing-page:ready', 'cdm-collection-landing-page:update', 'cdm-collection-page:ready', 'cdm-collection-page:update', 'cdm-collection-search-page:ready', 'cdm-collection-search-page:update'];
+
+	cdmCollectionEvents.forEach(startEventListenerCollections);
+
+	var allOtherEvents = ['cdm-search-page:ready', 'cdm-search-page:update', 'cdm-custom-page:ready', 'cdm-custom-page:update']
+
+	allOtherEvents.forEach(startEventListenerDefault);
+
+})();*/
+
+
+// if advanced search were active, this would allow for near5
+document.addEventListener('cdm-advanced-search-page:ready', function(e){
+
+	var newOption = document.createElement("option");
+	newOption.setAttribute('id', 'nearOp');
+	newOption.value = "near5";
+	newOption.innerText = "Within 5 words";
+	document.getElementsByClassName('form-control')[2].appendChild(newOption);
+
+	document.getElementsByClassName("cdm-btn btn btn-primary btn-block")[1].addEventListener("click", function(){
+
+		if ( document.getElementsByClassName('form-control')[2].value.match(/near5/) ) {
+			window.location.href = 'https://www.ohiomemory.org/digital/search/searchterm/' + document.getElementsByClassName('form-control')[1].value.split(" ").join(' near5 ') + '/field/all/mode/exact/conn/and';
+			e.stopPropagation();
+		}
+	});
+	
+});
+document.addEventListener('cdm-advanced-search-page:update', function(e){
+	// e is instance of CustomEvent
+	// a page was updated
+	//console.log(e);
+	//console.log("cdm-advanced-search-page:update");
+	//console.log(e);
+	document.getElementsByClassName("SimpleSearch-headerAdvancedSearchButtonLink")[0].addEventListener("click", function(e){
+		console.log("cdm-advanced-search-page:update");
+		//if( !!document.getElementById("advancedSearchDiv") ) { history.back(1); e.stopPropagation(); }
+	});
+
+});
+document.addEventListener('cdm-advanced-search-page:leave', function(e){
+	// e is instance of CustomEvent
+	// ...
+	// http://www.ohiomemory.org/digital/collection/addresses/search/searchterm/water%20near5%20pollution/field/all/mode/exact/conn/and
+	
+	
+	//console.log(e);
+});
