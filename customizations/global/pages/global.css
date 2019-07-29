@@ -142,6 +142,8 @@ div.tingle-modal.tingle-modal--noOverlayClose.refContainer.tingle-modal--visible
 	}
 	
 }
+
+/* media query for > 768 */
 @media screen and (min-width: 768px) {
 
 	.Header-logoImage { 
@@ -208,6 +210,8 @@ div.tingle-modal.tingle-modal--noOverlayClose.refContainer.tingle-modal--visible
 	    top: 10px;
 	    right: 10px;
 	}
+	
+
 }
 
 @media screen and (max-width : 860px) {

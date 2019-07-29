@@ -1,0 +1,83 @@
+---
+header: true
+footer: true
+title: "Ohio Memory Browse by Period"
+---
+<style>
+	body, html {
+	  font-family: arial, sans-serif;
+	  font-size: 11pt;
+	}
+	span.large {
+	  font-size: 200%;
+	}
+	.vis-foreground {
+		background-color: rgb(100,100,100);
+	}
+	.vis-time-axis.vis-foreground {
+		background-color: rgb(230,230,230);
+	}
+	.vis-background {
+		background-color: rgb(150,150,150);
+	}
+	.vis-item {
+		border-color: rgb(20,70,100) !important;
+	}
+	.vis-item-content {
+		font-size: 1.2em;
+    	font-weight: bold;
+	}
+	.fa-arrow-circle-right {
+		margin-right:20px;
+		margin-left:20px;
+		padding: 10px;
+	}
+	.fa-arrow-circle-right:hover {
+		color:#336699;
+	}
+	.fa-arrow-circle-left {
+		margin-left:20px;
+		margin-right:20px;
+		padding: 10px;
+	}
+	.fa-arrow-circle-left:hover {
+		color:#336699;
+	}
+
+	.timeline-container {
+		border-radius: 5px;
+	    background-color: #fff;
+	    border-bottom: rgba(0, 0, 0, .13) 1px solid;
+	    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+	    padding: 10px;
+	}
+	#timeline {
+	    overflow: hidden;
+	    border-right: 1px #ccc solid;
+	}
+	.Header-valerieBar {
+	    background-color: #000;
+	    height: 3px;
+	}
+	.flex-container {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+			justify-content: center;
+	}
+</style>
+
+<link href="/customizations/global/pages/periods_resources/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="timeline-container">
+	<div style="text-align:center;padding-bottom: 8px;">
+	<i class="fas fa-arrow-circle-left fa-3x" id="moveLeft"></i> <div style="font-size: 2em;vertical-align: text-bottom;display: inline-block;">Ohio Memory Timeline</div> <i class="fas fa-arrow-circle-right fa-3x" id="moveRight"></i>
+</div>
+
+<div id="timeline"></div>
+</div>

@@ -241,7 +241,32 @@
 			document.getElementsByClassName("slides")[0].innerHTML = allHTML;
 			
 			request.abort();
-			//console.log('flexloader firing');
+
+			function fixFlexsliderHeight(callback) {
+				var sliderHeight = 600;
+				var checkHeight = setInterval(function() {
+					// document.querySelectorAll('.slides li img.images');
+					var imageSlides = document.querySelectorAll('.slides li img.images');
+					var imageTotal = imageSlides.length;
+					if (imageSlides[0].height > 50 && imageSlides[1].height > 50 && imageSlides[2].height > 50) {
+						for (i=0; i<imageTotal; i++) {
+							var item = imageSlides[i];
+							var slideHeight = item.height;
+							if (sliderHeight > slideHeight) {
+				                sliderHeight = slideHeight;
+				            }
+				        }
+						clearInterval(checkHeight);
+						callback(sliderHeight);
+					}
+				}, 100);
+
+			}
+			fixFlexsliderHeight(function(sliderHeight) {
+			    var sliderHeightCss = sliderHeight + "px";
+				$('.flex-viewport').css("height", sliderHeightCss);
+			});
+
 			$('.flexslider').flexslider({
 				animation: "slide",
 				itemWidth: "70%", 
@@ -254,7 +279,7 @@
 					$('body').removeClass('loading');
 				}
 			});
-			fixFlexsliderHeight();
+
 		} else {
 			// We reached our target server, but it returned an error
 		}
@@ -266,7 +291,7 @@
 
 	request.send();
 
-	function fixFlexsliderHeight() {
+	/*function fixFlexsliderHeight() {
 		var checker = 0;
 		var imageSlides = $('.slides li img.images');
 		var imageTotal = $('.slides li img.images').length;
@@ -281,15 +306,11 @@
 	        	for (var i = 0; i < imageTotal; i++) {
 					var item = imageSlides[i];
 					var slideHeight = item.clientHeight;
-					/*console.log('sliderHeight: ' + sliderHeight + ", slideHeight: " + slideHeight);
-					console.log(sliderHeight > slideHeight);*/
 					if (sliderHeight > slideHeight) {
 		                sliderHeight = slideHeight;
 		            }
 				}
 	        	var sliderHeightCss = sliderHeight + "px";
-	        	//console.log( ($(window).width() < 760) || ($(document).width() < 760) );
-	        	//console.log(sliderHeightCss);
 	        	$('.flex-viewport').css("height", sliderHeightCss);
 			} 
 	    	if(checker == 0) {
@@ -297,13 +318,13 @@
 	    	}
 		}
 		checkClientHeight();
-	}
+	}*/
 
 	/*$(window).resize(function() {
 	    fixFlexsliderHeight();
 	});*/
 
-	var rtime;
+	/*var rtime;
 	var timeout = false;
 	var delta = 200;
 	$(window).resize(function() {
@@ -321,7 +342,7 @@
 	        //alert('Done resizing');
 	        fixFlexsliderHeight();
 	    }               
-	}
+	}*/
 
 
 	/*$('.selectpicker').selectpicker({

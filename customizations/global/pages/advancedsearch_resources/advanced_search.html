@@ -34,13 +34,14 @@ jQuery(document).ready(function($){
 
         e.preventDefault();
 
-        var searchurl = 'https://www.ohiomemory.org/digital/search';
+        var searchurl = 'https://ohiomemory.org/digital/search';
         var modevalues = [];
         var modeClasses = [];
-        var searchCriteria = "0";
+        var searchCriteria = "";
         var searchtermvalues = [];
         var connvalues = [];
         var fieldvalues = [];
+        var crossCollectionSearch = $("#selectCollections").val() === null || $("#selectCollections").val().length > 1;
 
         // modes
         var modes = $( "select[name='mode'] option:selected");
@@ -51,6 +52,7 @@ jQuery(document).ready(function($){
 
         // search terms
         var searchterms = $( "input[name='searchterm']" ).serializeArray();
+
         $.each( searchterms, function( i, searchterm ) {
             if ( modeClasses[i] != 'near' ) {
                 searchtermvalues.push(searchterm.value);
@@ -66,6 +68,13 @@ jQuery(document).ready(function($){
         // fields
         var fields = $( "select[name='field']" ).serializeArray();
         $.each( fields, function( i, field ) {
+            
+            /*if (field.value == 'coverab') { 
+                if (!crossCollectionSearch) {
+                    field.value = 'time';
+                }
+            }*/
+            
             fieldvalues.push(field.value);
         });
 
@@ -191,7 +200,9 @@ jQuery(document).ready(function($){
                 //$('#mode option[class="coveraa"]').attr('selected', 'selected');
             }
             //$('.fieldselectpicker').selectpicker('val', fields[0]);
-
+            /*if (fields[0] == "time" || fields[0] == "coverab") {
+                fields[0] = "coverab";
+            }*/
 
             if (modes[0].length < 3 || modes[0].length > 5) { modes[0] = "all"; }
             if (fields[0].length < 4 || fields[0].length > 7) { fields[0] = "all"; }
@@ -253,22 +264,28 @@ jQuery(document).ready(function($){
         //}
     }
 
-    function addLine(term = "", mode = "all", field = "all", conn = "and") {
+    function addLine(sterm, mode, field, conn) {
+        
+        (typeof sterm == "undefined" || sterm == "") ? sterm = "" : sterm = sterm;
+        (typeof mode == "undefined" || mode == "") ? mode = "all" : mode = mode;
+        (typeof field == "undefined" || field == "") ? field = "all" : field = field;
+        (typeof conn == "undefined" || conn == "") ? conn = "and" : conn = conn;
+        
         var newLine = $(".adv_search_row:last").clone(true, true);
         $( "#adv_search_query_builder_list" ).append( newLine );
         var newInput = newLine.find("input");
         var newSelects = newLine.find("select");
         
-        if ( decodeURI(term).match(/near5/) ) {
-            var unencodedTermsString = decodeURI(term).replace(/' '/g, '');
+        if ( decodeURI(sterm).match(/near5/) ) {
+            var unencodedTermsString = decodeURI(sterm).replace(/' '/g, '');
             var termsArray = unencodedTermsString.split('near5');
-            term = termsArray.join(" ");
+            sterm = termsArray.join(" ");
             $(newSelects[0]).children().last().attr('selected', 'selected');
         }  else {
             $(newSelects[0]).val(mode);
         }
         
-        newInput.val(term);
+        newInput.val(sterm);
         $(newSelects[1]).val(field);
         $(newSelects[2]).val(conn);
     }
@@ -417,6 +434,9 @@ div.add-or-submit {
                                                     </option>
                                                     <option class="descri" value="descri">
                                                         Description
+                                                    </option>
+                                                    <option class="contri" value="relatig">
+                                                        Collection
                                                     </option>
                                                     <option class="contri" value="contri">
                                                         Contributor
@@ -614,6 +634,12 @@ div.add-or-submit {
       "name":"Athens County Gazette",
       "path":"\/cdm\/sites\/16007\/data\/p16007coll41",
       "secondary_alias":"14"
+   },
+   {
+      "alias":"\/p16007coll87",
+      "name":"Bureau of Workers' Compensation Collection",
+      "path":"\/cdm\/sites\/16007\/data\/p16007coll87",
+      "secondary_alias":"p16007coll87"
    },
    {
       "alias":"\/p15005coll28",
@@ -968,6 +994,12 @@ div.add-or-submit {
       "name":"Morrow County Republican",
       "path":"\/cdm\/sites\/16007\/data\/p16007coll55",
       "secondary_alias":"28"
+   },
+   {
+      "alias":"\/p16007coll85",
+      "name":"Mount St. Joseph University Digital Archives",
+      "path":"\/cdm\/sites\/16007\/data\/p16007coll85",
+      "secondary_alias":"p16007coll85"
    },
    {
       "alias":"\/p16007coll3",

@@ -1,20 +1,4 @@
 
-// create element function
-/*const elFactory = (type, attributes, ...children) => {
-	const el = document.createElement(type)
-	for (key in attributes) {
-		el.setAttribute(key, attributes[key])
-	}
-	children.forEach(child => {
-		if (typeof child === 'string') {
-			el.appendChild(document.createTextNode(child))
-		} else {
-			el.appendChild(child)
-		}
-	})
-	return el
-}*/
-
 // subscribe to the homepage ready event
 document.addEventListener('cdm-home-page:ready', function(e){
 	// console.log('ready: ' + e.detail);
@@ -49,27 +33,6 @@ document.addEventListener('cdm-item-page:enter', function(e){
 	});
 
 });
-
-/**
- * This could be the way a supercollection search work, where branding and search criteria are maintained across pages
- */
-/*document.addEventListener('cdm-search-page:ready', function(e){
-	
-	if (document.getElementsByClassName('BackToResults-backLink')[0] != undefined) {
-		if (document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/) != null && document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/).length > 0) {
-			document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers";
-			document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
-		}
-	}
-
-	var facetNodes = document.getElementsByClassName("panel-title");
-	for (i=1; i<facetNodes.length; i++) {
-		if (facetNodes[i].firstChild.getAttribute("aria-label").includes("close")) {
-			facetNodes[i].firstChild.click();
-		}
-	}
-});*/
-
 
 document.addEventListener('cdm-search-page:update', function(e){
 
@@ -144,13 +107,11 @@ document.addEventListener('cdm-custom-page:ready', function(e){
 			});
 			break;
 		case 'browse':
-
 			ScriptLoader('/customizations/global/pages/browse_resources/imageMapResizer.min.js', function() {
 				ScriptLoader('/customizations/global/pages/browse_resources/browse.js', function() {
 					
 				});
 			});
-
 			break;
 		case 'periods':
 			var pageHead = (e.srcElement||e.target).head;
@@ -202,25 +163,15 @@ document.addEventListener('cdm-custom-page:ready', function(e){
 	}
 });
 
+/**
+ * Custom pages for main landing page (default), 
+ * @param  {[type]} e){	switch (e.detail.filename) {		case 'cropimage':			var pageHead [description]
+ * @return {[type]}             [description]
+ */
 document.addEventListener('cdm-custom-page:update', function(e){
-	// e is instance of CustomEvent
-	// ...
-	//console.log(e);
 
-	// console.log(typeof e.detail.filename === "undefined"); // e.srcElement.URL == http://www.ohiomemory.org/digital/ if(isEmpty(e.detail)) {
 	switch (e.detail.filename) {
-		case 'cropimage':
-			var pageHead = (e.srcElement||e.target).head;
-			[
-			  '/customizations/global/pages/cropimage_resources/cropper.min.js',
-			  '/customizations/global/pages/cropimage_resources/cropimage.js'
-			].forEach(function(src) {
-			  var script = document.createElement('script');
-			  script.src = src;
-			  script.async = false;
-			  pageHead.appendChild(script);
-			});
-			break;
+
 		case 'browse':
 			var body = document.getElementsByTagName('body')[0];
 			var script = document.createElement("script")
@@ -303,90 +254,11 @@ function ScriptLoader(url, callback){
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-// some kind of sub / super collection search
-/*(function () {
-	if (document.getElementsByClassName('BackToResults-backLink')[0] != undefined) {
-		if (document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/) != null && document.getElementsByClassName('BackToResults-backLink')[0].firstChild.getAttribute("href").match(/!newspapers/).length > 0) {
-			document.getElementsByClassName('Header-titleText')[0].innerHTML = "Ohio Memory Newspapers";
-			document.getElementsByClassName('Header-titleText')[0].classList.add("showTitle");
-		}
-	}
-})();*/
-
-
-// compound object item view
-(function () {
-
-	function startEventListener(cdmEvent) {
-
-		document.addEventListener(cdmEvent, function (e) {
-
-			if (e.detail.collectionId == 'p15005coll5') {
-				
-				var pageViewContainers = document.querySelectorAll('#pageView');
-				for (var i = 0; i < pageViewContainers.length; ++i) {
-				  pageViewContainers[i].remove();
-				} 
-				if (document.querySelectorAll('#pageView').length < 1) { 
-					var pageViewElem = document.createElement('div');
-					var att = document.createAttribute("id");
-					att.value = "pageView";
-					pageViewElem.setAttributeNode(att); 
-					var linkText = document.createTextNode("View all pages");
-					pageViewElem.appendChild(linkText);
-					var viewNode = document.getElementsByClassName("ItemView-itemSearchContainer")[1].insertBefore(pageViewElem, document.getElementsByClassName("ItemSearch-itemSearchControl")[1]);
-				}
-
-				viewNode.addEventListener("click", function(event){
-					if (document.getElementById("pageView").innerText == "View all pages") {
-						//var termValues = document.querySelectorAll('.ItemImage-itemImage div img')[0].getAttribute('src').match(/.*highlightTerms=(.*)/)[1];
-						//sessionStorage.setItem('searchTerms', { terms: termValues });
-						document.getElementsByClassName("fa-times-circle")[1].click();
-						//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
-						//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = " ";
-						document.getElementById("pageView").innerText = "View relevant pages";
-						console.log(event);
-						console.log('Ready: View relevant pages');
-						document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = 'infantry';
-						document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].addEventListener("click", function(event){
-							console.log(event);
-							console.log('Ready: View all pages');
-							document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
-							document.getElementById("pageView").innerText = "View all pages";
-						});
-						
-					} else {
-						//if (store.get('searchTerms') !== undefined && store.get('searchTerms').terms != "") {
-							document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = 'infantry';
-							//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].value = store.get('searchTerms').terms;
-							//document.getElementsByClassName("ItemSearch-itemSearchInputControl")[1].setAttribute('value', store.get('searchTerms').terms);
-							document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].addEventListener("click", function(event){
-								console.log(event);
-								console.log('Ready: View all pages');
-								document.getElementsByClassName("ItemSearch-itemHeaderButtonPadding")[2].click();
-								document.getElementById("pageView").innerText = "View all pages";
-							});
-							
-						//}
-					}
-				});
-
-	    	}
-	    });
-	}
-	
-	var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
-
-	cdmEvents.forEach(startEventListener);
-
-})();
-
-
 /**
- * Crop function for item view page
- */
-(function () {
-	
+ *  Crop function for	 item view page
+ */	
+(function () {	
+		
 	function openCropWindow(coll, ptr) {
 		var page_url = 'https://ohiomemory.org/digital/custom/cropimage?alias=' + coll + '&ptr=' + ptr;
 		window.open(page_url, "clipWindow", "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000");
@@ -394,32 +266,38 @@ function ScriptLoader(url, callback){
 
 	function setupCropTool(currentImageElement, collAlias) {
 
-		if (currentImageElement === null) {
-			return false;
-		}
-		if (document.getElementById("crop") !== null) {
-			document.getElementById("crop").remove();
-		}
-		var img_src_str = currentImageElement.getAttribute('src');
-		var img_id = img_src_str.split("/")[6];
-		var page_url = 'https://ohiomemory.org/digital/custom/cropimage?alias=' + collAlias + '&ptr=' + img_id;
-		var page_win = "clipWindow";
-		var page_size = "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000";
+		ScriptLoader('/customizations/global/pages/cropimage_resources/cropper.min.js', function() {
+			ScriptLoader('/customizations/global/pages/cropimage_resources/cropimage.js', function() {
 
-		var newButton = document.createElement("div");
-		newButton.setAttribute('class', 'btn-group');
-		var span_str = '<span class="fa fa-crop fa-2x"></span>';
-		var button_str = '<button onclick="window.open(\''+page_url+'\',\''+page_win+'\',\''+page_size+'\');return false;" id="crop" class="cdm-btn btn btn-primary" type="button" role="button" title="Crop" aria-label="Crop" aria-haspopup="true" aria-expanded="false">'+ span_str+'</button>';
+				if (currentImageElement === null) {
+					return false;
+				}
+				if (document.getElementById("crop") !== null) {
+					document.getElementById("crop").remove();
+				}
+				var img_src_str = currentImageElement.getAttribute('src');
+				var img_id = img_src_str.split("/")[6];
+				var page_url = 'https://ohiomemory.org/digital/custom/cropimage?alias=' + collAlias + '&ptr=' + img_id;
+				var page_win = "clipWindow";
+				var page_size = "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000";
 
-		newButton.innerHTML =  button_str;
+				var newButton = document.createElement("div");
+				newButton.setAttribute('class', 'btn-group');
+				var span_str = '<span class="fa fa-crop fa-2x"></span>';
+				var button_str = '<button onclick="window.open(\''+page_url+'\',\''+page_win+'\',\''+page_size+'\');return false;" id="crop" class="cdm-btn btn btn-primary" type="button" role="button" title="Crop" aria-label="Crop" aria-haspopup="true" aria-expanded="false">'+ span_str+'</button>';
 
-		var offsetheight = document.getElementsByClassName('btn-toolbar pull-right')[1].offsetHeight;
-		if (offsetheight > 0) {
-			var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[1];
-		} else {
-			var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[0];
-		}
-		targetElem.insertBefore(newButton, targetElem.firstElementChild);
+				newButton.innerHTML =  button_str;
+
+				var offsetheight = document.getElementsByClassName('btn-toolbar pull-right')[1].offsetHeight;
+				if (offsetheight > 0) {
+					var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[1];
+				} else {
+					var targetElem = document.getElementsByClassName('btn-toolbar pull-right')[0];
+				}
+				targetElem.insertBefore(newButton, targetElem.firstElementChild);
+
+			});
+		});
 
 	}
 
@@ -430,6 +308,53 @@ function ScriptLoader(url, callback){
 	}
 	
     var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+	cdmEvents.forEach(startEventListener);
+
+})();
+
+/**
+ * Replace print button action
+ */
+(function () {
+
+	function startEventListener(cdmEvent) {
+		document.addEventListener(cdmEvent, function(e){
+		  	// don't use openseadragon for PDFs
+    		if (document.getElementsByClassName("ItemPDF-itemImage").length > 0) {
+    			//document.getElementsByClassName("ItemPreview-container")[0].style.visibility = "visible";
+    			return;
+    		}
+	  		var coll = e.detail.collectionId;
+	  		var item = e.detail.itemId;
+	  		if (document.getElementsByClassName("CompoundItemView-selectedCompoundItem").length > 0) {
+	  			item = document.getElementsByClassName("CompoundItemView-selectedCompoundItem")[1].firstChild.firstChild.src.replace(/.*?\/id\/(.*?)\/thumbnail/, '$1');
+	  		}
+	  		var itemUrl = 'https://ohiomemory.org/digital/collection/' + coll + '/id/' + item;
+	  		var iiifUrl = 'https://ohiomemory.org/digital/iiif/' + coll + '/' + item + '/full/650,350/0/default.jpg';
+	  		var itemTitle = document.getElementsByClassName("ItemTitle-primaryTitle")[0].innerText;
+		    // change action of print button
+		    document.getElementsByClassName("fa fa-print fa-2x")[1].parentElement.addEventListener('click', function(e) {
+		    	e.stopPropagation();
+		    	function ImagetoPrint(iiifUrl, itemUrl, itemTitle)
+			    {
+			        return "<html><head><scri"+"pt>" +
+			                '</scri' + 'pt></head><body style="font-family:Arial,Helvetica,Verdana,sans-serif;font-size: 90%;">' + 
+			                '<strong style="font-size: large;">' + itemTitle + '</strong><br/>' + 
+			                '<div>Reference URL: ' + itemUrl + '</div>' + 
+			                '<div style="padding-bottom:10px"><a href="#" onclick="window.print();return false;">&#128438; Print this image</a></div>' + 
+			                "<div><img src='" + iiifUrl + "' /></div></body></html>";
+			    }
+		        var Pagelink = "";
+		        var pwa = window.open(Pagelink, "_new");
+		        pwa.document.open();
+		        pwa.document.write(ImagetoPrint(iiifUrl, itemUrl, itemTitle));
+		    });
+			
+	  	});
+	}
+
+  	var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+
 	cdmEvents.forEach(startEventListener);
 
 })();
@@ -601,12 +526,13 @@ function ScriptLoader(url, callback){
     	});
     	//console.log(levelsArray);
 		ScriptLoader('https://ohiomemory.org/customizations/global/pages/openseadragon_resources/openseadragon.min.js', function(){
+        	
         	container.firstChild.className += ' hide';
         	var zoomContainers = document.getElementsByClassName("zoomView");
-	    	if (document.getElementsByClassName("zoomView").length > 0) {	
+	    	if (document.getElementsByClassName("zoomView").length > 0) {
 	    		Array.prototype.forEach.call(zoomContainers, function(el) { el.parentNode.removeChild(el); });
 	    	}
-            //var openseadragonContainer = elFactory('div', { id: 'zoomDiv', class: 'zoomView', style: 'height:100vh;width:100%' });
+            
             var openseadragonContainer = document.createElement("div");
             openseadragonContainer.setAttribute("id", "zoomDiv");
             openseadragonContainer.setAttribute("class", "zoomView");
@@ -624,6 +550,12 @@ function ScriptLoader(url, callback){
 		    });
 		    var odcStyle = openseadragonContainer.firstChild.firstChild.getAttribute("style");
 		    openseadragonContainer.firstChild.firstChild.setAttribute("style", odcStyle + "outline:0");
+		    //var previewContainerStyle = openseadragonContainer.parent.getAttribute("style");
+
+		    //openseadragonContainer.parent.setAttribute("style", "visibility:visible !important");
+		    //openseadragonContainer.parent.style.display = 'visibility:visible !important';
+		    document.getElementsByClassName('ItemPreview-container')[0].style.visibility = "visible !important";
+		    
 		});
 
 	}
@@ -631,12 +563,24 @@ function ScriptLoader(url, callback){
     function startEventListener(cdmEvent) {
     	document.addEventListener(cdmEvent, function(e){
 
-    		// don't use openseadragon for videos
+    		// don't use openseadragon for video
     		if (document.getElementsByClassName("field-type")[0] !== undefined && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == 'MovingImage') {
+    			document.getElementsByClassName("ItemPreview-container")[0].style.visibility = "visible";
+    			return;
+    		}
+    		// don't use openseadragon for audio
+    		if (document.getElementsByClassName("field-type")[0] !== undefined && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == 'Sound') {
+    			document.getElementsByClassName("ItemPreview-container")[0].style.visibility = "visible";
     			return;
     		}
     		// don't use openseadragon for PDFs
     		if (document.getElementsByClassName("ItemPDF-itemImage").length > 0) {
+    			document.getElementsByClassName("ItemPreview-container")[0].style.visibility = "visible";
+    			return;
+    		}
+    		// don't use p267401ccp2, State Library of Ohio
+    		if (e.detail.collectionId == 'p267401ccp2') {
+    			document.getElementsByClassName("ItemPreview-container")[0].style.visibility = "visible";
     			return;
     		}
 
@@ -670,6 +614,81 @@ function ScriptLoader(url, callback){
 			
     	});
     }
+
+    document.addEventListener('cdm-item-page:enter', function(e){
+
+		//console.log("cdm-search-page:update");
+		//var lastNum = e.target.images.length - 1;
+		//console.log(e.target.images[lastNum].width + ", " + e.target.images[lastNum].height);
+		//console.log(e.target.images);
+		// don't use openseadragon for videos
+		/*if (document.getElementsByClassName("field-type")[0] === undefined && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent != 'MovingImage') {
+			// don't use openseadragon for PDFs
+			if (document.getElementsByClassName("ItemPDF-itemImage").length < 1) {
+				var view_container = document.getElementsByClassName("preview")[0];
+				//view_container.firstChild.className += ' hide';
+				console.log(view_container);
+			}
+		}*/
+
+		//addNewStyle('.ItemPreview-container {visibility:visible;}');
+		//addNewStyle('.ItemPreview-container {visibility:visible;}');
+	//if (e.detail.collectionId == 'p15005coll5') {
+		var pageHead = (e.srcElement||e.target).head;
+		var script = document.createElement('script');
+		var code =  'function addNewStyle(newStyle) {' + 
+					'    var styleElement = document.getElementById("styles_js");' + 
+					'    if (!styleElement) {' + 
+					'        styleElement = document.createElement("style");' + 
+					'        styleElement.type = "text/css";' + 
+					'        styleElement.id = "styles_js";' + 
+					'        document.getElementsByTagName("head")[0].appendChild(styleElement);' + 
+					'    }' + 
+					'    styleElement.appendChild(document.createTextNode(newStyle));' + 
+					'}' + 
+					'function waitForElement(selector) {' + 
+					'  return new Promise(function(resolve, reject) {' + 
+					'    var element = document.querySelector(selector);' + 
+					'    if(element) {' + 
+					'      resolve(element);' + 
+					'      return;' + 
+					'    }' + 
+					'    var observer = new MutationObserver(function(mutations) {' + 
+					'      mutations.forEach(function(mutation) {' + 
+					'        var nodes = Array.from(mutation.addedNodes);' + 
+					'        for(var node of nodes) {' + 
+					'          if(node.matches && node.matches(selector)) {' + 
+					'            observer.disconnect();' + 
+					'            resolve(node);' + 
+					'            return;' + 
+					'          }' + 
+					'        };' + 
+					'      });' + 
+					'    });' + 
+					'    observer.observe(document.documentElement, { childList: true, subtree: true });' + 
+					'  });' + 
+					'}' + 
+					'addNewStyle(".ItemPreview-container {visibility:hidden;}");' + 
+					'waitForElement("#zoomDiv").then(function(element) {' + 
+					'  document.getElementById("zoomDiv").parentNode.setAttribute("style", "visibility:visible");' + 
+					'});';
+		script.appendChild(document.createTextNode(code));
+		script.async = false;
+		pageHead.appendChild(script);
+	//}
+
+	});
+
+    /*function addNewStyle(newStyle) {
+	    var styleElement = document.getElementById('styles_js');
+	    if (!styleElement) {
+	        styleElement = document.createElement('style');
+	        styleElement.type = 'text/css';
+	        styleElement.id = 'styles_js';
+	        document.getElementsByTagName('head')[0].appendChild(styleElement);
+	    }
+	    styleElement.appendChild(document.createTextNode(newStyle));
+	}*/
 
     // use the alternative viewer only for larger sizes
     if ( window.innerWidth > 760 || document.body.clientWidth > 760 ) {
@@ -998,3 +1017,172 @@ document.addEventListener('cdm-custom-page:ready', function(event) {
 });
 
 
+// helper function to load js file and insert into DOM
+// @param {string} src link to a js file
+// @returns Promise
+
+function loadScript(src) {
+  return new Promise(function(resolve, reject) {
+    const script = document.createElement('script');
+/*    script.crossOrigin = 'anonymous'; */
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+/*
+// Mirador
+(function() {
+  const currentUrl = window.location.origin
+    ? window.location.origin + '/'
+    : window.location.protocol + '//' + window.location.host + '/';
+
+    // helper function to determine parent record ID of current item
+  	function getParent(item, collection) {
+      return fetch('/digital/bl/dmwebservices/index.php?q=GetParent/' + collection + '/' + item + '/json')
+      .then(function(response) {
+  		// make GetParent API call and return as JSON
+        return response.json();
+      })
+      .then(function(json) {
+        let parent = false;
+        // parse JSON for 'parent' value; -1 indicates parent ID is the same as item ID
+        if (json.parent === -1) {
+          parent = item;
+        } else {
+          parent = json.parent;
+        }
+        return parent;
+      })
+      .then(function(parent) {
+      // once parent is known, check if IIIF Pres manifest exists (image-based records)
+        return fetch('/digital/iiif-info/' + collection + '/' + parent)
+        .then(function(response) {
+          if (response.status == 404) {
+            console.log('No IIIF manifest exists for this record.');
+            parent = false;
+            // if no manifest exists, return is 'false' so that IIIF button is not inserted
+            return parent;
+          } else {
+            return parent;
+          }
+        })
+  		})
+      .catch(function(error) {
+        console.log('Request failed: ' + error);
+        parent = false;
+        return parent;
+  		})
+  	}
+
+  var mirador_button = {
+    getMiradorUrl: function(item, collection) {
+      const manifestUrl = currentUrl + '/digital/iiif-info/' + collection + '/' + item + '/manifest.json';
+      return '/digital/custom/mirador?manifest=' + manifestUrl;
+    },
+    add: function(item, collection) {
+      var div = document.createElement('div')
+      div.className = 'btn-group btn-group-default mirador-button';
+
+      var buttonAnchor = document.createElement('a');
+      buttonAnchor.title = "View this item in Mirador";
+      buttonAnchor.className = 'cdm-btn btn btn-primary';
+      buttonAnchor.href = mirador_button.getMiradorUrl(item, collection);
+      buttonAnchor.style.paddingTop = '5px';
+      buttonAnchor.style.paddingBottom = '2px';
+      buttonAnchor.target = '_blank';
+      buttonAnchor.innerHTML = ' <svg xmlns="http://www.w3.org/2000/svg" height="1.8em" viewBox="0 0 60 55" style="fill: white;"><rect width="18" height="55" /><rect width="18" height="55" transform="translate(42)" /><rect width="18" height="34" transform="translate(21)" /></svg> ';
+
+      div.appendChild(buttonAnchor);
+
+      Array.from(document.querySelectorAll('.ItemOptions-itemOptions>.btn-toolbar'))
+        .forEach(el => {
+          el.appendChild(div.cloneNode(true));
+        });
+    },
+    remove: function() {
+      Array.from(document.querySelectorAll('.mirador-button'))
+        .forEach(el => {
+          if (el && el.parentElement) {
+            el.parentElement.removeChild(el);
+          }
+        });
+    }
+  }
+
+  document.addEventListener('cdm-item-page:ready', function(e) {
+
+  	if (e.detail.collectionId == 'p15005coll5') {
+
+    const item = e.detail.itemId;
+		const collection = e.detail.collectionId;
+  	getParent(item, collection).then(function(response) {
+  		if (response === false) { return; } else {
+        mirador_button.add(response, collection);
+      }
+    });
+
+  	}
+
+  });
+
+  document.addEventListener('cdm-item-page:update', function(e) {
+
+  	if (e.detail.collectionId == 'p15005coll5') {
+
+	    const item = e.detail.itemId;
+	    const collection = e.detail.collectionId;
+	    getParent(item, collection).then(function(response) {
+	      if (response === false) {
+	        mirador_button.remove();
+	        return;
+	      } else {
+	        mirador_button.remove();
+	        mirador_button.add(response, collection);
+	      }
+	    });
+
+	}
+
+  });
+
+  document.addEventListener('cdm-item-page:leave', function(e) {
+  	if (e.detail.collectionId == 'p15005coll5') {
+    	mirador_button.remove();
+	}
+  });
+
+
+  document.addEventListener('cdm-custom-page:enter', function(e) {
+  	// /customizations/global/pages/cropimage_resources/cropper.min.js
+    if (e.detail.filename == 'mirador') {
+    	//ScriptLoader('/customizations/global/pages/js/mirador-cp.js', function() {
+    	//	addMiradorCss();
+    	//});
+				
+
+      loadScript('/customizations/global/pages/js/mirador-cp.js')
+      .then(function() {
+        addMiradorCss();
+      });
+
+    }
+
+  });
+
+  document.addEventListener('cdm-custom-page:ready', function(e) {
+
+  	//if (e.detail.collectionId == 'p15005coll5') {
+	    if (e.detail.filename == 'mirador') {
+	      loadScript('/customizations/global/pages/mirador/mirador.js')
+	      .then(function() {
+	        initMirador();
+	      });
+	    }
+	//}
+  });
+
+})();
+*/
