@@ -43,18 +43,13 @@ jQuery(document).ready(function($){
         var fieldvalues = [];
         var crossCollectionSearch = $("#selectCollections").val() === null || $("#selectCollections").val().length > 1;
 
-        // modes
-        var modes = $( "select[name='mode'] option:selected");
-        $.each( modes, function( i, mode ) {
-            modeClasses.push(mode.getAttribute('class'));
-            modevalues.push(mode.value);
-        });
+
 
         // search terms
         var searchterms = $( "input[name='searchterm']" ).serializeArray();
 
         $.each( searchterms, function( i, searchterm ) {
-            if ( modeClasses[i] != 'near' ) {
+            if ( modeClasses[i] != 'near' && searchterms[i].value != "" ) {
                 searchtermvalues.push(searchterm.value);
             } else {
                 var searchText = searchterm.value;
@@ -62,6 +57,15 @@ jQuery(document).ready(function($){
                 searchText = searchText.trim(searchText);
                 var searchTermsArray = searchText.split(" ");
                 searchtermvalues.push(searchTermsArray.join(' near5 '));
+            }
+        });
+
+        // modes
+        var modes = $( "select[name='mode'] option:selected");
+        $.each( modes, function( i, mode ) {
+            modeClasses.push(mode.getAttribute('class'));
+            if (searchterms[i].value != "") {
+                modevalues.push(mode.value);
             }
         });
 
@@ -74,9 +78,11 @@ jQuery(document).ready(function($){
                     field.value = 'time';
                 }
             }*/
-            
-            fieldvalues.push(field.value);
+            if (searchterms[i].value != "") {
+                fieldvalues.push(field.value);
+            }
         });
+        sessionStorage.setItem('fieldvalues', fieldvalues.join("!"));
 
         // collections
         var collCriteria = ""; 
@@ -95,7 +101,9 @@ jQuery(document).ready(function($){
         // connectors
         var conns = $( "select[name='conn']" ).serializeArray();
         $.each( conns, function( i, conn ) {
-            connvalues.push(conn.value);
+            if (searchterms[i].value != "") {
+                connvalues.push(conn.value);
+            }
         });
         
         // formats (from drop-down)
@@ -116,13 +124,20 @@ jQuery(document).ready(function($){
         } 
 
         if (searchtermvalues.length > 0) {
-            searchCriteria = 'searchterm/' + searchtermvalues.join("!");
+            var searchvals = searchtermvalues.join("!");
+            if ( searchvals.startsWith("!") ) {
+                searchvals = searchvals.substr(1);
+            }
+            searchCriteria = 'searchterm/' + searchvals;
         }
         // https://ohiomemory.org/customizations/global/pages/advancedsearch_resources/advanced_search.html?undefined&search/searchterm/buckeye%20steamboat/field/all/mode/all/conn/and
         // e.g https://ohiomemory.org/digital/search/collection/p267401coll32!p16007coll51/searchterm/war!battle!19050101-19191231/field/subjec!all!date/mode/all!all!exact/conn/and!and!and/order/nosort 1905-01-01 1919-12-31
         searchurl += collCriteria + '/' + searchCriteria + '/field/' + fieldvalues.join("!") + '/mode/' + modevalues.join("!") + '/conn/' + connvalues.join("!");
 
-        window.parent.location.href = searchurl;
+        //if (collCriteria.match('p16007coll22')) {
+
+            window.parent.location.href = searchurl;
+        //}
 
     });
 
@@ -162,7 +177,24 @@ jQuery(document).ready(function($){
             //var lastCollectionSelected = lastCriteriaSelected[0].split("!");
             var lastCollectionSelected = collectionString.split("!");
             //$('.selectpicker').selectpicker('val', lastCollectionSelected);
-            $('.collectionselectpicker').selectpicker('val', lastCollectionSelected);
+            
+            $.getJSON( "https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json", function( data ) {
+                var items = [];
+                $.each( data, function( i, prop ) {
+                    items.push( '<option id="' + prop.alias.substring(1) + '" value="' + prop.alias.substring(1) + '">' + prop.name + '</option>' );
+                });
+                $("#selectCollections").html(items.join(""));
+
+                // initialize collections drop-down
+                $('.collectionselectpicker').selectpicker({
+                    actionsBox: true,
+                    style: 'btn-info',
+                    virtualScroll: true
+                });
+                $('.collectionselectpicker').selectpicker('val', lastCollectionSelected);
+            });
+
+            
         }
         //console.log(sessionStorage);
         //console.log(lastCriteriaSelected[1]);
@@ -209,6 +241,7 @@ jQuery(document).ready(function($){
             if (conns[0].length < 2 || conns[0].length > 3) { conns[0] = "and"; }
             if (fields[0] == "format" && formatValues.indexOf(decodeURI(terms[0]).split(" ")[0]) > -1) {
                 var lastFormatsSelected = decodeURI(terms[0]).split(" ");
+                $('.formatselectpicker').selectpicker();
                 $('.formatselectpicker').selectpicker('val', lastFormatsSelected);
             } else {
                 $("select[name='field']").val(fields[0]);
@@ -222,7 +255,9 @@ jQuery(document).ready(function($){
             } else {
                 $("select[name='mode']").val(modes[0]);
             }
-            $("input[name='searchterm']").val(decodeURI(terms[0]));
+            if (!decodeURI(terms[0]).match( /(\d\d\d\d.*\d\d|\d\d\d\d)/mg ) ) {
+                $("input[name='searchterm']").val( decodeURI(terms[0]) );
+            } 
             
             $("select[name='conn']").val(conns[0]);
 
@@ -244,6 +279,7 @@ jQuery(document).ready(function($){
                     //$('.fieldselectpicker').selectpicker('val', fields[0]);
                     if (fields[i] == "format" && formatValues.indexOf(decodeURI(terms[i]).split(" ")[0]) > -1) {
                         var lastFormatsSelected = decodeURI(terms[i]).split(" ");
+                        $('.formatselectpicker').selectpicker();
                         $('.formatselectpicker').selectpicker('val', lastFormatsSelected);
                         continue;
                     } 
@@ -562,7 +598,7 @@ div.add-or-submit {
     // Can get this from http://www.ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json
     // Could do $.getJSON( "http://www.ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json", function( data ) {
     // data for collection options
-    var data = [
+    var data_old = [
    {
       "alias":"\/p16007coll29",
       "name":"1840s Campaign Newspapers",
@@ -1428,6 +1464,12 @@ div.add-or-submit {
       "secondary_alias":"p15005coll4"
    },
    {
+      "alias":"\/p16007coll97",
+      "name":"Worthington News",
+      "path":"\/cdm\/sites\/16007\/data\/p16007coll97",
+      "secondary_alias":"p16007coll97"
+   },
+   {
       "alias":"\/p15005coll10",
       "name":"Youngstown Historical Center of Industry and Labor",
       "path":"\/cdm\/sites\/16007\/data\/p15005coll10",
@@ -1448,19 +1490,22 @@ div.add-or-submit {
 ];
 
 // create collection options
-var items = [];
-$.each( data, function( i, prop ) {
-    items.push( '<option id="' + prop.alias.substring(1) + '" value="' + prop.alias.substring(1) + '">' + prop.name + '</option>' );
+$.getJSON( "https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetCollectionList/json", function( data ) {
+    var items = [];
+    $.each( data, function( i, prop ) {
+        items.push( '<option id="' + prop.alias.substring(1) + '" value="' + prop.alias.substring(1) + '">' + prop.name + '</option>' );
+    });
+    $("#selectCollections").html(items.join(""));
+
+    // initialize collections drop-down
+    $('.collectionselectpicker').selectpicker({
+        actionsBox: true,
+        style: 'btn-info',
+        virtualScroll: true
+    });
 });
 
-$("#selectCollections").html(items.join(""));
 
-// initialize collections drop-down
-$('.collectionselectpicker').selectpicker({
-    actionsBox: true,
-    style: 'btn-info',
-    virtualScroll: true
-});
 
 // initialize format drop-down
 $('.formatselectpicker').selectpicker({

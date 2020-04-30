@@ -1,3 +1,5 @@
+@import "scroll-away-header.css";
+
 body {
 	background: #f8f8f8;
 }
@@ -71,12 +73,23 @@ body {
 	color: blue;
 	font-family: sans-serif;
 }
+.refContainer {
+	/*display: inline-block;*/
+}
 .refStyle {
 	color: #2178b5;
     font-weight: bold;
     font-size: medium;
 	cursor: pointer;
 	padding-bottom: 8px;
+}
+.viewTranscript {
+	display: inline-block;
+	color: #2178b5;
+    font-weight: bold;
+    font-size: medium;
+	cursor: pointer;
+	float:right;
 }
 
 /*div.tingle-modal.tingle-modal--noOverlayClose.refContainer.tingle-modal--visible {

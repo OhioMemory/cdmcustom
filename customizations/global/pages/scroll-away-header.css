@@ -1,0 +1,11 @@
+@media (min-width: 768px) {
+    .cdm-header {
+        position: relative;
+        margin-bottom: -155px;
+    }
+
+    /*Correct the '<' and '>' button locations for navigating search results */
+    .ItemTextNav-itemTextNavHolderTop {
+        margin-top: 5px;
+    }
+}

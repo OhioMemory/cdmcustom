@@ -1,28 +1,77 @@
+// Redirect from branded name alias to p#####coll##
+(function(){
+	document.addEventListener('cdm-app:ready', function() {
+		// List out the branded aliases and the p#####coll## collections they will redirect to
+		const brandedCollObj = { archaeology: "p267401coll7", ewing: "p16007coll19", harding: "p16007coll100", hayes: "p16007coll67", munroe: "p16007coll15", ohioguide: "p267401coll34", osj: "p16007coll22", selections: "p267401coll32", test: "p15005coll5", wwi: "p16007coll51", zoar: "p16007coll10" };
+		brandedCollsList = Object.keys(brandedCollObj).join();
+		var inUrl = window.location.href;
+		var urlCollPart = inUrl.replace(/^.*?collection\/(.*?)(\/\w.*|$)/, '$1');
+		if ( brandedCollsList.includes(urlCollPart) ) {
+			var reUrlCollPart = new RegExp(urlCollPart);
+			window.location.href = inUrl.replace(reUrlCollPart, brandedCollObj[urlCollPart]);
+		}
+	});
+})();
 
 // subscribe to the homepage ready event
 document.addEventListener('cdm-home-page:ready', function(e){
 	// console.log('ready: ' + e.detail);
-	//console.log(e);
+	// console.log(e);
 });
 
 document.addEventListener('cdm-home-page:update', function(e){
 	// console.log('ready: ' + e.detail);
-	//console.log(e);
+	// console.log(e);
 });
 
 document.addEventListener('cdm-item-page:enter', function(e){
 	// e is instance of CustomEvent
-	//console.log('cdm-item-page:enter');
-	//console.log(e);
+	// console.log('cdm-item-page:enter');
+	// console.log(e.srcElement.children.children[0].children[2].children[0].children[1].children[0].children[1].children[1].children[1].children[1].children[0].children[0].value);
+
+});
+document.addEventListener('cdm-item-page:ready', function(e){
+	// e is instance of CustomEvent
+	// console.log('cdm-item-page:enter');
+	// console.log(e);
+	var inputText = document.getElementsByClassName('ItemSearch-itemSearchInputControl')[1].value;
+
+	if (inputText.match(/ OR /)) {
+		document.getElementsByClassName('ItemSearch-itemSearchInputControl')[1].value = inputText.replace(/ OR /g, ' ');
+	}
 });
 
 
 (function () {
 
+	function startEventListener(cdmEvent) {
+		document.addEventListener(cdmEvent, function (e) {
+	        
+	        if (e.detail.collectionId == "siebert") { return; }
+			// hide full text initially
+			if (document.getElementById("compoundItemTranscript") != null) {
+
+				if ( document.getElementById('compoundItemTranscript').getAttribute("aria-hidden") == "false" ) {
+					document.getElementsByClassName('panel-title')[0].firstChild.click();
+				}
+				
+			}
+
+	    });
+	}
+	
+    var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+	cdmEvents.forEach(startEventListener);
+
+})();
+
+/*(function () {
+
 	document.addEventListener('cdm-item-page:update', function(e){
 
 		// hide full text initially
-		if (document.getElementById("compoundItemTranscript") != null) {
+		console.log( e.detail.collectionId);
+		if (document.getElementById("compoundItemTranscript") != null && e.detail.collectionId != 'siebert') {
 
 			if ( document.getElementById('compoundItemTranscript').getAttribute("aria-hidden") == "false" ) {
 				document.getElementsByClassName('panel-title')[0].firstChild.click();
@@ -31,6 +80,20 @@ document.addEventListener('cdm-item-page:enter', function(e){
 		}
 
 	});
+
+});*/
+
+document.addEventListener('cdm-search-page:enter', function(e){
+
+	//console.log("cdm-search-page:update");
+	//console.log(e);
+
+});
+
+document.addEventListener('cdm-search-page:ready', function(e){
+
+	//console.log("cdm-search-page:update");
+	//console.log(e);
 
 });
 
@@ -87,6 +150,36 @@ document.addEventListener('cdm-collection-search-page:update', function(e){
 	//console.log(e);
 
 });
+
+// logo redirects
+(function() {
+
+	'use strict';
+	function startEventListener(cdmEvent) {
+		document.addEventListener(cdmEvent, function(e){
+
+			const homesites =	{
+									p16007coll88: "https://www.toledolibrary.org/digitalcollections-categories", 
+									p16007coll31: "https://www.toledolibrary.org/digitalcollections-categories", 
+									p16007coll33: "https://www.toledolibrary.org/digitalcollections-categories", 
+									p16007coll77: "https://www.toledolibrary.org/digitalcollections-categories" 
+								}
+			
+		    if (homesites[e.detail.collectionId] !== undefined) {
+		    	var headerLogo = document.querySelector('div.Header-logoHolder>div>a');
+				headerLogo.addEventListener('click', function(mouseevent) {
+					location.href = homesites[e.detail.collectionId];
+				});
+		    }
+				
+		});
+	}
+
+	var cdmEvents = ['cdm-custom-page:ready', 'cdm-custom-page:update', 'cdm-collection-landing-page:ready', 'cdm-collection-landing-page:update', 'cdm-collection-search-page:ready', 'cdm-collection-search-page:update', 'cdm-search-page:ready', 'cdm-search-page:update', 'cdm-item-page:ready', 'cdm-item-page:update'];
+	cdmEvents.forEach(startEventListener);
+
+})();
+
 
 /**
  * Custom pages for main landing page (default), 
@@ -317,6 +410,7 @@ function ScriptLoader(url, callback){
 
 })();
 
+
 /**
  * Replace print button action
  */
@@ -324,9 +418,14 @@ function ScriptLoader(url, callback){
 
 	function startEventListener(cdmEvent) {
 		document.addEventListener(cdmEvent, function(e){
+			// don't take siebert - PDFs were created along with tiffs
+			if ("siebert".match(e.detail.collectionId) !== null) { return; }
 		  	// don't use openseadragon for PDFs
     		if (document.getElementsByClassName("ItemPDF-itemImage").length > 0) {
     			//document.getElementsByClassName("ItemPreview-container")[0].style.visibility = "visible";
+    			return;
+    		}
+    		if (document.querySelector(".ItemImage-itemImage div img") === null) {
     			return;
     		}
 	  		var coll = e.detail.collectionId;
@@ -334,8 +433,13 @@ function ScriptLoader(url, callback){
 	  		if (document.getElementsByClassName("CompoundItemView-selectedCompoundItem").length > 0) {
 	  			item = document.getElementsByClassName("CompoundItemView-selectedCompoundItem")[1].firstChild.firstChild.src.replace(/.*?\/id\/(.*?)\/thumbnail/, '$1');
 	  		}
+
+	  		var imgWidth = document.querySelector(".ItemImage-itemImage div img").width;
+	  		var imgHeight = document.querySelector(".ItemImage-itemImage div img").height;
+	  		var imgSize = imgWidth > imgHeight ? "600,880" : "600,880";
+
 	  		var itemUrl = 'https://ohiomemory.org/digital/collection/' + coll + '/id/' + item;
-	  		var iiifUrl = 'https://ohiomemory.org/digital/iiif/' + coll + '/' + item + '/full/650,350/0/default.jpg';
+	  		var iiifUrl = 'https://ohiomemory.org/digital/iiif/' + coll + '/' + item + '/full/' + imgSize + '/0/default.jpg';
 	  		var itemTitle = document.getElementsByClassName("ItemTitle-primaryTitle")[0].innerText;
 		    // change action of print button
 		    document.getElementsByClassName("fa fa-print fa-2x")[1].parentElement.addEventListener('click', function(e) {
@@ -360,7 +464,6 @@ function ScriptLoader(url, callback){
 	}
 
   	var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
-
 	cdmEvents.forEach(startEventListener);
 
 })();
@@ -372,11 +475,11 @@ function ScriptLoader(url, callback){
 
 	function startEventListener(cdmEvent) {
 		document.addEventListener(cdmEvent, function(e){
-			
 
 				// remove CONTENTdm default of page-level the filename
-            	if (document.getElementsByClassName("ItemTitle-secondaryTitle")[0] !== undefined) {
-            		document.getElementsByClassName("ItemTitle-secondaryTitle")[0].remove();
+            	if (document.getElementsByClassName("ItemTitle-secondaryTitle").length > 0) {
+            		//document.getElementsByClassName("ItemTitle-secondaryTitle")[0].remove();
+            		document.getElementsByClassName("ItemTitle-secondaryTitle")[0].className += " hide";
             	}
             	// remove all previous instances of the container block for reference URLs
             	var refContainers = document.querySelectorAll('.refContainer');
@@ -392,6 +495,7 @@ function ScriptLoader(url, callback){
 						
 						// create the container div
 						var itemTitleContainer = document.getElementsByClassName("ItemView-itemTitle")[0];
+						// var itemTitleContainer = document.getElementsByClassName("CompoundItemPagination-container")[0]; 
 			            var refContainer = document.createElement("div");
 			            refContainer.setAttribute("class", "refContainer");
 			            itemTitleContainer.append(refContainer);
@@ -449,18 +553,95 @@ function ScriptLoader(url, callback){
 	}
 
 	var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
+	cdmEvents.forEach(startEventListener);
+	
+})();
 
+
+/**
+ * Side-by-side transcription viewer
+ */
+(function () {
+
+	function startEventListener(cdmEvent) {
+		
+		document.addEventListener(cdmEvent, function(e){
+
+			if (document.getElementById("view-transcript") !== null) {
+				document.getElementById("view-transcript").remove();
+			}
+
+			if (document.getElementsByClassName("ItemText-container")[0] === undefined) { return; }			
+
+			var itemTitleContainer = document.getElementsByClassName("ItemView-itemTitle")[0];
+			var refContainer = document.getElementsByClassName("refContainer")[0];
+            var viewTranscript = document.createElement("div");
+
+            viewTranscript.setAttribute("class", "viewTranscript");
+            viewTranscript.setAttribute("id", "view-transcript");
+            viewTranscript.innerHTML = 'View Transcript';
+            itemTitleContainer.append(viewTranscript);
+
+            viewTranscript.addEventListener('click', function() {
+
+            	// get the record-level and item-level IDs for reference URLs using CDM API
+				var request = new XMLHttpRequest();
+				var item_src_str = "";
+				var displayItemId = "";
+				if (document.querySelector('.ItemImage-itemImage img') !== null) {
+					item_src_str = document.querySelector('.ItemImage-itemImage img').getAttribute('src');
+					displayItemId = item_src_str.split("/")[6];
+				} 
+				if (document.querySelector('audio') !== null) {
+					displayItemId = window.location.href.split("/")[7];
+				}
+				if (document.querySelector('tr.field-type td.field-value') != null && document.querySelector('tr.field-type td.field-value').innerText == 'MovingImage') {
+					// https://ohiomemory.org/digital/collection/p15005coll4/id/77
+					displayItemId = document.getElementsByClassName("ref-input-css")[1].value.split("/")[7];
+				}
+
+				request.open('GET', location.protocol + '//' + location.hostname + '/digital/bl/dmwebservices/index.php?q=GetParent/' + e.detail.collectionId + '/' + displayItemId + '/json', true);
+				request.onload = function() {
+					if (request.status >= 200 && request.status < 400) {
+						
+						// change the object-level URL if different
+						var objectIdNum = displayItemId;
+						var ret = JSON.parse(request.responseText);
+						if (ret.parent > -1) { objectIdNum = ret.parent; }
+
+						
+						var page_url = 'https://ohiomemory.org/customizations/global/pages/transcript/view.html?alias=' + e.detail.collectionId + '&ptr=' + objectIdNum + '&pg=' + displayItemId;
+						if (document.querySelector('audio') !== null || (document.querySelector('tr.field-type td.field-value') != null && document.querySelector('tr.field-type td.field-value').innerText == 'MovingImage') ) { 
+							page_url = 'https://ohiomemory.org/customizations/global/pages/transcript/audioview.html?alias=' + e.detail.collectionId + '&ptr=' + objectIdNum + '&pg=' + displayItemId; 
+						}
+						window.open(page_url, "TranscriptWindow", "location=1,status=1,toolbar=1,menubar=1,scrollbars=1,width=1100,height=1000");
+					
+					} else { } // else: reached target but returned an error
+				};
+				request.onerror = function() { }; // connection error
+				request.send();
+				
+			});
+
+		});
+		
+	}
+	
+	var cdmEvents = ['cdm-item-page:ready', 'cdm-item-page:update'];
 	cdmEvents.forEach(startEventListener);
 	
 })();
 
 /**
- * Google Analytics needs to be set for every event
+ * Google Analytics and Terms of Use need to be included for every event
  */
 (function () {
 
 	function startEventListener(cdmEvent) {
 		document.addEventListener(cdmEvent, function(e){
+			if (document.getElementById("trademark") !== null) {
+				document.getElementById("trademark").innerHTML = 'Powered by <a style="font-weight:bold" href="http://www.oclc.org/en-US/contentdm.html">CONTENTdm®</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="font-weight:bold" href="https://ohiomemory.ohiohistory.org/about-ohio-memory/terms-of-use">Terms of Use</a>';
+			}
 			ScriptLoader('https://ohiomemory.org/customizations/global/pages/ga_resources/ga.js', function() {
 			});
 		});
@@ -553,6 +734,7 @@ function ScriptLoader(url, callback){
 		        	type: 'legacy-image-pyramid',
 		         	levels: levelsArray,
 		        }],
+		        showRotationControl: true,
 		        showNavigator: false
 		    });
 		    var odcStyle = openseadragonContainer.firstChild.firstChild.getAttribute("style");
@@ -569,6 +751,12 @@ function ScriptLoader(url, callback){
 
     function startEventListener(cdmEvent) {
     	document.addEventListener(cdmEvent, function(e){
+
+
+	    	if (document.getElementsByClassName("zoomView").length > 0) {
+	    		var zoomContainers = document.getElementsByClassName("zoomView");
+				Array.prototype.forEach.call(zoomContainers, function(el) { el.parentNode.removeChild(el); });
+	    	}
 
     		// doon't use openseadragon for mobile
     		if (window.innerWidth < 760) {
@@ -597,11 +785,8 @@ function ScriptLoader(url, callback){
     			return;
     		}
 
-    		var zoomContainers = document.getElementsByClassName("zoomView");
-	    	if (document.getElementsByClassName("zoomView").length > 0) {
-				Array.prototype.forEach.call(zoomContainers, function(el) { el.parentNode.removeChild(el); });
-	    	}
 			var request = new XMLHttpRequest();
+			// https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=GetParent/p15005coll5/1466/json
 			request.open('GET', location.protocol + '//' + location.hostname + '/digital/bl/dmwebservices/index.php?q=GetParent/' + e.detail.collectionId + '/' + e.detail.itemId + '/json', true);
 			request.onload = function() {
 				if (request.status >= 200 && request.status < 400) {
@@ -743,6 +928,27 @@ function ScriptLoader(url, callback){
         });
     }
 
+    function OhmsAPI(url) {
+        return new Promise(function (resolve) {
+            if (!url) {
+                return resolve(false);
+            }
+            // create iframe for kaltura
+            var html = '<div class="videoWrapper"><iframe width="100%" scrolling="auto" height="550px" frameborder="0" src="' + url + '"></iframe></div>';
+            resolve(html);
+        });
+    }
+
+    function OhioMemoryAPI(url) {
+        return new Promise(function (resolve) {
+            if (!url) {
+                return resolve(false);
+            }
+            //console.log(url);
+            var html = '<iframe type="text/html" width="500" height="290" src="' + url + '" frameborder="0" allowfullscreen=""></iframe>';
+            resolve(html);
+        });
+    }
 
     function YoutuAPI(url) {
         if (!url) {
@@ -781,6 +987,8 @@ function ScriptLoader(url, callback){
     var APIS = {
         'vimeo.com': VimeoAPI,
         'youtu.be': YoutuAPI,
+        'resources.ohiohistory.org': OhmsAPI,
+        'ohiomemory.ohiohistory.org': OhioMemoryAPI,
         'www.youtube.com': YoutubeAPI,
         'cdnapisec.kaltura.com': KalturaAPI,
         'media.norweld.org' : NorweldAPI,
@@ -857,7 +1065,7 @@ function ScriptLoader(url, callback){
     }
     
     document.addEventListener('cdm-item-page:ready', function (e) {
-    	if (document.getElementsByClassName("field-type")[0] !== undefined && "p16007coll30 p16007coll72 p15005coll27 p15005coll22 p16007coll33".match(e.detail.collectionId) !== null && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == "MovingImage") {
+    	if (document.getElementsByClassName("field-type")[0] !== undefined && "p16007coll30 p16007coll72 p15005coll27 p15005coll22 p16007coll33 p15005coll37".match(e.detail.collectionId) !== null && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == "MovingImage") {
         	// unmount or remove current video player from DOM if it is exists
         	currentInstance && currentInstance.unmount();
        		// creates a new instance if it is url item and it is from vimeo.com
@@ -867,7 +1075,7 @@ function ScriptLoader(url, callback){
     });
 
     document.addEventListener('cdm-item-page:update', function (e) {
-        if (document.getElementsByClassName("field-type")[0] !== undefined && "p16007coll30 p16007coll72 p15005coll27 p15005coll22 p16007coll33".match(e.detail.collectionId) !== null && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == "MovingImage") {
+        if (document.getElementsByClassName("field-type")[0] !== undefined && "p16007coll30 p16007coll72 p15005coll27 p15005coll22 p16007coll33 p15005coll37".match(e.detail.collectionId) !== null && document.getElementsByClassName("field-type")[0].lastChild.lastChild.textContent == "MovingImage") {
         	// unmount or remove current video player from DOM if it is exists
         	currentInstance && currentInstance.unmount();
        		// creates a new instance if it is url item and it is from vimeo.com
@@ -882,174 +1090,4 @@ function ScriptLoader(url, callback){
     });
 
 })();
-
-// helper function to load js file and insert into DOM
-// @param {string} src link to a js file
-// @returns Promise
-
-function loadScript(src) {
-  return new Promise(function(resolve, reject) {
-    const script = document.createElement('script');
-/*    script.crossOrigin = 'anonymous'; */
-    script.src = src;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
-}
-
-/*
-// Mirador
-(function() {
-  const currentUrl = window.location.origin
-    ? window.location.origin + '/'
-    : window.location.protocol + '//' + window.location.host + '/';
-
-    // helper function to determine parent record ID of current item
-  	function getParent(item, collection) {
-      return fetch('/digital/bl/dmwebservices/index.php?q=GetParent/' + collection + '/' + item + '/json')
-      .then(function(response) {
-  		// make GetParent API call and return as JSON
-        return response.json();
-      })
-      .then(function(json) {
-        let parent = false;
-        // parse JSON for 'parent' value; -1 indicates parent ID is the same as item ID
-        if (json.parent === -1) {
-          parent = item;
-        } else {
-          parent = json.parent;
-        }
-        return parent;
-      })
-      .then(function(parent) {
-      // once parent is known, check if IIIF Pres manifest exists (image-based records)
-        return fetch('/digital/iiif-info/' + collection + '/' + parent)
-        .then(function(response) {
-          if (response.status == 404) {
-            console.log('No IIIF manifest exists for this record.');
-            parent = false;
-            // if no manifest exists, return is 'false' so that IIIF button is not inserted
-            return parent;
-          } else {
-            return parent;
-          }
-        })
-  		})
-      .catch(function(error) {
-        console.log('Request failed: ' + error);
-        parent = false;
-        return parent;
-  		})
-  	}
-
-  var mirador_button = {
-    getMiradorUrl: function(item, collection) {
-      const manifestUrl = currentUrl + '/digital/iiif-info/' + collection + '/' + item + '/manifest.json';
-      return '/digital/custom/mirador?manifest=' + manifestUrl;
-    },
-    add: function(item, collection) {
-      var div = document.createElement('div')
-      div.className = 'btn-group btn-group-default mirador-button';
-
-      var buttonAnchor = document.createElement('a');
-      buttonAnchor.title = "View this item in Mirador";
-      buttonAnchor.className = 'cdm-btn btn btn-primary';
-      buttonAnchor.href = mirador_button.getMiradorUrl(item, collection);
-      buttonAnchor.style.paddingTop = '5px';
-      buttonAnchor.style.paddingBottom = '2px';
-      buttonAnchor.target = '_blank';
-      buttonAnchor.innerHTML = ' <svg xmlns="http://www.w3.org/2000/svg" height="1.8em" viewBox="0 0 60 55" style="fill: white;"><rect width="18" height="55" /><rect width="18" height="55" transform="translate(42)" /><rect width="18" height="34" transform="translate(21)" /></svg> ';
-
-      div.appendChild(buttonAnchor);
-
-      Array.from(document.querySelectorAll('.ItemOptions-itemOptions>.btn-toolbar'))
-        .forEach(el => {
-          el.appendChild(div.cloneNode(true));
-        });
-    },
-    remove: function() {
-      Array.from(document.querySelectorAll('.mirador-button'))
-        .forEach(el => {
-          if (el && el.parentElement) {
-            el.parentElement.removeChild(el);
-          }
-        });
-    }
-  }
-
-  document.addEventListener('cdm-item-page:ready', function(e) {
-
-  	if (e.detail.collectionId == 'p15005coll5') {
-
-    const item = e.detail.itemId;
-		const collection = e.detail.collectionId;
-  	getParent(item, collection).then(function(response) {
-  		if (response === false) { return; } else {
-        mirador_button.add(response, collection);
-      }
-    });
-
-  	}
-
-  });
-
-  document.addEventListener('cdm-item-page:update', function(e) {
-
-  	if (e.detail.collectionId == 'p15005coll5') {
-
-	    const item = e.detail.itemId;
-	    const collection = e.detail.collectionId;
-	    getParent(item, collection).then(function(response) {
-	      if (response === false) {
-	        mirador_button.remove();
-	        return;
-	      } else {
-	        mirador_button.remove();
-	        mirador_button.add(response, collection);
-	      }
-	    });
-
-	}
-
-  });
-
-  document.addEventListener('cdm-item-page:leave', function(e) {
-  	if (e.detail.collectionId == 'p15005coll5') {
-    	mirador_button.remove();
-	}
-  });
-
-
-  document.addEventListener('cdm-custom-page:enter', function(e) {
-  	// /customizations/global/pages/cropimage_resources/cropper.min.js
-    if (e.detail.filename == 'mirador') {
-    	//ScriptLoader('/customizations/global/pages/js/mirador-cp.js', function() {
-    	//	addMiradorCss();
-    	//});
-				
-
-      loadScript('/customizations/global/pages/js/mirador-cp.js')
-      .then(function() {
-        addMiradorCss();
-      });
-
-    }
-
-  });
-
-  document.addEventListener('cdm-custom-page:ready', function(e) {
-
-  	//if (e.detail.collectionId == 'p15005coll5') {
-	    if (e.detail.filename == 'mirador') {
-	      loadScript('/customizations/global/pages/mirador/mirador.js')
-	      .then(function() {
-	        initMirador();
-	      });
-	    }
-	//}
-  });
-
-})();
-*/
 

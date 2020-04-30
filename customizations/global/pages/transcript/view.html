@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Transcript and Image" />
+    <meta charset="utf-8">
+    <title>Transcript and Image</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="https://ohiomemory.org/digital/favicon.ico?v=1132">
+    <link rel="stylesheet" id="bootstrap-css-css" href="https://ohiomemory.org/customizations/global/pages/homepage_resources/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/customizations/global/pages/transcript/transcribe_files/transcribr_site_form.css">
+    <link rel="stylesheet" href="/customizations/global/pages/transcript/transcribe_files/screen.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/customizations/global/pages/transcript/transcribe_files/transcription.css">
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/jquery-3-2-1-min.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/bootstrap-min.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/json2.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/jquery-jscroll-min.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/scrollspy.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/jquery-cookie.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/openseadragon-min.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/jquery-textarearesizer.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/store-modern-min.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/transcribe.js"></script>
+    <link rel="stylesheet" type="text/css" href="/customizations/global/pages/transcript/transcribe_files/jcarousel-ajax.css">
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/jquery-jcarousel-min.js"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/jcarousel-ajax.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.9/jquery.jcarousel-control.min.js" integrity="sha256-yR2bdlr2PFgbv29LoU85R4lzhYuf/4S7LWol1C6jwCE=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/customizations/global/pages/transcript/transcribe_files/jquery-jcarousel-scrollintoview-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js" integrity="sha256-9u7Hr7DXDRNHVZ/p9uoV5oIHL9Ql7Qx3dKPJzeRakII=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
+
+    <style type="text/css">
+        #containerIDS {
+            width:100%;
+            height:500px
+        }
+        .jcarousel-wrapper {
+            /*width: 600px;*/
+            width: 92%;
+            height: 120px;
+        }
+        .jcarousel li {
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin-right: 1px;
+        }
+        .jcarousel-control-next:hover, .jcarousel-control-prev:hover {
+            color:orange;
+            text-decoration:none;
+        }
+        .jcarousel-wrapper {
+            margin: 0 auto;
+            margin-bottom: 10px;
+            box-shadow: 0 0 2px #666;
+        }
+        .jcarousel img {
+            max-height: 100px;
+            max-width: 100px;
+        }
+        #searchterms {
+            width:50%;
+            display:inline-block;
+            margin-left: 10px;
+        }
+        .highlight {
+            background-color:#ff9999;
+            display:inline-block;
+        }
+        #pdf {
+            float:right;
+            padding-right:20px
+        }
+        .gutter.gutter-horizontal {
+            height:512px;
+        }
+        #objecttitle {
+            font-weight: bold;
+            font-size: medium;
+            padding-left:10px;
+        }
+        body {
+            color:#000000;
+        }
+        #clear {
+            margin-left:30px;
+        }
+        #edit-transcriptdata {
+            padding-top:20px;
+        }
+        #transcript-close {
+            float:right;
+            margin-right:10px
+        }
+        .transcription-form {
+        	height: 512px;
+        }
+        .fa-stack-1x:hover {
+            color:darkred;
+        }
+        .hits {
+            border: red 2px solid;
+        }
+        .pagetext {
+            display:none;
+        }
+        .cdm-btn {
+            font-family: "Helvetica Neue",Arial,Helvetica,Verdana,sans-serif;
+            font-size: .75rem;
+            font-weight: normal;
+            padding: 4px 8px;
+            float:right;
+            margin-right:10px
+        }
+        .hide {
+            display: none;
+        }
+        .alert {
+            display:none;
+        }
+        .fa-2x {
+            font-size: 1.7em;
+        }
+        .alert-danger {
+            float: right;
+            margin-right: 20px;
+            padding: 4px;
+        }
+        .form-textarea {
+            height:446px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+
+<body>
+<div class="main-content clearfix">
+            <div style="width: 100%;">
+
+                <div class="tabs clearfix"></div>
+                <div id="the-content" class="actual-content">
+                    <div class="region region-content">
+                        <div id="block-system-main" class="block block-system">
+                                
+                            <div class="transcription-page-tools-container">
+                                <span id="objecttitle"></span>
+                                <button id="transcript-close" type="button" aria-label="Clear this search" title="Clear this search" class="cdm-btn btn btn-primary button transparentIcon headerIconButton">
+                                    <span class="fa fa-times-circle fa-2x"></span>
+                                </button>
+                                <span id="pdf">
+                                    <img id="pdf-icon" src="/customizations/global/pages/transcript/transcribe_files/pdf-icon.png" height="34">
+                                </span>
+                                
+                            </div>
+
+                            <div class="content flex">
+                                
+                                <div id="transcription-asset-wrapper" class="split">
+                                    <div id="transcription-asset-view">
+                                        <div id="asset-map">
+                                            <div id="containerIDS">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="transcription-form-wrapper" class="split">
+                                    <div class="transcription-form">
+                                        <div class="transcription-form-header">
+                                            <input id="searchterms" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                            <button id="searchwithin" class="btn btn-primary fa fa-search fa-2x"></button>
+                                            <button id="show-all" class="btn btn-primary">Show all</button>
+                                            <div class="alert alert-danger" role="alert">No hits found</div>
+                                        </div>
+                                        <div class="transcription-form-content">
+                                            <div class="transcription-form-lock-status"></div>
+                                            <form class="transcribe-form transcribe-form-template-opentext ajaxsave" action=
+                                            "savetranscript.php" method="post" id=
+                                            "transcribr-site-transcribe-form" accept-charset="UTF-8" name="transcribr-site-transcribe-form">
+                                                <div>
+                                                    <div class="form-item form-type-textarea form-item-transcriptdata-tl1-text">
+                                                        <div class="form-textarea-wrapper resizable textarea-processed resizable-textarea">
+                                                            <div class="form-transcriptdata-field form-textarea" id=
+                                                            "edit-transcriptdata" name="transcriptdata">
+															</div>
+                                                        </div>
+                                                        <div class="description" style="display: none;">
+                                                            Enter your transcription
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <input id="curpage" type="hidden" name="page" value="<?php echo($curpage); ?>">
+                                                    <input id="total" type="hidden" name="total" value="<?php echo($total); ?>">
+                                                    <input id="pageid" type="hidden" name="pageid" value="<?php echo($item_ids[$curpage-1]); ?>">
+                                                    <input id="allpageids" type="hidden" name="pageids" value="<?php echo(trim(implode(', ', $item_ids))); ?>">
+                                                    <input id="terms" type="hidden" name="terms" value=
+                                                    "<?php echo($search_terms); ?>">
+                                                    <input id="id" type="hidden" name="id" value=
+                                                    "<?php echo($id); ?>">
+                                                    <input id="coll" type="hidden" name="coll" value=
+                                                    "<?php echo($alias); ?>">
+                                                    <input id="title" type="hidden" name="title" value=
+                                                    "<?php echo($item_info['title']); ?>">
+                                                    <input type="hidden" name="form_id" value="transcribr_site_transcribe_form">
+                                                    
+                                                </div>
+                                                <input type="hidden" name="redirect" value="">
+                                                <div id="transcription-form-autosave-status" style="display: none;">
+                                                    Changes Saved
+                                                </div>
+                                            </form>
+                                            <img src="/customizations/global/pages/transcript/transcribe_files/ajax-loader.gif" id="transcription-form-ajax-loader" style=
+                                            "display: none;" alt="loading...">
+                                        </div>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                </div>
+                                <div class="transcription-page-tools-container">
+
+                                </div>
+
+                            </div>
+                            <div class="jcarousel-wrapper">
+                                <div class="jcarousel">
+                                    <ul>
+
+                                    </ul>
+                                </div>
+                                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<script type="application/javascript">
+	
+    // http://localhost/test/transcriptview.html?alias=p16007coll51&ptr=199&pg=197
+    function getParameterByName(name) {
+        if (name !== "" && name !== null && name != undefined) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        } else {
+            var arr = location.href.split("/");
+            return arr[arr.length - 1];
+        }
+    } 
+    var alias = getParameterByName('alias');
+    var ptr = getParameterByName('ptr');
+    var pg = getParameterByName('pg');
+    var type = getParameterByName('type');
+
+    // get object info
+    // https://ohiomemory.org/iiif/info/p15005coll5/1088/manifest.json
+    // https://ohiomemory.org/iiif/info/siebert/28564/manifest.json
+    // https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/siebert/28564/json
+    // http://server16007.contentdm.oclc.org/dmwebservices/index.php?q=dmGetCompoundObjectInfo/siebert/28565/json
+    requestUrl = "https://ohiomemory.org/iiif/info/" + alias + "/" + ptr + "/manifest.json";
+    
+    $.getJSON( requestUrl, function( objManifest ) {
+
+        $('#objecttitle').text(objManifest.label);
+        numPages = objManifest.structures[0].canvases.length;
+        var pageThumbs = [];
+        for (i = 0; i < numPages; i++) {
+
+            var pageUrl = objManifest.structures[0].canvases[i];
+            var pageId = pageUrl.replace(/^.*?iiif\/(.*?)\/canvas.*$/, '$1').split("/"); 
+
+            var regex = new RegExp('^.*?pg=(.*)$', 'mg');
+            if ( regex.test(location.href) ) {
+                var pgReq = location.href.replace(/^.*?pg=(.*)$/, '$1');
+            } 
+            // https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/siebert/26871/json
+            var pageManifestUrl = 'https://ohiomemory.org/digital/bl/dmwebservices/index.php?q=dmGetItemInfo/' + alias + '/' + pageId[1] + '/json';
+            $.ajax({
+                type: 'GET',
+                url: pageManifestUrl,
+                dataType: "json", 
+                async: true,
+                success: function(pageJson){
+                    if ( !jQuery.isEmptyObject(pageJson.full) || !jQuery.isEmptyObject(pageJson.fulla) ) {
+                        var regex = new RegExp('\n|\u2028', 'mg');
+                        var viewText = '';
+                        if (alias == 'siebert') {
+                            viewText = pageJson.fulla.replace(regex, '<br/>');
+                        } else {
+                            viewText = pageJson.full.replace(regex, '<br/>');
+                        }
+                        $('#block-system-main').append('<div class="pagetext" id="' + pageJson.dmrecord + '">' + viewText + '</div>');
+                    } else {
+                        $('#block-system-main').append('<div class="pagetext" id="' + pageJson.dmrecord + '"></div>');
+                    }
+
+                    var pgReq = location.href.replace(/^.*?pg=(.*)$/, '$1');
+                    if (pgReq == pageJson.dmrecord) {
+                        $('#edit-transcriptdata').html(viewText);
+                    }
+                },
+                error: function() {
+                    //console.log('error');
+                } 
+                
+            });
+
+            pageThumbs.push( '<li id="thumb-' + pageId[1] + '" class="thumb"><img ' + (pgReq==pageId[1]?' id="activeImg"':'') + 'class="pageimg" src="https://ohiomemory.org/digital/api/singleitem/collection/' + pageId[0] + '/id/' + pageId[1] + '/thumbnail" alt="Page ' + i + '"></li>' );
+
+        }
+        
+        $(".jcarousel ul").html(pageThumbs.join("\n"));
+
+        $('#pdf').on('click', function(event) {
+            var formattedText = '';
+            $(".thumb").each(function() {
+                var textId = $(this).attr('id').split('-')[1];
+                var pageText = $('#'+textId).html();
+                var regex = new RegExp('<br>', 'mg');
+                formattedText += "\n\n" + pageText.replace(regex, "\n");
+            });
+            var regex = new RegExp('<.*?>', 'mg');
+            formattedText = formattedText.replace(regex, '');
+            var doc = new jsPDF();
+            var downloadText = doc.splitTextToSize(formattedText, 180);
+            var pageHeight = doc.internal.pageSize.height;
+            doc.setFontType("normal");
+            doc.setFontSize("11");
+            var y = 7;
+            for (var i = 0; i < downloadText.length; i++) {                
+                if (y > 280) {
+                    y = 10;
+                    doc.addPage();
+                }
+                doc.text(15, y, downloadText[i]);
+                y = y + 7;
+            }
+            doc.save('transcript.pdf');
+        });
+
+        
+    });
+
+    // set image for OpenSeadragon
+    function setImage(alias, pg) {
+        $('#containerIDS').empty();
+        // initialize image viewer: 
+        var imageInfo = "https://ohiomemory.org/digital/iiif/" + alias + "/" + pg + "/info.json";
+        var viewer = new OpenSeadragon.Viewer({
+            id:            "containerIDS",
+            prefixUrl:     ".//transcribe_files/images/",
+            // Initial rotation angle
+            showRotationControl: true,
+            // Enable touch rotation on tactile devices
+            gestureSettingsTouch: {
+                pinchRotate: true
+            },
+            tileSources: imageInfo
+        });
+    }
+    setImage(alias, pg);
+
+    // this should probably be in a previous ajax callback, but need to wait for all thumbnails to render before binding click to them
+    var checkExistPageThumbs = setInterval(function() {
+       if ( $('.pageimg').length ) {
+          
+            $('.pageimg').click(function() {
+                var pageid = $( this ).attr('src').replace(/^.*?\/id\/(.*?)\/thumbnail.*$/, '$1');
+                setImage(alias, pageid);
+                $('#edit-transcriptdata').html($('#' + pageid).html());
+                $("#activeImg").removeAttr("id");
+                $(this).attr("id", "activeImg");
+            });
+
+            $(".jcarousel").jcarousel( {} );
+
+            $('.jcarousel-control-prev').jcarouselControl({
+                target: '-=' +  Math.floor($('.jcarousel').width()/100)
+            });
+
+            $('.jcarousel-control-next').jcarouselControl({
+                target: '+=' +  Math.floor($('.jcarousel').width()/100)
+            });
+
+            clearInterval(checkExistPageThumbs);
+       }
+    }, 100);
+
+    // set up side-by-side view
+    Split(['#transcription-asset-wrapper', '#transcription-form-wrapper'], {
+        elementStyle: (dimension, size, gutterSize) => ({
+            'flex-basis': `calc(${size}% - ${gutterSize}px)`,
+        }),
+        gutterStyle: (dimension, gutterSize) => ({
+            'flex-basis':  `${gutterSize}px`,
+        }),
+    });
+
+    // search and highlight hits in full text, and hide all thumbnails that do not have hits
+    function highlightTerms() {
+        var terms = $('#searchterms').val();
+        var numHits = 0;
+        $(".pagetext").each(function() {
+            var regex = new RegExp('(' + terms + ')', 'mgi');        
+            if ( regex.test( $( this ).text()) ) {
+                $( this ).html( $( this ).html().replace(regex, '<span class="highlight">$1</span>') );
+                var pgIdNum = $( this ).attr('id');
+                $( '#thumb-' + pgIdNum ).removeClass("hide");
+                $( '#thumb-' + pgIdNum + ' img' ).addClass("hits");
+                numHits++;
+            } else {
+                var pgIdNum = $( this ).attr('id');
+                $( '#thumb-' + pgIdNum ).addClass("hide");
+                
+            }
+        });
+        if (numHits > 0) {
+            var firstId = $('li').not('.hide')[0].id.split("-")[1];
+            $('#edit-transcriptdata').html( $('#' + firstId).html() ); 
+
+            $("#activeImg").removeAttr("id");
+            $('#thumb-' + firstId + ' img').attr("id", "activeImg");
+
+            var numCarousel = parseInt( $('#thumb-' + firstId + ' img').attr('alt').split(' ')[1] );
+            var imageAliasId = $('#thumb-' + firstId + ' img').attr('src').match(/^.*?collection\/(.*?)\/id\/(.*?)\/.*$/);
+            var jcarouselInstance = $('.jcarousel').data('jcarousel');
+            jcarouselInstance.scroll(numCarousel);
+            setImage(imageAliasId[1], imageAliasId[2]);
+        } else {
+            $(".alert").show().delay(5000).fadeOut();
+            clearHighlights();
+        }
+    }
+
+    // show all thumbnails while retaining highlights or reset everything if it is a new search
+    function clearHighlights(action) {
+        $(".pagetext").each(function() {
+            var pgIdNum = $( this ).attr('id');
+            $( '#thumb-' + pgIdNum ).removeClass("hide");
+            if (action == 'newsearch') { 
+                $( '#thumb-' + pgIdNum + ' img' ).removeClass("hits");
+                var regex = new RegExp('<\/span>', 'mg');
+                if ( regex.test($( this ).html()) ) {
+                    var regex = new RegExp('(<span class="highlight">|<\/span>)', 'mg');
+                    $( this ).html( $( this ).html().replace(regex, '') );
+                }
+            }
+        });
+    }
+
+    // Search within page-level full text, click or enter key
+    $( "#searchwithin" ).click(function() {
+        clearHighlights('newsearch');
+        highlightTerms();
+    });
+    $('#searchterms').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            clearHighlights('newsearch');
+            highlightTerms();  
+        }
+    });
+
+    // unhide all thumbnails, but don't remove highlight tags
+    $('#show-all').click(function() {
+        clearHighlights();
+        var numCarousel = parseInt( $('#activeImg').attr('alt').split(' ')[1] );
+        var imageAliasId = $('#activeImg').attr('src').match(/^.*?collection\/(.*?)\/id\/(.*?)\/.*$/);
+        var jcarouselInstance = $('.jcarousel').data('jcarousel');
+        jcarouselInstance.scroll(numCarousel);
+        setImage(imageAliasId[1], imageAliasId[2]);
+    });
+
+    // close side-by-side view
+    $( "#transcript-close" ).click(function() {
+        window.close();
+    });
+    
+    // hover action for PDF icon
+    $("img#pdf-icon").mouseover(function() { this.src = '/customizations/global/pages/transcript/transcribe_files/pdf-icon-hover.png'; }).mouseout(function() { this.src = '/customizations/global/pages/transcript/transcribe_files/pdf-icon.png'; });
+
+</script>
+
+</body>
+</html>

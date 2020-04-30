@@ -1,0 +1,146 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4,
+h5, h6, p, blockquote, pre, a, abbr, acronym, address, big,
+cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small,
+strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt,
+dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+details, embed, figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary, time, mark,
+audio, video {
+margin: 0; padding: 0; border: 0; font-size: 100%;
+font: inherit; vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: ''; content: none;
+}
+table { border-collapse: collapse; border-spacing: 0; }
+a{ text-decoration: none; color: #df5400; font-weight:bold; line-height: 100%; }
+
+hr {
+    border: 0; border-top:solid 1px #cccccc; padding: 0; margin:0;
+}
+
+pre {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 90%;
+  color: #292b2c;
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF; /* f8f8f8 */
+	color: #4A4A4A;
+	/*font: .9em 'Tauri', sans-serif;*/
+	font-family: "Helvetica Neue", Arial, Helvetica, Verdana, sans-serif;
+}
+
+body { /*margin-bottom: 200px;*/ }
+
+h1,.h1{font-size:2em; font-weight:bold; letter-spacing:-0.03em; text-transform:uppercase; /*margin-bottom: .5em;*/}
+h2,.h2{font-size:1.5em; font-weight:bold; letter-spacing:-0.03em; /*text-transform:uppercase;*/}
+h3,.h3{font-size:1.17em; text-transform:uppercase; }
+h4,.h4{font-size:1em;}
+h5,.h5{font-size:0.83em;}
+h6,.h6{font-size:0.75em;}
+
+.actual-content { /*padding-bottom: 1em;*/ }
+
+a.white-box { display: block; }
+
+.ir { text-indent: 100%; white-space: nowrap; overflow: hidden; }
+
+.grey-highlight{color:#4a4a4a;}
+.teel-highlight{color:#0592a5;}
+.orange-highlight{color:#df5400;}
+.green-highlight{color:#2ca529;}
+.rounded-corners { -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; }
+.shadow {-moz-box-shadow: 0px 2px 0px 0px #777; -webkit-box-shadow: 0px 2px 0px 0px #777; box-shadow:0px 2px 0px 0px #777; }
+.scale{ transform: scale(1.1,1.1); -ms-transform: scale(1.1,1.1); -webkit-transform: scale(1.1,1.1);}
+
+h2 a { color: #05A2B3; }
+
+.main-content{
+	padding-top:20px;
+	max-width: 100%; 
+	min-width: 500px; 
+	padding: 20px;
+}
+
+label.il {
+  display: inline;
+}
+
+
+/**
+ * Header
+ */
+#header {position: relative; z-index: 10; width:100%; /*background: url('wwi_transcription_back.jpg') transparent repeat-x 0 0;*/ }
+#header-top {
+	height:85px; 
+	position:relative;
+	background-position: left top;
+	background-image: url('wwi_transcriptions_back.jpg');
+	z-index: 11;
+}
+
+.breadcrumb { text-transform: uppercase; background-color:transparent; }
+
+/**
+ * Footer
+ */
+footer{position: absolute; bottom: 0; left: 0; right: 0; clear:both; border-top: 1px solid #7f7f7f; background-color:#fff; height: 200px;}
+#footer-wrapper{width:940px; margin: 0px auto;}
+
+
+/**
+ * Theme
+ */
+.progress-bar {
+	display: block;
+	height: 18px;
+	position: absolute;
+	left: 2px;
+	top: 2px;
+}
+
+
+/**
+ * Clearfix
+ */
+div.tabs:after,
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+html[xmlns] div.tabs,
+html[xmlns] .clearfix {
+	display: block;
+}
+
+* html div.tabs,
+* html .clearfix {
+	height: 1%;
+}

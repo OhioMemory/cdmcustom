@@ -1,3 +1,19 @@
+// helper function to load js file and insert into DOM
+// @param {string} src link to a js file
+// @returns Promise
+function loadScript(src) {
+  return new Promise(function(resolve, reject) {
+    const script = document.createElement('script');
+/*    script.crossOrigin = 'anonymous'; */
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+
+
 // Logo action
 /*(function () {
 	function startEventListenerCollections(cdmEvent) {
@@ -392,4 +408,159 @@ document.addEventListener('cdm-custom-page:ready', function(event) {
 	    }
     }
 });
+
+/*
+// Mirador
+(function() {
+  const currentUrl = window.location.origin
+    ? window.location.origin + '/'
+    : window.location.protocol + '//' + window.location.host + '/';
+
+    // helper function to determine parent record ID of current item
+  	function getParent(item, collection) {
+      return fetch('/digital/bl/dmwebservices/index.php?q=GetParent/' + collection + '/' + item + '/json')
+      .then(function(response) {
+  		// make GetParent API call and return as JSON
+        return response.json();
+      })
+      .then(function(json) {
+        let parent = false;
+        // parse JSON for 'parent' value; -1 indicates parent ID is the same as item ID
+        if (json.parent === -1) {
+          parent = item;
+        } else {
+          parent = json.parent;
+        }
+        return parent;
+      })
+      .then(function(parent) {
+      // once parent is known, check if IIIF Pres manifest exists (image-based records)
+        return fetch('/digital/iiif-info/' + collection + '/' + parent)
+        .then(function(response) {
+          if (response.status == 404) {
+            console.log('No IIIF manifest exists for this record.');
+            parent = false;
+            // if no manifest exists, return is 'false' so that IIIF button is not inserted
+            return parent;
+          } else {
+            return parent;
+          }
+        })
+  		})
+      .catch(function(error) {
+        console.log('Request failed: ' + error);
+        parent = false;
+        return parent;
+  		})
+  	}
+
+  var mirador_button = {
+    getMiradorUrl: function(item, collection) {
+      const manifestUrl = currentUrl + '/digital/iiif-info/' + collection + '/' + item + '/manifest.json';
+      return '/digital/custom/mirador?manifest=' + manifestUrl;
+    },
+    add: function(item, collection) {
+      var div = document.createElement('div')
+      div.className = 'btn-group btn-group-default mirador-button';
+
+      var buttonAnchor = document.createElement('a');
+      buttonAnchor.title = "View this item in Mirador";
+      buttonAnchor.className = 'cdm-btn btn btn-primary';
+      buttonAnchor.href = mirador_button.getMiradorUrl(item, collection);
+      buttonAnchor.style.paddingTop = '5px';
+      buttonAnchor.style.paddingBottom = '2px';
+      buttonAnchor.target = '_blank';
+      buttonAnchor.innerHTML = ' <svg xmlns="http://www.w3.org/2000/svg" height="1.8em" viewBox="0 0 60 55" style="fill: white;"><rect width="18" height="55" /><rect width="18" height="55" transform="translate(42)" /><rect width="18" height="34" transform="translate(21)" /></svg> ';
+
+      div.appendChild(buttonAnchor);
+
+      Array.from(document.querySelectorAll('.ItemOptions-itemOptions>.btn-toolbar'))
+        .forEach(el => {
+          el.appendChild(div.cloneNode(true));
+        });
+    },
+    remove: function() {
+      Array.from(document.querySelectorAll('.mirador-button'))
+        .forEach(el => {
+          if (el && el.parentElement) {
+            el.parentElement.removeChild(el);
+          }
+        });
+    }
+  }
+
+  document.addEventListener('cdm-item-page:ready', function(e) {
+
+  	if (e.detail.collectionId == 'p15005coll5') {
+
+    const item = e.detail.itemId;
+		const collection = e.detail.collectionId;
+  	getParent(item, collection).then(function(response) {
+  		if (response === false) { return; } else {
+        mirador_button.add(response, collection);
+      }
+    });
+
+  	}
+
+  });
+
+  document.addEventListener('cdm-item-page:update', function(e) {
+
+  	if (e.detail.collectionId == 'p15005coll5') {
+
+	    const item = e.detail.itemId;
+	    const collection = e.detail.collectionId;
+	    getParent(item, collection).then(function(response) {
+	      if (response === false) {
+	        mirador_button.remove();
+	        return;
+	      } else {
+	        mirador_button.remove();
+	        mirador_button.add(response, collection);
+	      }
+	    });
+
+	}
+
+  });
+
+  document.addEventListener('cdm-item-page:leave', function(e) {
+  	if (e.detail.collectionId == 'p15005coll5') {
+    	mirador_button.remove();
+	}
+  });
+
+
+  document.addEventListener('cdm-custom-page:enter', function(e) {
+  	// /customizations/global/pages/cropimage_resources/cropper.min.js
+    if (e.detail.filename == 'mirador') {
+    	//ScriptLoader('/customizations/global/pages/js/mirador-cp.js', function() {
+    	//	addMiradorCss();
+    	//});
+				
+
+      loadScript('/customizations/global/pages/js/mirador-cp.js')
+      .then(function() {
+        addMiradorCss();
+      });
+
+    }
+
+  });
+
+  document.addEventListener('cdm-custom-page:ready', function(e) {
+
+  	//if (e.detail.collectionId == 'p15005coll5') {
+	    if (e.detail.filename == 'mirador') {
+	      loadScript('/customizations/global/pages/mirador/mirador.js')
+	      .then(function() {
+	        initMirador();
+	      });
+	    }
+	//}
+  });
+
+})();
+*/
 
